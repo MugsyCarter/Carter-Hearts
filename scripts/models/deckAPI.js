@@ -15,16 +15,35 @@
       console.log('SUCCESS', data);
       Deck.playerHand = data.cards;
       console.log(Deck.playerHand);
-      Deck.playerHearts = Deck.playerHand.filter(function(card){
+      Deck.allNumbers=Deck.playerHand.map(function(obj){
+        if (obj.value==='JACK'){
+          obj.value=11;
+        }
+        else if(obj.value==='QUEEN'){
+          obj.value=12;
+        }
+        else if(obj.value==='KING'){
+          obj.value=13;
+        }
+        else if(obj.value==='ACE'){
+          obj.value=14;
+        }
+        return obj;
+      });
+
+      Deck.allNumbers.sort(function(a,b){
+        return a.value-b.value;
+      });
+      Deck.playerHearts = Deck.allNumbers.filter(function(card){
         return card.suit === 'HEARTS';
       });
-      Deck.playerSpades = Deck.playerHand.filter(function(card){
+      Deck.playerSpades = Deck.allNumbers.filter(function(card){
         return card.suit === 'SPADES';
       });
-      Deck.playerDiamonds = Deck.playerHand.filter(function(card){
+      Deck.playerDiamonds = Deck.allNumbers.filter(function(card){
         return card.suit === 'DIAMONDS';
       });
-      Deck.playerClubs = Deck.playerHand.filter(function(card){
+      Deck.playerClubs = Deck.allNumbers.filter(function(card){
         return card.suit === 'CLUBS';
       });
 

@@ -1,0 +1,23 @@
+{
+  "name": "carter-hearts",
+  "version": "1.0.0",
+  "description": "A Hearts game app that uses the superior Carter family rules.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MugsyCarter/Carter-Hearts.git"
+  },
+  "author": "Mugsy Carter",
+  "license": "ISC",
+  "dependencies": {
+  "express": "^4.13.3",
+  "express-request-proxy": "^1.0.10"},
+  "bugs": {
+    "url": "https://github.com/MugsyCarter/Carter-Hearts/issues"
+  },
+  "homepage": "https://github.com/MugsyCarter/Carter-Hearts#readme"
+}

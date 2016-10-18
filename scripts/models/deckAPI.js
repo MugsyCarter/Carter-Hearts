@@ -29,7 +29,7 @@
     Deck.sortedHand = Deck.playerHearts.concat(Deck.playerSpades).concat(Deck.playerDiamonds).concat(Deck.playerClubs);
     //add cards from sorted player hand to the DOM as html elements.
     for (var i =0; i < Deck.sortedHand.length; i++){
-      $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'"><img class="card-img" id="player-card'+Deck.sortedHand[i].value+'" src="'+Deck.sortedHand[i].image+'"</div>');
+      $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'"><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
     };
   };
 
@@ -124,13 +124,13 @@
 
       //add cards from sorted comp hand to the DOM as html elements.  Make sure to delete these lines later.
       for (var i =0; i < Deck.compDecks[0].length; i++){
-        $('.compHand1').append('<div class="comp1Card" id="'+Deck.compDecks[0][i].code+'" data-suit="'+Deck.compDecks[0][i].suit+'" data-value="'+Deck.compDecks[0][i].value+'"><img class="card-img" id="comp0-card'+Deck.compDecks[0][i].value+'" src="'+Deck.compDecks[0][i].image+'"</div>');
+        $('.compHand1').append('<div class="comp1Card" id="'+Deck.compDecks[0][i].code+'" data-suit="'+Deck.compDecks[0][i].suit+'" data-value="'+Deck.compDecks[0][i].value+'"><img class="card-img" id="comp0-card'+Deck.compDecks[0][i].code+'" src="'+Deck.compDecks[0][i].image+'"</div>');
       }
       for (var i =0; i < Deck.compDecks[1].length; i++){
-        $('.compHand2').append('<div class="comp2Card" id="'+Deck.compDecks[1][i].code+'" data-suit="'+Deck.compDecks[1].suit+'" data-value="'+Deck.compDecks[1][i].value+'"><img class="card-img" id="comp1-card'+Deck.compDecks[0][i].value+'" src="'+Deck.compDecks[1][i].image+'"</div>');
+        $('.compHand2').append('<div class="comp2Card" id="'+Deck.compDecks[1][i].code+'" data-suit="'+Deck.compDecks[1].suit+'" data-value="'+Deck.compDecks[1][i].value+'"><img class="card-img" id="comp1-card'+Deck.compDecks[0][i].code+'" src="'+Deck.compDecks[1][i].image+'"</div>');
       }
       for (var i =0; i < Deck.compDecks[2].length; i++){
-        $('.compHand3').append('<div class="comp3Card" id="'+Deck.compDecks[2][i].code+'" data-suit="'+Deck.compDecks[2].suit+'" data-value="'+Deck.compDecks[2][i].value+'"><img class="card-img" id="comp2-card'+Deck.compDecks[0][i].value+'" src="'+Deck.compDecks[2][i].image+'"</div>');
+        $('.compHand3').append('<div class="comp3Card" id="'+Deck.compDecks[2][i].code+'" data-suit="'+Deck.compDecks[2].suit+'" data-value="'+Deck.compDecks[2][i].value+'"><img class="card-img" id="comp2-card'+Deck.compDecks[0][i].code+'" src="'+Deck.compDecks[2][i].image+'"</div>');
       }
       $('.banner').append('<button class = "button" id="pass-button">Pass</button>');
     };

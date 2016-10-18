@@ -17,20 +17,50 @@
   bottom: 10vh;
 }
 
+.compHand1{
+  position: absolute;
+  bottom: 20vh;
+}
+
+.compHand2{
+  position: absolute;
+  bottom: 30vh;
+}
+
+.compHand3{
+  position: absolute;
+  bottom: 40vh;
+}
 .playerCard{
   display: inline-block;
   width: 6vw;
 }
 
+.comp1Card{
+  display: inline-block;
+  width: 4vw;
+}
+
+.comp2Card{
+  display: inline-block;
+  width: 4vw;
+}
+
+.comp3Card{
+  display: inline-block;
+  width: 4vw;
+}
+
 img{
   height: 24vh;
+  display: inline-block;
 }
 
 
 .playerCard:hover{
   cursor: pointer;
-  position: absolute;
-  bottom: +5px;
+  position: relative;
+  bottom: +10px;
 
 }
 
@@ -110,9 +140,6 @@ a:hover{
     padding: 1% 5%;
   }
 
-  .hero {
-    background-image: url('../img/map-1600.png');
-  }
 
   .icon-menu {
     font-size: 1.1em;
@@ -125,9 +152,6 @@ a:hover{
     padding: 1% 8%;
   }
 
-  .hero {
-    background-image: url('../img/map-2000.png');
-  }
 
   .icon-menu {
     font-size: 1.2em;

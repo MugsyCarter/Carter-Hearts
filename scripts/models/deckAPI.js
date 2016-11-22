@@ -29,7 +29,7 @@
     Deck.sortedHand = Deck.playerHearts.concat(Deck.playerSpades).concat(Deck.playerDiamonds).concat(Deck.playerClubs);
     //add cards from sorted player hand to the DOM as html elements.
     for (var i =0; i < Deck.sortedHand.length; i++){
-      $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'"><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
+      $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
     };
   };
 
@@ -132,9 +132,41 @@
       for (var i =0; i < Deck.compDecks[2].length; i++){
         $('.compHand3').append('<div class="comp3Card" id="'+Deck.compDecks[2][i].code+'" data-suit="'+Deck.compDecks[2].suit+'" data-value="'+Deck.compDecks[2][i].value+'"><img class="card-img" id="comp2-card'+Deck.compDecks[0][i].code+'" src="'+Deck.compDecks[2][i].image+'"</div>');
       }
-      $('.banner').append('<button class = "button" id="pass-button">Pass</button>');
-    };
 
+//hide computer hands
+      $('.comp1Card').hide();
+      $('.comp2Card').hide();
+      $('.comp3Card').hide();
+//show pass button once dealt and sorted
+      $('.banner').append('<button class = "button" id="pass-button">Pass</button>');
+
+//Allow users to select pass-button
+      Deck.passArray = [];
+      $('.card-img').on('click', function(event){
+        event.preventDefault();
+        console.log('even target is ', event.target);
+        var clickParent = $(event.target).parent();
+        console.log('event parent is ', clickParent);
+        console.log('this is ', this);
+
+        var index = Deck.passArray.indexOf(clickParent.id);
+        console.log(index);
+        if(index===-1){
+          Deck.passArray.push(clickParent.id);
+          $(this).css({'position':'relative','bottom':'20px'});
+          console.log(Deck.passArray);
+        }
+        else{
+          Deck.passArray.splice(index,1);
+          console.log('card being removed.');
+          $(this).css({'position':'relative','bottom':'0px'});
+        }
+      });
+
+
+
+
+    };
 
 
 

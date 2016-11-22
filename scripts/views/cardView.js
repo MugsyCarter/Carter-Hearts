@@ -1,5 +1,4 @@
 
-
 var CardView = {};
 //deals cards and dissapears
 $('#deal-button').on('click', function(){

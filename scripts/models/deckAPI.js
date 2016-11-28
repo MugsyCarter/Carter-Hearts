@@ -138,28 +138,40 @@
       $('.comp2Card').hide();
       $('.comp3Card').hide();
 //show pass button once dealt and sorted
-      $('.banner').append('<button class = "button" id="pass-button">Pass</button>');
+      $('#pass-button').fadeIn();
+      Turn.newTurn();
+
+
 
 //Allow users to select pass-button
       Deck.passArray = [];
       $('.card-img').on('click', function(event){
         event.preventDefault();
         console.log('even target is ', event.target);
-        var clickParent = $(event.target).parent();
+        var clickParent = $(event.target).parent()[0];
         console.log('event parent is ', clickParent);
         console.log('this is ', this);
 
-        var index = Deck.passArray.indexOf(clickParent.id);
+        var index = Deck.passArray.indexOf(clickParent);
         console.log(index);
         if(index===-1){
-          Deck.passArray.push(clickParent.id);
+          Deck.passArray.push(clickParent);
+          console.log('click parent is ', clickParent);
           $(this).css({'position':'relative','bottom':'20px'});
           console.log(Deck.passArray);
+          if (Deck.passArray.length > 3){
+            console.log('time to remove', Deck.passArray[0]);
+            $(Deck.passArray[0].firstChild).css({'position':'relative','bottom':'0px'});
+            Deck.passArray.shift();
+            console.log('removed card.  Pass Array is ', Deck.passArray);
+          }
         }
         else{
+          console.log('index is', index);
           Deck.passArray.splice(index,1);
-          console.log('card being removed.');
+          console.log('card being removed.', this);
           $(this).css({'position':'relative','bottom':'0px'});
+          console.log(Deck.passArray);
         }
       });
 

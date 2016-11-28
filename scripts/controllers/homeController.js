@@ -6,6 +6,7 @@
     $('#home-page').fadeIn();
     $('.link a').css({color:'white'});
     $('#home-link').css({color:'grey'});
+    $('#pass-button').hide();
   };
 
   module.homeController = homeController;

@@ -151,6 +151,8 @@
         var clickParent = $(event.target).parent()[0];
         console.log('event parent is ', clickParent);
         console.log('this is ', this);
+        console.log('event parent ID is ', clickParent.id);
+        
 
         var index = Deck.passArray.indexOf(clickParent);
         console.log(index);

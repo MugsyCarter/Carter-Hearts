@@ -5,23 +5,36 @@ $('#pass-button').on('click', function(event){
   console.log('turn is ', Turn.pass);
   // console.log('pass direction is ,' Turn.pass);
   if (Deck.passArray.length === 3){
-    var playerPassCards = Deck.sortedHand.filter(function(card){
-      return Deck.passArray.indexOf(card.code);
+    $('#pass-button').fadeOut();
+    $('.playerCard').detach();
+    var passIdArray = [];
+   
+    Deck.passArray.forEach( function(card){
+      passIdArray.push(card.id);
     });
-    console.log('playerPassCards are ', playerPassCards);
+   
+    console.log('passIdArray is ', passIdArray);
 
-    Turn.passDeck.push(Deck.passArray);
+    // Turn.passDeck.push(Deck.passArray);
+
     for (var i = 0; i < Deck.sortedHand.length; i++){
-      index = Deck.passArray.indexOf(Deck.sortedHand[i].code);
-
+      index = passIdArray.indexOf(Deck.sortedHand[i].code);
+    
       if (index>-1){
         //can also add in new cards here
         Deck.sortedHand.splice(i, 1);
       }
     };
-    console.log(Deck.passArray);
+    console.log(passIdArray);
     console.log(Deck.sortedHand);
     Deck.passArray = [];
+    //this is showing the hand with the pass cards removed, i still need to add in the new cards and sort the hand.
+    for (var i =0; i < Deck.sortedHand.length; i++){
+      $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
+    }
+
+
+
   }
   else{
     console.log('not enough cards');

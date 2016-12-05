@@ -4,11 +4,18 @@ $('#pass-button').on('click', function(event){
   console.log('pass button clicked');
   console.log('turn is ', Turn.pass);
   // console.log('pass direction is ,' Turn.pass);
+
   if (Deck.passArray.length === 3){
     $('#pass-button').fadeOut();
     $('.playerCard').detach();
     var passIdArray = [];
    
+  //create computer player pass here.
+  
+
+   
+
+
     Deck.passArray.forEach( function(card){
       passIdArray.push(card.id);
     });
@@ -22,7 +29,9 @@ $('#pass-button').on('click', function(event){
     
       if (index>-1){
         //can also add in new cards here
+        console.log('removing this card: '+ Deck.sortedHand[i].code);
         Deck.sortedHand.splice(i, 1);
+        i--;
       }
     };
     console.log(passIdArray);

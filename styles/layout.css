@@ -26,3 +26,7 @@ footer {
   display: table;
   clear: both;
 }
+
+#small-pass-message{
+  color: white;
+}

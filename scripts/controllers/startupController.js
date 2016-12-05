@@ -1,0 +1,1 @@
+$('.hidden, #pass-button').hide();

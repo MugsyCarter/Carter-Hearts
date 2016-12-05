@@ -30,7 +30,17 @@
       <section class ="page" id="play-page">
         <div>
           <h1>PLAY PAGE</h1>
+          <div class="banner">
           <button class="button" id="deal-button">Deal</button>
+          <button class = "button" id="pass-button">Pass</button>
+          <h1 class ='hidden' id="small-pass-message">You must select three cards to pass</h1>
+          </div>
+          <div class="compHand1">
+          </div>
+          <div class="compHand2">
+          </div>
+          <div class="compHand3">
+          </div>
           <div class="hand">
           </div>
         </div>
@@ -53,10 +63,13 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
     <!-- Model Files -->
     <script src="scripts/models/deckAPI.js"></script>
+    <script src="scripts/models/turn.js"></script>
     <!-- View Files -->
     <script src="scripts/views/cardView.js"></script>
     <!-- <script src="scripts/views/mobileNav.js"></script> -->
     <!-- Controller Files -->
+    <script src="scripts/controllers/passCards.js"></script>
+      <script src="scripts/controllers/startupController.js"></script>
     <script src="scripts/controllers/aboutController.js"></script>
     <script src="scripts/controllers/playController.js"></script>
     <script src="scripts/controllers/rulesController.js"></script>

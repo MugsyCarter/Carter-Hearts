@@ -3,17 +3,33 @@ $('#pass-button').on('click', function(event){
   var index = -1;
   console.log('pass button clicked');
   console.log('turn is ', Turn.pass);
+  var passTarget = 0;
   // console.log('pass direction is ,' Turn.pass);
+  if (Turn.pass === 'left'){
+    passTarget = 1; 
+  }
+  if (Turn.pass === 'right'){
+    passTarget = 3; 
+  }
+  else {
+    passTarget = 2;
+  }
 
   if (Deck.passArray.length === 3){
     $('#pass-button').fadeOut();
     $('.playerCard').detach();
     var passIdArray = [];
    
+    console.log('pass target is ', passTarget);
+    console.log('passArray is ', Deck.passArray);
+    Deck.passObject[passTarget] = Deck.passArray;
   //create computer player pass here.
-  
+    AI.passCards(Deck.comp1Hand, 1);
+    AI.passCards(Deck.comp2Hand, 2);
+    AI.passCards(Deck.comp3Hand, 3);
 
-   
+    console.log('pass object is ', Deck.passObject);
+    console.log('comp decks are ', Deck.compDecks);
 
 
     Deck.passArray.forEach( function(card){
@@ -44,6 +60,8 @@ $('#pass-button').on('click', function(event){
 
 
 
+    $('#begin-play-message').fadeIn().fadeOut(3000);
+    //put the start play function call here once written
   }
   else{
     console.log('not enough cards');

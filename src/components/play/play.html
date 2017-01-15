@@ -1,22 +1,26 @@
-<section>
+
  <section class ="page" id="play-page">
-        <div>
-          <h1>PLAY PAGE</h1>
-          <div class="banner">
-          <button class="button" id="deal-button">Deal</button>
-          <button class = "button" id="pass-button">Pass</button>
-          <h1 class ='hidden' id="small-pass-message">You must select three cards to pass</h1>
-          <h1 class ='hidden' id="hold-hand-message">It's a Hold Hand!</h1>
-          <h1 class ='hidden' id="begin-play-message">Begin Play!</h1>
-          </div>
-          <div class="compHand1">
-          </div>
-          <div class="compHand2">
-          </div>
-          <div class="compHand3">
-          </div>
-          <div class="hand">
-          </div>
+    <div>
+        <h1>Play Carter Hearts!</h1>
+        <div class="banner">
+            <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true">Deal</button>
+            <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true">Pass</button>
+            <h1 class ='hidden' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select three cards to pass</h1>
+            <!--<h1 class ='hidden' id="hold-hand-message">It's a Hold Hand!</h1>
+            <h1 class ='hidden' id="begin-play-message">Begin Play!</h1>-->
         </div>
-      </section>
+        <div class="compHand1">
+        </div>
+        <div class="compHand2">
+        </div>
+        <div class="compHand3">
+        </div>
+        <div class="playerHand">
+            <ul class="hand">
+                <li class="playerCard"ng-repeat="card in $ctrl.hand" >
+                    <button ng-click="$ctrl.clicked(card)" ng-class="{'selectedCard' : card.toggled, 'cardButton' : !card.toggled}"><img src="{{card.image}}" ></button>
+                </li>
+            </ul>
+        </div>
+    </div>
 </section>

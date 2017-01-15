@@ -95,6 +95,8 @@ footer {
 }
 
 .hand{
+ list-style-type: none;
+  display: block;
   position: absolute;
   bottom: 10vh;
 }
@@ -114,8 +116,12 @@ footer {
   bottom: 40vh;
 }
 .playerCard{
+  list-style-type: none;
   display: inline-block;
   width: 6vw;
+    &:hover{
+    cursor: pointer;
+    }
 }
 
 .comp1Card{
@@ -136,6 +142,7 @@ footer {
 img{
   height: 24vh;
   display: inline-block;
+border-radius: 1vh;
 }
 
 
@@ -144,6 +151,24 @@ img{
   position: relative;
   bottom: +10px;
 
+}
+
+.cardButton{
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: 1vh;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.selectedCard{
+    padding: 1vh;
+    bottom: +30px;
+    background-color: red;
+    border-radius: 2vh;
+    border-color: black;
 }
 
 .link {

@@ -16,6 +16,19 @@ export default function routes($stateProvider, $urlRouterProvider) {
         component: 'play' 
     });
 
+    $stateProvider.state({
+        name: 'rules',
+        url: '/rules',
+        data: { public: true },
+        component: 'rules' 
+    });
+
+    $stateProvider.state({
+        name: 'about',
+        url: '/about',
+        data: { public: true },
+        component: 'about' 
+    });
 
     // $stateProvider.state({
     //     name: 'stores',

@@ -14,7 +14,7 @@ body {
 }
 
 h1 {       
-  font-size: 1.5em;
+  font-size: 5em;
   /*font-family: 'Open Sans', serif;*/
   font-weight:800;
   margin:0 auto;
@@ -22,7 +22,7 @@ h1 {
 
 h2 {
   color: black;
-  font-size: 1.3em;
+  font-size: 5em;
 }
 
 h3 {
@@ -76,8 +76,13 @@ footer {
   clear: both;
 }
 
-#small-pass-message{
-  color: white;
+.gameMessage{
+    font-size: 3em;
+    color: white;
+}
+
+#playMessage{
+  color:$red;
 }
 
 .main-nav {

@@ -7,10 +7,13 @@ export default {
 
 controller.$inject = ['shuffleService', '$timeout', '$rootScope'];
 
-function controller(shuffle) {
+function controller(shuffle, timeout) {
     this.beginning = true;
     this.passReady = false;
     this.selectedCard = false;
+    this.passCompleted = false;
+    this.passTarget = 0;
+    this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
 
     this.clicked = (card)=>{
         console.log('ctrl.clicked clicked: this is the card', card);
@@ -37,6 +40,11 @@ function controller(shuffle) {
         this.sortedHand=[];
         this.passReady=true;
         this.beginning = false;
+        this.passTarget ++;
+        if (this.passTarget === 5){
+            this.passTarget = 1;
+        }
+        this.passPlayer = this.players[this.passTarget];
         shuffle.getNewHand()
             .then((cards)=>{
                 console.log(cards);
@@ -126,23 +134,24 @@ function controller(shuffle) {
             });
     };
 
-    // this.passCards = ()=>{
-    //     console.log('pass cards clicked');
-    //     var index = -1;
-    //     // console.log('turn is ', Turn.pass);
-    //     var passTarget = 0;
-    // // console.log('pass direction is ,' Turn.pass);
-    //     // if (Turn.pass === 'left'){
-    //     //     passTarget = 1; 
-    //     // }
-    //     // if (Turn.pass === 'right'){
-    //     //     passTarget = 3; 
-    //     // }
-    //     // else {
-    //     //     passTarget = 2;
-    //     // }
+    this.passCards = ()=>{
+        console.log('pass cards clicked');
+        // var index = -1;
+        // console.log('turn is ', Turn.pass);
+        // var passTarget = 0;
+    // console.log('pass direction is ,' Turn.pass);
+        // if (Turn.pass === 'left'){
+        //     passTarget = 1; 
+        // }
+        // if (Turn.pass === 'right'){
+        //     passTarget = 3; 
+        // }
+        // else {
+        //     passTarget = 2;
+        // }
 
-    //     if (Deck.passArray.length === 3){
+        if (this.passArray.length === 3){
+            console.log('passing these 3 cards ', this.passArray) + ' to this person ' + this.passPlayer;
     //         $('#pass-button').fadeOut();
     //         $('.playerCard').detach();
     //         var passIdArray = [];
@@ -159,39 +168,41 @@ function controller(shuffle) {
     //         console.log('comp decks are ', Deck.compDecks);
 
 
-    //         Deck.passArray.forEach( function(card){
-    //             passIdArray.push(card.id);
-    //         });
+            // Deck.passArray.forEach( function(card){
+            //     passIdArray.push(card.id);
+            // });
 
-    //         console.log('passIdArray is ', passIdArray);
+            // console.log('passIdArray is ', passIdArray);
 
-    // // Turn.passDeck.push(Deck.passArray);
+    // Turn.passDeck.push(Deck.passArray);
 
-    //         for (var i = 0; i < Deck.sortedHand.length; i++){
-    //             index = passIdArray.indexOf(Deck.sortedHand[i].code);
+            // for (var i = 0; i < Deck.sortedHand.length; i++){
+            //     index = passIdArray.indexOf(Deck.sortedHand[i].code);
 
-    //             if (index>-1){
-    //     //can also add in new cards here
-    //                 console.log('removing this card: '+ Deck.sortedHand[i].code);
-    //                 Deck.sortedHand.splice(i, 1);
-    //                 i--;
-    //             }
-    //         };
-    //         console.log(passIdArray);
-    //         console.log(Deck.sortedHand);
-    //         Deck.passArray = [];
-    // //this is showing the hand with the pass cards removed, i still need to add in the new cards and sort the hand.
-    //         for (var i =0; i < Deck.sortedHand.length; i++){
-    //             $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
-    //         }
-    //         $('#begin-play-message').fadeIn().fadeOut(3000);
-    //     //put the start play function call here once written
-    //     }
-    //     else{
-    //         console.log('not enough cards');
-    //         $('#small-pass-message').fadeIn().fadeOut(4000);
-    //     }
-    // };
+            //     if (index>-1){
+        //can also add in new cards here
+            //         console.log('removing this card: '+ Deck.sortedHand[i].code);
+            //         Deck.sortedHand.splice(i, 1);
+            //         i--;
+            //     }
+            // };
+            // console.log(passIdArray);
+            // console.log(Deck.sortedHand);
+            // Deck.passArray = [];
+    //this is showing the hand with the pass cards removed, i still need to add in the new cards and sort the hand.
+            // for (var i =0; i < Deck.sortedHand.length; i++){
+            //     $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
+            // }
+            this.passCompleted = true;
+        //put the start play function call here once written
+        }
+        else{
+
+            this.badPass = true;
+            timeout(()=>{this.badPass=false;}, 3000);
+            console.log('not enough cards');
+        }
+    };
 
 
 

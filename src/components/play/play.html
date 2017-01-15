@@ -1,0 +1,27 @@
+
+ <section class ="page" id="play-page">
+    <div>
+        <h1>Play Carter Hearts!</h1>
+        <div class="banner">
+            <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true">Deal</button>
+            <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()">Pass</button>
+            <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.  Your target is {{$ctrl.passPlayer}}.</h2>
+            <h1 class ='gameMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.  You have {{$ctrl.passArray.length}} cards selected.</h2>
+            <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!</h2>
+            <h1 id="playMessage" ng-if"$ctrl.passCompleted=== true">Begin Play!</h1>
+        </div>
+        <div class="compHand1">
+        </div>
+        <div class="compHand2">
+        </div>
+        <div class="compHand3">
+        </div>
+        <div class="playerHand">
+            <ul class="hand">
+                <li class="playerCard"ng-repeat="card in $ctrl.hand" >
+                    <button ng-click="$ctrl.clicked(card)" ng-class="{'selectedCard' : card.toggled, 'cardButton' : !card.toggled}"><img src="{{card.image}}" ></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

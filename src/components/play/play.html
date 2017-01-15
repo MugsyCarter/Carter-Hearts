@@ -4,7 +4,7 @@
         <h1>Play Carter Hearts!</h1>
         <div class="banner">
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true">Deal</button>
-            <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true">Pass</button>
+            <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards">Pass</button>
             <h1 class ='hidden' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select three cards to pass</h1>
             <!--<h1 class ='hidden' id="hold-hand-message">It's a Hold Hand!</h1>
             <h1 class ='hidden' id="begin-play-message">Begin Play!</h1>-->

@@ -84,14 +84,21 @@ function controller(shuffle) {
                     
                     finalDeck.push(newCardEntry);
                 });
-                console.log('final deck is ', finalDeck);
+                // console.log('final deck is ', finalDeck);
                 //  save each card in the db
                         // new Card(newCardEntry).save()
                         // .then(saved => res.send(saved));
                     // });
                   //deal hands
-                var playerHand = finalDeck.splice(0,13);
-                console.log(playerHand);
+                this.hands = [];
+                while(finalDeck.length > 0){
+                    var tempHand = finalDeck.splice(0,13);
+                    this.hands.push(tempHand);
+                }
+                var playerHand = this.hands[0];
+                // console.log('hands are ', this.hands);
+                // console.log('player hand is ', playerHand);
+                // console.log('final deck is ', finalDeck);
             //sort player hand numerically
                 playerHand.sort(function(a,b){
                     return a.number-b.number;
@@ -112,77 +119,79 @@ function controller(shuffle) {
             //combine suit arrays to make final sorted player hand
                 this.hand = playerHearts.concat(playerSpades).concat(playerDiamonds).concat(playerClubs);
                 console.log(this.hand);
+                this.comp1Hand = this.hands[1];
+                this.comp2Hand = this.hands[2];
+                this.comp3Hand = this.hands[3];
                 this.passArray = [];
             });
     };
 
-    this.passCards = ()=>{
-        event.preventDefault();
-        var index = -1;
-        console.log('pass button clicked');
-        console.log('turn is ', Turn.pass);
-        var passTarget = 0;
-    // console.log('pass direction is ,' Turn.pass);
-        if (Turn.pass === 'left'){
-            passTarget = 1; 
-        }
-        if (Turn.pass === 'right'){
-            passTarget = 3; 
-        }
-        else {
-            passTarget = 2;
-        }
+    // this.passCards = ()=>{
+    //     console.log('pass cards clicked');
+    //     var index = -1;
+    //     // console.log('turn is ', Turn.pass);
+    //     var passTarget = 0;
+    // // console.log('pass direction is ,' Turn.pass);
+    //     // if (Turn.pass === 'left'){
+    //     //     passTarget = 1; 
+    //     // }
+    //     // if (Turn.pass === 'right'){
+    //     //     passTarget = 3; 
+    //     // }
+    //     // else {
+    //     //     passTarget = 2;
+    //     // }
 
-        if (Deck.passArray.length === 3){
-            $('#pass-button').fadeOut();
-            $('.playerCard').detach();
-            var passIdArray = [];
+    //     if (Deck.passArray.length === 3){
+    //         $('#pass-button').fadeOut();
+    //         $('.playerCard').detach();
+    //         var passIdArray = [];
 
-            console.log('pass target is ', passTarget);
-            console.log('passArray is ', Deck.passArray);
-            Deck.passObject[passTarget] = Deck.passArray;
-    //create computer player pass here.
-            AI.passCards(Deck.comp1Hand, 1);
-            AI.passCards(Deck.comp2Hand, 2);
-            AI.passCards(Deck.comp3Hand, 3);
+    //         console.log('pass target is ', passTarget);
+    //         console.log('passArray is ', Deck.passArray);
+    //         Deck.passObject[passTarget] = Deck.passArray;
+    // //create computer player pass here.
+    //         AI.passCards(Deck.comp1Hand, 1);
+    //         AI.passCards(Deck.comp2Hand, 2);
+    //         AI.passCards(Deck.comp3Hand, 3);
 
-            console.log('pass object is ', Deck.passObject);
-            console.log('comp decks are ', Deck.compDecks);
+    //         console.log('pass object is ', Deck.passObject);
+    //         console.log('comp decks are ', Deck.compDecks);
 
 
-            Deck.passArray.forEach( function(card){
-                passIdArray.push(card.id);
-            });
+    //         Deck.passArray.forEach( function(card){
+    //             passIdArray.push(card.id);
+    //         });
 
-            console.log('passIdArray is ', passIdArray);
+    //         console.log('passIdArray is ', passIdArray);
 
-    // Turn.passDeck.push(Deck.passArray);
+    // // Turn.passDeck.push(Deck.passArray);
 
-            for (var i = 0; i < Deck.sortedHand.length; i++){
-                index = passIdArray.indexOf(Deck.sortedHand[i].code);
+    //         for (var i = 0; i < Deck.sortedHand.length; i++){
+    //             index = passIdArray.indexOf(Deck.sortedHand[i].code);
 
-                if (index>-1){
-        //can also add in new cards here
-                    console.log('removing this card: '+ Deck.sortedHand[i].code);
-                    Deck.sortedHand.splice(i, 1);
-                    i--;
-                }
-            };
-            console.log(passIdArray);
-            console.log(Deck.sortedHand);
-            Deck.passArray = [];
-    //this is showing the hand with the pass cards removed, i still need to add in the new cards and sort the hand.
-            for (var i =0; i < Deck.sortedHand.length; i++){
-                $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
-            }
-            $('#begin-play-message').fadeIn().fadeOut(3000);
-        //put the start play function call here once written
-        }
-        else{
-            console.log('not enough cards');
-            $('#small-pass-message').fadeIn().fadeOut(4000);
-        }
-    };
+    //             if (index>-1){
+    //     //can also add in new cards here
+    //                 console.log('removing this card: '+ Deck.sortedHand[i].code);
+    //                 Deck.sortedHand.splice(i, 1);
+    //                 i--;
+    //             }
+    //         };
+    //         console.log(passIdArray);
+    //         console.log(Deck.sortedHand);
+    //         Deck.passArray = [];
+    // //this is showing the hand with the pass cards removed, i still need to add in the new cards and sort the hand.
+    //         for (var i =0; i < Deck.sortedHand.length; i++){
+    //             $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
+    //         }
+    //         $('#begin-play-message').fadeIn().fadeOut(3000);
+    //     //put the start play function call here once written
+    //     }
+    //     else{
+    //         console.log('not enough cards');
+    //         $('#small-pass-message').fadeIn().fadeOut(4000);
+    //     }
+    // };
 
 
 

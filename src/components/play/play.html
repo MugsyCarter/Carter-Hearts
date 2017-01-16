@@ -10,6 +10,14 @@
             <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!</h2>
             <h1 id="playMessage" ng-if="$ctrl.passCompleted===true">Begin Play!</h1>
         </div>
+
+        <div class="playArea">
+            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.playerPlay.image}">
+            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.comp1Play.image}">
+            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.comp2Play.image}">
+            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.comp3Play.image}">  
+        </div>
+
         <div class="compHand1">
             <ul class="hand">
                 <li class="comp1Card" ng-repeat="compCard in $ctrl.hands[1]" >

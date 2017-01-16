@@ -77,32 +77,37 @@ function controller(shuffle, ai, timeout) {
                     var tempHand = finalDeck.splice(0,13);
                     this.hands.push(tempHand);
                 }
-                var playerHand = this.hands[0];
-            //sort player hand numerically
-                playerHand.sort(function(a,b){
-                    return a.number-b.number;
-                });
-            //Sort player hand into suit arrays
-                var playerHearts = playerHand.filter(function(card){
-                    return card.suit === 'HEARTS';
-                });
-                var playerSpades = playerHand.filter(function(card){
-                    return card.suit === 'SPADES';
-                });
-                var playerDiamonds = playerHand.filter(function(card){
-                    return card.suit === 'DIAMONDS';
-                });
-                var playerClubs = playerHand.filter(function(card){
-                    return card.suit === 'CLUBS';
-                });
-            //combine suit arrays to make final sorted player hand
-                this.hand = playerHearts.concat(playerSpades).concat(playerDiamonds).concat(playerClubs);
-                console.log(this.hand);
+                this.hand = this.sortHand(this.hands[0]);
+          
                 this.comp1Hand = this.hands[1];
                 this.comp2Hand = this.hands[2];
                 this.comp3Hand = this.hands[3];
                 this.passArray = [];
             });
+    };
+
+    this.sortHand = (hand)=> {
+          //sort player hand numerically
+        hand.sort(function(a,b){
+            return a.number-b.number;
+        });
+            //Sort player hand into suit arrays
+        var playerHearts = hand.filter(function(card){
+            return card.suit === 'HEARTS';
+        });
+        var playerSpades = hand.filter(function(card){
+            return card.suit === 'SPADES';
+        });
+        var playerDiamonds = hand.filter(function(card){
+            return card.suit === 'DIAMONDS';
+        });
+        var playerClubs = hand.filter(function(card){
+            return card.suit === 'CLUBS';
+        });
+            //combine suit arrays to make final sorted player hand
+        var sortedHand = playerHearts.concat(playerSpades).concat(playerDiamonds).concat(playerClubs);
+        console.log('sorted hand: ', sortedHand);
+        return sortedHand;
     };
 
     this.clicked = (card)=>{
@@ -159,11 +164,13 @@ function controller(shuffle, ai, timeout) {
             var passObject = ai.pass(this.hands[this.passTarget], this.hand);
             console.log(passObject);
             this.hands[this.passTarget] = passObject.compHand;
-            this.hand = passObject.playerHand;
         //add the pass to the computer's hand
-            this.hands[this.passTarget].push(this.passArray);
+            this.hands[this.passTarget].push(this.passArray[0]);
+            this.hands[this.passTarget].push(this.passArray[1]);
+            this.hands[this.passTarget].push(this.passArray[2]);
+            console.log('computer hand is ', this.hands[this.passTarget]);
         //re-sort the player's hand
-
+            this.hand = this.sortHand(passObject.playerHand);
     //         $('#pass-button').fadeOut();
     //         $('.playerCard').detach();
     //         var passIdArray = [];

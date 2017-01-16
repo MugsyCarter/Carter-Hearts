@@ -12,6 +12,8 @@ function controller(shuffle, ai, timeout) {
     this.passReady = false;
     this.selectedCard = false;
     this.passCompleted = false;
+    this.turnOver = false;
+    this.playReady = false;
     this.passTarget = 0;
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
 
@@ -78,10 +80,9 @@ function controller(shuffle, ai, timeout) {
                     this.hands.push(tempHand);
                 }
                 this.hand = this.sortHand(this.hands[0]);
-          
-                this.comp1Hand = this.hands[1];
-                this.comp2Hand = this.hands[2];
-                this.comp3Hand = this.hands[3];
+                this.hands[1]= this.sortHand(this.hands[1]);
+                this.hands[2]= this.sortHand(this.hands[2]);
+                this.hands[3]= this.sortHand(this.hands[3]);
                 this.passArray = [];
             });
     };
@@ -135,25 +136,6 @@ function controller(shuffle, ai, timeout) {
 
     this.passCards = ()=>{
         console.log('pass cards clicked, passTarget is ', this.passTarget);
-   
-
-
-
-
-        // var index = -1;
-        // console.log('turn is ', Turn.pass);
-        // var passTarget = 0;
-    // console.log('pass direction is ,' Turn.pass);
-        // if (Turn.pass === 'left'){
-        //     passTarget = 1; 
-        // }
-        // if (Turn.pass === 'right'){
-        //     passTarget = 3; 
-        // }
-        // else {
-        //     passTarget = 2;
-        // }
-
         if (this.passArray.length === 3){
             console.log('passing these 3 cards ', this.passArray) + ' to this person ' + this.passPlayer;
                  //remove the pass cards from the player hand.
@@ -171,61 +153,37 @@ function controller(shuffle, ai, timeout) {
             console.log('computer hand is ', this.hands[this.passTarget]);
         //re-sort the player's hand
             this.hand = this.sortHand(passObject.playerHand);
-    //         $('#pass-button').fadeOut();
-    //         $('.playerCard').detach();
-    //         var passIdArray = [];
-
-    //         console.log('pass target is ', passTarget);
-    //         console.log('passArray is ', Deck.passArray);
-    //         Deck.passObject[passTarget] = Deck.passArray;
-    // //create computer player pass here.
-    //         AI.passCards(Deck.comp1Hand, 1);
-    //         AI.passCards(Deck.comp2Hand, 2);
-    //         AI.passCards(Deck.comp3Hand, 3);
-
-    //         console.log('pass object is ', Deck.passObject);
-    //         console.log('comp decks are ', Deck.compDecks);
-
-
-            // Deck.passArray.forEach( function(card){
-            //     passIdArray.push(card.id);
-            // });
-
-            // console.log('passIdArray is ', passIdArray);
-
-    // Turn.passDeck.push(Deck.passArray);
-
-            // for (var i = 0; i < Deck.sortedHand.length; i++){
-            //     index = passIdArray.indexOf(Deck.sortedHand[i].code);
-
-            //     if (index>-1){
-        //can also add in new cards here
-            //         console.log('removing this card: '+ Deck.sortedHand[i].code);
-            //         Deck.sortedHand.splice(i, 1);
-            //         i--;
-            //     }
-            // };
-            // console.log(passIdArray);
-            // console.log(Deck.sortedHand);
-            // Deck.passArray = [];
-    //this is showing the hand with the pass cards removed, i still need to add in the new cards and sort the hand.
-            // for (var i =0; i < Deck.sortedHand.length; i++){
-            //     $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
-            // }
+            this.hands[this.passTarget]=this.sortHand(this.hands[this.passTarget]);
             this.passReady = false;
             this.passCompleted = true;
+            this.playReady = true;
         //put the start play function call here once written
         }
         else{
-
             this.badPass = true;
             timeout(()=>{this.badPass=false;}, 3000);
             console.log('not enough cards');
         }
     };
 
+    this.startPlay = ()=>{
+        this.playReady = false;
+        //find the two of CLUBS
+        for (var i = 1; i <4; i++){
+            var twoedHand = this.hands[i].filter((card) => {
+                return card.code !== '2C';
+            });
+            if (twoedHand.length<13){
+                console.log('two found in deck #',i);
 
+            }
+        };
+        //show the clear button
+        this.turnOver = true;
+    };
 
-
-
+    this.newTurn = ()=>{
+        //show the clear button
+        this.turnOver = true;
+    };
 };

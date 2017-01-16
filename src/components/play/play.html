@@ -3,23 +3,23 @@
     <div>
         <h1>Play Carter Hearts!</h1>
         <div class="banner">
-            <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true">Deal</button>
-            <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()">Pass</button>
+            <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true"><h1 id="buttonMessage">Deal</h1></button>
+            <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>
             <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.  Your target is {{$ctrl.passPlayer}}.</h2>
             <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.  You have {{$ctrl.passArray.length}} cards selected.</h2>
             <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!</h2>
-            <h1 id="playMessage" ng-if="$ctrl.passCompleted===true">Begin Play!</h1>
+            <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
         </div>
 
         <div class="playArea">
             <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.playerPlay.image}">
-            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.comp1Play.image}">
-            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.comp2Play.image}">
-            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.comp3Play.image}">  
+            <image ng-if="$ctrl.comp1Played===true" src="{$ctrl.comp1Play.image}">
+            <image ng-if="$ctrl.comp2Played===true" src="{$ctrl.comp2Play.image}">
+            <image ng-if="$ctrl.comp3Played===true" src="{$ctrl.comp3Play.image}">  
         </div>
 
-        <div class="compHand1">
-            <ul class="hand">
+        <div class="compHand">
+            <ul class="comp1Hand">
                 <li class="comp1Card" ng-repeat="compCard in $ctrl.hands[1]" >
                     <img src="{{compCard.image}}" >
                 </li>
@@ -34,7 +34,9 @@
                 <li class="playerCard" ng-repeat="card in $ctrl.hand" >
                     <button ng-click="$ctrl.clicked(card)" ng-class="{'selectedCard' : card.toggled, 'cardButton' : !card.toggled}"><img src="{{card.image}}" ></button>
                 </li>
+                 <button class = "button" id="clear-button" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.clearTrick()"><h1 id="buttonMessage">Clear Trick</h1></button>
             </ul>
         </div>
+
     </div>
 </section>

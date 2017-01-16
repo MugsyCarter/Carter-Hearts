@@ -5,36 +5,15 @@ export default {
     controller
 };
 
-controller.$inject = ['shuffleService', '$timeout', '$rootScope'];
+controller.$inject = ['shuffleService', 'aiService', '$timeout', '$rootScope'];
 
-function controller(shuffle, timeout) {
+function controller(shuffle, ai, timeout) {
     this.beginning = true;
     this.passReady = false;
     this.selectedCard = false;
     this.passCompleted = false;
     this.passTarget = 0;
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
-
-    this.clicked = (card)=>{
-        console.log('ctrl.clicked clicked: this is the card', card);
-        if (this.passReady === true){
-            if (card.toggled===true){
-                console.log('removing card from passArray');
-                card.toggled = false;
-                console.log(this.passArray);
-                this.passArray.splice(this.passArray.indexOf(card),1);
-                console.log(this.passArray);
-            }
-            else{
-                console.log('adding card to passArray');
-                card.toggled = true;
-                console.log('card is ', card);
-                this.selectedCard = true;
-                this.passArray.push(card);
-                console.log(this.passArray);
-            }
-        }
-    };
 
     this.dealCards = ()=>{
         this.sortedHand=[];
@@ -92,11 +71,6 @@ function controller(shuffle, timeout) {
                     
                     finalDeck.push(newCardEntry);
                 });
-                // console.log('final deck is ', finalDeck);
-                //  save each card in the db
-                        // new Card(newCardEntry).save()
-                        // .then(saved => res.send(saved));
-                    // });
                   //deal hands
                 this.hands = [];
                 while(finalDeck.length > 0){
@@ -104,9 +78,6 @@ function controller(shuffle, timeout) {
                     this.hands.push(tempHand);
                 }
                 var playerHand = this.hands[0];
-                // console.log('hands are ', this.hands);
-                // console.log('player hand is ', playerHand);
-                // console.log('final deck is ', finalDeck);
             //sort player hand numerically
                 playerHand.sort(function(a,b){
                     return a.number-b.number;
@@ -134,8 +105,36 @@ function controller(shuffle, timeout) {
             });
     };
 
+    this.clicked = (card)=>{
+        //adds or removes player cards to be passed
+        console.log('ctrl.clicked clicked: this is the card', card);
+        if (this.passReady === true){
+            if (card.toggled===true){
+                console.log('removing card from passArray');
+                card.toggled = false;
+                console.log(this.passArray);
+                this.passArray.splice(this.passArray.indexOf(card),1);
+                console.log(this.passArray);
+            }
+            else{
+                console.log('adding card to passArray');
+                card.toggled = true;
+                console.log('card is ', card);
+                this.selectedCard = true;
+                this.passArray.push(card);
+                console.log(this.passArray);
+            }
+        }
+    };
+
+
     this.passCards = ()=>{
-        console.log('pass cards clicked');
+        console.log('pass cards clicked, passTarget is ', this.passTarget);
+   
+
+
+
+
         // var index = -1;
         // console.log('turn is ', Turn.pass);
         // var passTarget = 0;
@@ -152,6 +151,19 @@ function controller(shuffle, timeout) {
 
         if (this.passArray.length === 3){
             console.log('passing these 3 cards ', this.passArray) + ' to this person ' + this.passPlayer;
+                 //remove the pass cards from the player hand.
+            this.hand = this.hand.filter((card)=>{
+                return card !== this.passArray[0] && card !== this.passArray [1] && card !== this.passArray[2];
+            });
+        //run the algorithim from the aiService to get the pass from the computer player.  It returns an object with the new full player hand and the new computer hand which has had its pass removed. 
+            var passObject = ai.pass(this.hands[this.passTarget], this.hand);
+            console.log(passObject);
+            this.hands[this.passTarget] = passObject.compHand;
+            this.hand = passObject.playerHand;
+        //add the pass to the computer's hand
+            this.hands[this.passTarget].push(this.passArray);
+        //re-sort the player's hand
+
     //         $('#pass-button').fadeOut();
     //         $('.playerCard').detach();
     //         var passIdArray = [];
@@ -193,6 +205,7 @@ function controller(shuffle, timeout) {
             // for (var i =0; i < Deck.sortedHand.length; i++){
             //     $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
             // }
+            this.passReady = false;
             this.passCompleted = true;
         //put the start play function call here once written
         }

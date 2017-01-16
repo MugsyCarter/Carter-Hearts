@@ -58,6 +58,22 @@ export default function aiService() {
                 clubs=[];
             }
             console.log('computer pass is ', aiPass.compPass);
+            //if none of the above apply pass a middling heart to mess with the player
+            if(aiPass.compPass.length === 0 && hearts.length>2){
+                var sortedHearts = hearts.sort(function(a, b){
+                    return a.number - b.number;
+                });
+                aiPass.compPass.push(sortedHearts[1]);
+                sortedHearts.splice(1,1);
+                hearts = sortedHearts;
+                console.log('MIDDLING HEART.  hearts are '+ hearts+ ' and the heart was '+aiPass.compPass[0].code);
+            }
+            else if(hearts.length<=2){
+                while(hearts.length > 0){
+                    aiPass.compPass.push(hearts[0]);
+                }
+                hearts=[];
+            }
             if (aiPass.compPass.length ===3){
                 aiPass.compHand = hearts.concat(spades).concat(clubs).concat(diamonds);
             }

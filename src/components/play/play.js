@@ -93,6 +93,9 @@ function controller(shuffle, ai, timeout) {
             return a.number-b.number;
         });
             //Sort player hand into suit arrays
+        var playerClubs = hand.filter(function(card){
+            return card.suit === 'CLUBS';
+        });
         var playerHearts = hand.filter(function(card){
             return card.suit === 'HEARTS';
         });
@@ -102,11 +105,9 @@ function controller(shuffle, ai, timeout) {
         var playerDiamonds = hand.filter(function(card){
             return card.suit === 'DIAMONDS';
         });
-        var playerClubs = hand.filter(function(card){
-            return card.suit === 'CLUBS';
-        });
+       
             //combine suit arrays to make final sorted player hand
-        var sortedHand = playerHearts.concat(playerSpades).concat(playerDiamonds).concat(playerClubs);
+        var sortedHand = playerClubs.concat(playerHearts).concat(playerSpades).concat(playerDiamonds);
         console.log('sorted hand: ', sortedHand);
         return sortedHand;
     };
@@ -168,21 +169,24 @@ function controller(shuffle, ai, timeout) {
 
     this.startPlay = ()=>{
         this.playReady = false;
+        this.compPlays = [];
         //find the two of CLUBS
         for (var i = 1; i <4; i++){
-            var twoedHand = this.hands[i].filter((card) => {
-                return card.code !== '2C';
-            });
-            if (twoedHand.length<13){
+            if (this.hands[i][0].code === '2C'){
                 console.log('two found in deck #',i);
-
+                var two = this.hands[i].shift();
+                this.compPlays[i]= two;
+                console.log(this.hands[i]);
+                console.log(this.compPlays);
             }
-        };
+        }
+        
         //show the clear button
         this.turnOver = true;
     };
 
     this.newTurn = ()=>{
+        this.compPlays = [];
         //show the clear button
         this.turnOver = true;
     };

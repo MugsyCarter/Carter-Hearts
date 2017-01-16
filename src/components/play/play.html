@@ -13,9 +13,9 @@
 
         <div class="playArea">
             <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.playerPlay.image}">
-            <image ng-if="$ctrl.comp1Played===true" src="{$ctrl.comp1Play.image}">
-            <image ng-if="$ctrl.comp2Played===true" src="{$ctrl.comp2Play.image}">
-            <image ng-if="$ctrl.comp3Played===true" src="{$ctrl.comp3Play.image}">  
+            <image ng-if="$ctrl.compPlays[1]" src="{{$ctrl.compPlays[1].image}}">
+            <image ng-if="$ctrl.compPlays[2]" src="{{$ctrl.compPlays[2].image}}">
+            <image ng-if="$ctrl.compPlays[3]" src="{{$ctrl.compPlays[3].image}}">  
         </div>
 
         <div class="compHand">

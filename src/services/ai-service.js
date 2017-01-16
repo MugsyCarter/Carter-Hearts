@@ -8,8 +8,6 @@ export default function aiService() {
             };
             console.log('in aiService, hand is', hand);
             console.log('hand length is ', hand.length);
-            var full = [];
-            var sorted = [];
          
             var hearts = hand.filter(function(card){
                 return card.suit === 'HEARTS';
@@ -61,35 +59,35 @@ export default function aiService() {
             }
             console.log('computer pass is ', aiPass.compPass);
             if (aiPass.compPass.length ===3){
-                full = hearts.concat(spades).concat(clubs).concat(diamonds);
-                console.log('full AI is ', full); 
+                aiPass.compHand = hearts.concat(spades).concat(clubs).concat(diamonds);
             }
             //If comp pass is too big or too small
-            else if (aiPass.compPass===4){
-                var x = aiPass.compPass.pop();
-                hearts.push(x);
-                full = hearts.concat(spades).concat(clubs).concat(diamonds);
-                console.log('full AI is ', full); 
-                sorted = full;
+            else if (aiPass.compPass.length >3){
+                while(aiPass.compPass.length >3){
+                    var x = aiPass.compPass.pop();
+                    hearts.push(x);
+                }
+                aiPass.compHand = hearts.concat(spades).concat(clubs).concat(diamonds);
             }
-        //     //If too small, fill it with high cards
-        //     else if(aiPass.compPass.length < 3){
-        //         full = hearts.concat(spades).concat(clubs).concat(diamonds);
-        //         console.log('full AI is ', full); 
-        //         sorted = full.sort(function(a,b){
-        //             return a.value - b.value;
-        //         });
-        //         while(aiPass.compPass.length<3){
-        //             var y = sorted.pop();
-        //             aiPass.compPass.push(y);
-        //         } 
-            // }
+            //If too small, fill it with high cards
+            else if(aiPass.compPass.length < 3){
+                var full = hearts.concat(spades).concat(clubs).concat(diamonds);
+                console.log('full AI is ', full); 
+                var sorted = full.sort(function(a,b){
+                    return a.number - b.number;
+                });
+                console.log('sorted is ', sorted);
+                while(aiPass.compPass.length<3){
+                    var y = sorted.pop();
+                    aiPass.compPass.push(y);
+                } 
+            }
             console.log('at end of ai');
             console.log('player hand is ', aiPass.playerHand);
             console.log('comp Pass is ', aiPass.compPass);
 
 
-            aiPass.playerHand.concat(aiPass.compPass);
+            aiPass.playerHand = aiPass.playerHand.concat(aiPass.compPass);
             aiPass.compHand = aiPass.compHand.filter((card)=>{
                 return card !== aiPass.compPass[0] && card !== aiPass.compPass[1] && card !== aiPass.compPass[2];
             });

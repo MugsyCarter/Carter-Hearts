@@ -79,10 +79,17 @@ footer {
 .gameMessage{
     font-size: 3em;
     color: white;
+     padding-left: 10vw;
+}
+
+.errorMessage{    
+    font-size: 3em;
+    color: $red;
 }
 
 #playMessage{
   color:$red;
+  padding-left: 35vw;
 }
 
 .main-nav {
@@ -106,10 +113,12 @@ footer {
   bottom: 10vh;
 }
 
-.compHand1{
-  position: absolute;
-  bottom: 20vh;
-}
+// .compHand1{
+//  list-style-type: none;
+//   display: block;
+//   position: absolute;
+//   bottom: 30vh;
+// }
 
 .compHand2{
   position: absolute;
@@ -130,8 +139,11 @@ footer {
 }
 
 .comp1Card{
+    // position: absolute;
+  bottom: 30vh;
+ list-style-type: none;
   display: inline-block;
-  width: 4vw;
+  width: 6vw;
 }
 
 .comp2Card{

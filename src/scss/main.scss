@@ -87,11 +87,6 @@ footer {
     color: $red;
 }
 
-#playMessage{
-  color:$red;
-  padding-left: 35vw;
-}
-
 .main-nav {
   display: block;
   margin:0 auto;
@@ -113,12 +108,12 @@ footer {
   bottom: 10vh;
 }
 
-// .compHand1{
-//  list-style-type: none;
-//   display: block;
-//   position: absolute;
-//   bottom: 30vh;
-// }
+.compHand1{
+ list-style-type: none;
+  display: block;
+  position: absolute;
+  bottom: 30vh;
+}
 
 .compHand2{
   position: absolute;
@@ -140,7 +135,7 @@ footer {
 
 .comp1Card{
     // position: absolute;
-  bottom: 30vh;
+  bottom: 40vh;
  list-style-type: none;
   display: inline-block;
   width: 6vw;
@@ -213,8 +208,22 @@ a:hover{
   color: $red;
 }
 
+#playMessage{
+  color:$red;
+  font-size: 3em;
+}
 
+#playButton{
+  background-color: white;
+  &:hover{
+    background-color: black;
+  }
+}
 
+#buttonMessage{
+  color:white;
+  font-size: 3em;
+}
 
 /* Media Query Stuff */
 

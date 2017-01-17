@@ -12,7 +12,13 @@ function controller(shuffle, ai, timeout) {
     this.passReady = false;
     this.selectedCard = false;
     this.passCompleted = false;
+    this.turnOver = false;
+    this.playReady = false;
+    this.suitError = false;
+    this.firstHandError = false;
+    this.twoError = false;
     this.passTarget = 0;
+    this.lead = 0;
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
 
     this.dealCards = ()=>{
@@ -77,52 +83,84 @@ function controller(shuffle, ai, timeout) {
                     var tempHand = finalDeck.splice(0,13);
                     this.hands.push(tempHand);
                 }
-                var playerHand = this.hands[0];
-            //sort player hand numerically
-                playerHand.sort(function(a,b){
-                    return a.number-b.number;
-                });
-            //Sort player hand into suit arrays
-                var playerHearts = playerHand.filter(function(card){
-                    return card.suit === 'HEARTS';
-                });
-                var playerSpades = playerHand.filter(function(card){
-                    return card.suit === 'SPADES';
-                });
-                var playerDiamonds = playerHand.filter(function(card){
-                    return card.suit === 'DIAMONDS';
-                });
-                var playerClubs = playerHand.filter(function(card){
-                    return card.suit === 'CLUBS';
-                });
-            //combine suit arrays to make final sorted player hand
-                this.hand = playerHearts.concat(playerSpades).concat(playerDiamonds).concat(playerClubs);
-                console.log(this.hand);
-                this.comp1Hand = this.hands[1];
-                this.comp2Hand = this.hands[2];
-                this.comp3Hand = this.hands[3];
+                this.hand = this.sortHand(this.hands[0]);
+                this.hands[1]= this.sortHand(this.hands[1]);
+                this.hands[2]= this.sortHand(this.hands[2]);
+                this.hands[3]= this.sortHand(this.hands[3]);
                 this.passArray = [];
             });
     };
 
+    this.sortHand = (hand)=> {
+          //sort player hand numerically
+        hand.sort(function(a,b){
+            return a.number-b.number;
+        });
+            //Sort player hand into suit arrays
+        var playerClubs = hand.filter(function(card){
+            return card.suit === 'CLUBS';
+        });
+        var playerHearts = hand.filter(function(card){
+            return card.suit === 'HEARTS';
+        });
+        var playerSpades = hand.filter(function(card){
+            return card.suit === 'SPADES';
+        });
+        var playerDiamonds = hand.filter(function(card){
+            return card.suit === 'DIAMONDS';
+        });
+       
+            //combine suit arrays to make final sorted player hand
+        var sortedHand = playerClubs.concat(playerHearts).concat(playerSpades).concat(playerDiamonds);
+        return sortedHand;
+    };
+
     this.clicked = (card)=>{
         //adds or removes player cards to be passed
-        console.log('ctrl.clicked clicked: this is the card', card);
         if (this.passReady === true){
             if (card.toggled===true){
-                console.log('removing card from passArray');
                 card.toggled = false;
-                console.log(this.passArray);
                 this.passArray.splice(this.passArray.indexOf(card),1);
-                console.log(this.passArray);
             }
             else{
-                console.log('adding card to passArray');
                 card.toggled = true;
-                console.log('card is ', card);
                 this.selectedCard = true;
                 this.passArray.push(card);
-                console.log(this.passArray);
+            }
+        }
+        //else, play cards
+        else{
+            if(this.lead === 0 && card.code !== '2C'){
+                //if its the first hand and the player must play the two 
+                this.twoError = true;
+                timeout(()=>{this.twoError=false;}, 3000);
+            }
+            else if (this.lead ===0 && card.code === '2C'){
+                this.playedCards[0] = card;
+                this.nextPlayer();
+            }
+            else if (card.suit === this.playedCards[this.lead].suit){
+                //if the suit matches its a valid play
+                this.playedCards[0] = card;
+                this.nextPlayer();
+            }
+            else {
+                //check to see if player is voided 
+                this.leadSuit = this.playedCards[this.lead].suit;
+                var suitMatches = this.hand.filter((thisCard)=>{
+                    return thisCard.suit === this.leadSuit; 
+                });
+                if (suitMatches.length > 0){
+                    //player is not yet voided
+                    this.playerSuit = card.suit;
+                    this.suitError = true;
+                    timeout(()=>{this.suitError=false;}, 3000);
+                }
+                //check to see if its the first hand and the player is trying to play a point card
+                else if(this.playedCards[this.lead].code === '2C' && card.points >0){
+                    this.firstHandError = true;
+                    timeout(()=>{this.firstHandError=false;}, 3000);
+                }
             }
         }
     };
@@ -130,25 +168,6 @@ function controller(shuffle, ai, timeout) {
 
     this.passCards = ()=>{
         console.log('pass cards clicked, passTarget is ', this.passTarget);
-   
-
-
-
-
-        // var index = -1;
-        // console.log('turn is ', Turn.pass);
-        // var passTarget = 0;
-    // console.log('pass direction is ,' Turn.pass);
-        // if (Turn.pass === 'left'){
-        //     passTarget = 1; 
-        // }
-        // if (Turn.pass === 'right'){
-        //     passTarget = 3; 
-        // }
-        // else {
-        //     passTarget = 2;
-        // }
-
         if (this.passArray.length === 3){
             console.log('passing these 3 cards ', this.passArray) + ' to this person ' + this.passPlayer;
                  //remove the pass cards from the player hand.
@@ -159,65 +178,76 @@ function controller(shuffle, ai, timeout) {
             var passObject = ai.pass(this.hands[this.passTarget], this.hand);
             console.log(passObject);
             this.hands[this.passTarget] = passObject.compHand;
-            this.hand = passObject.playerHand;
         //add the pass to the computer's hand
-            this.hands[this.passTarget].push(this.passArray);
+            this.hands[this.passTarget].push(this.passArray[0]);
+            this.hands[this.passTarget].push(this.passArray[1]);
+            this.hands[this.passTarget].push(this.passArray[2]);
+            console.log('computer hand is ', this.hands[this.passTarget]);
         //re-sort the player's hand
-
-    //         $('#pass-button').fadeOut();
-    //         $('.playerCard').detach();
-    //         var passIdArray = [];
-
-    //         console.log('pass target is ', passTarget);
-    //         console.log('passArray is ', Deck.passArray);
-    //         Deck.passObject[passTarget] = Deck.passArray;
-    // //create computer player pass here.
-    //         AI.passCards(Deck.comp1Hand, 1);
-    //         AI.passCards(Deck.comp2Hand, 2);
-    //         AI.passCards(Deck.comp3Hand, 3);
-
-    //         console.log('pass object is ', Deck.passObject);
-    //         console.log('comp decks are ', Deck.compDecks);
-
-
-            // Deck.passArray.forEach( function(card){
-            //     passIdArray.push(card.id);
-            // });
-
-            // console.log('passIdArray is ', passIdArray);
-
-    // Turn.passDeck.push(Deck.passArray);
-
-            // for (var i = 0; i < Deck.sortedHand.length; i++){
-            //     index = passIdArray.indexOf(Deck.sortedHand[i].code);
-
-            //     if (index>-1){
-        //can also add in new cards here
-            //         console.log('removing this card: '+ Deck.sortedHand[i].code);
-            //         Deck.sortedHand.splice(i, 1);
-            //         i--;
-            //     }
-            // };
-            // console.log(passIdArray);
-            // console.log(Deck.sortedHand);
-            // Deck.passArray = [];
-    //this is showing the hand with the pass cards removed, i still need to add in the new cards and sort the hand.
-            // for (var i =0; i < Deck.sortedHand.length; i++){
-            //     $('.hand').append('<div class="playerCard" id="'+Deck.sortedHand[i].code+'" data-suit="'+Deck.sortedHand[i].suit+'" data-value="'+Deck.sortedHand[i].value+'" data-clicked=false><img class="card-img" id="player-card'+Deck.sortedHand[i].code+'" src="'+Deck.sortedHand[i].image+'"</div>');
-            // }
+            this.hand = this.sortHand(passObject.playerHand);
+            this.hands[this.passTarget]=this.sortHand(this.hands[this.passTarget]);
             this.passReady = false;
             this.passCompleted = true;
+            this.playReady = true;
         //put the start play function call here once written
         }
         else{
-
             this.badPass = true;
             timeout(()=>{this.badPass=false;}, 3000);
             console.log('not enough cards');
         }
     };
 
+    this.startPlay = ()=>{
+        this.playReady = false;
+        this.playedCards = [];
+        //find the two of CLUBS
+        for (var i = 1; i <4; i++){
+            if (this.hands[i][0].code === '2C'){
+                console.log('two found in deck #',i);
+                var two = this.hands[i].shift();
+                this.playedCards[i]= two;
+                this.lead = i;
+                console.log(this.hands[i]);
+                console.log(this.playedCards);
+                this.turnOrder = [i];
+            }
+        }
+        //if not, then the player has the 2
+        if(this.playedCards.length === 0){
+            //show two message
+            this.playTwo = true;
+            this.turnOrder = [0];
+            this.lead = 0;
+            console.log(this.hand[0]);
+            this.hand[0].toggled = true;
+        }
+        
 
+
+        //show the clear button
+        this.turnOver = true;
+    };
+
+
+    this.nextPlayer = ()=>{
+        //if not last play 
+        if (this.turnOrder.length < 4){
+            var lastPlayer = this.turnOrder[this.turnOrder.length-1];
+            console.log('last player was ', lastPlayer);
+            var nextPlayer = lastePlayer +1;
+            if (nextPlayer === 4){
+                nextPlayer = 0;
+                //let the Player Play
+            }
+            //code for the next player to go will go here
+        }
+        else{
+            //all players have played so resolve the trick 
+        } 
+        //show the clear button
+        this.turnOver = true;
+    };
 
 
 

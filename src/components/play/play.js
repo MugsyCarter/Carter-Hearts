@@ -15,6 +15,7 @@ function controller(shuffle, ai, timeout) {
     this.turnOver = false;
     this.playReady = false;
     this.suitError = false;
+    this.firstHandError = false;
     this.passTarget = 0;
     this.lead = 0;
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
@@ -130,6 +131,8 @@ function controller(shuffle, ai, timeout) {
         else{
             if (card.suit === this.playedCards[this.lead].suit){
                 //if the suit matches its a valid play
+                this.playedCards[0] = card;
+                this.nextPlayer();
             }
             else {
                 //check to see if player is voided 
@@ -142,6 +145,11 @@ function controller(shuffle, ai, timeout) {
                     this.playerSuit = card.suit;
                     this.suitError = true;
                     timeout(()=>{this.suitError=false;}, 2000);
+                }
+                //check to see if its the first hand and the player is trying to play a point card
+                else if(this.playedCards[this.lead].code === '2C' && card.points >0){
+                    this.firstHandError = true;
+                    timeout(()=>{this.firstHandError=false;}, 2000);
                 }
             }
         }
@@ -212,7 +220,7 @@ function controller(shuffle, ai, timeout) {
     };
 
 
-    this.newTurn = ()=>{
+    this.nextPlayer = ()=>{
         //if not last play 
         if (this.turnOrder.length < 4){
             var lastPlayer = this.turnOrder[this.turnOrder.length-1];

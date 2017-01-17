@@ -16,6 +16,7 @@ function controller(shuffle, ai, timeout) {
     this.playReady = false;
     this.suitError = false;
     this.firstHandError = false;
+    this.twoError = false;
     this.passTarget = 0;
     this.lead = 0;
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
@@ -129,7 +130,16 @@ function controller(shuffle, ai, timeout) {
         }
         //else, play cards
         else{
-            if (card.suit === this.playedCards[this.lead].suit){
+            if(this.lead === 0 && card.code !== '2C'){
+                //if its the first hand and the player must play the two 
+                this.twoError = true;
+                timeout(()=>{this.twoError=false;}, 3000);
+            }
+            else if (this.lead ===0 && card.code === '2C'){
+                this.playedCards[0] = card;
+                this.nextPlayer();
+            }
+            else if (card.suit === this.playedCards[this.lead].suit){
                 //if the suit matches its a valid play
                 this.playedCards[0] = card;
                 this.nextPlayer();
@@ -144,12 +154,12 @@ function controller(shuffle, ai, timeout) {
                     //player is not yet voided
                     this.playerSuit = card.suit;
                     this.suitError = true;
-                    timeout(()=>{this.suitError=false;}, 2000);
+                    timeout(()=>{this.suitError=false;}, 3000);
                 }
                 //check to see if its the first hand and the player is trying to play a point card
                 else if(this.playedCards[this.lead].code === '2C' && card.points >0){
                     this.firstHandError = true;
-                    timeout(()=>{this.firstHandError=false;}, 2000);
+                    timeout(()=>{this.firstHandError=false;}, 3000);
                 }
             }
         }

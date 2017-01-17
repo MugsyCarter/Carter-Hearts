@@ -14,7 +14,9 @@ function controller(shuffle, ai, timeout) {
     this.passCompleted = false;
     this.turnOver = false;
     this.playReady = false;
+    this.suitError = false;
     this.passTarget = 0;
+    this.lead = 0;
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
 
     this.dealCards = ()=>{
@@ -108,28 +110,39 @@ function controller(shuffle, ai, timeout) {
        
             //combine suit arrays to make final sorted player hand
         var sortedHand = playerClubs.concat(playerHearts).concat(playerSpades).concat(playerDiamonds);
-        console.log('sorted hand: ', sortedHand);
         return sortedHand;
     };
 
     this.clicked = (card)=>{
         //adds or removes player cards to be passed
-        console.log('ctrl.clicked clicked: this is the card', card);
         if (this.passReady === true){
             if (card.toggled===true){
-                console.log('removing card from passArray');
                 card.toggled = false;
-                console.log(this.passArray);
                 this.passArray.splice(this.passArray.indexOf(card),1);
-                console.log(this.passArray);
             }
             else{
-                console.log('adding card to passArray');
                 card.toggled = true;
-                console.log('card is ', card);
                 this.selectedCard = true;
                 this.passArray.push(card);
-                console.log(this.passArray);
+            }
+        }
+        //else, play cards
+        else{
+            if (card.suit === this.playedCards[this.lead].suit){
+                //if the suit matches its a valid play
+            }
+            else {
+                //check to see if player is voided 
+                this.leadSuit = this.playedCards[this.lead].suit;
+                var suitMatches = this.hand.filter((thisCard)=>{
+                    return thisCard.suit === this.leadSuit; 
+                });
+                if (suitMatches.length > 0){
+                    //player is not yet voided
+                    this.playerSuit = card.suit;
+                    this.suitError = true;
+                    timeout(()=>{this.suitError=false;}, 2000);
+                }
             }
         }
     };
@@ -169,25 +182,55 @@ function controller(shuffle, ai, timeout) {
 
     this.startPlay = ()=>{
         this.playReady = false;
-        this.compPlays = [];
+        this.playedCards = [];
         //find the two of CLUBS
         for (var i = 1; i <4; i++){
             if (this.hands[i][0].code === '2C'){
                 console.log('two found in deck #',i);
                 var two = this.hands[i].shift();
-                this.compPlays[i]= two;
+                this.playedCards[i]= two;
+                this.lead = i;
                 console.log(this.hands[i]);
-                console.log(this.compPlays);
+                console.log(this.playedCards);
+                this.turnOrder = [i];
             }
         }
+        //if not, then the player has the 2
+        if(this.playedCards.length === 0){
+            //show two message
+            this.playTwo = true;
+            this.turnOrder = [0];
+            this.lead = 0;
+            console.log(this.hand[0]);
+            this.hand[0].toggled = true;
+        }
         
+
+
         //show the clear button
         this.turnOver = true;
     };
 
+
     this.newTurn = ()=>{
-        this.compPlays = [];
+        //if not last play 
+        if (this.turnOrder.length < 4){
+            var lastPlayer = this.turnOrder[this.turnOrder.length-1];
+            console.log('last player was ', lastPlayer);
+            var nextPlayer = lastePlayer +1;
+            if (nextPlayer === 4){
+                nextPlayer = 0;
+                //let the Player Play
+            }
+            //code for the next player to go will go here
+        }
+        else{
+            //all players have played so resolve the trick 
+        } 
         //show the clear button
         this.turnOver = true;
     };
+
+
+
 };

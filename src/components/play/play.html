@@ -6,16 +6,18 @@
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true"><h1 id="buttonMessage">Deal</h1></button>
             <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>
             <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.  Your target is {{$ctrl.passPlayer}}.</h2>
-            <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.  You have {{$ctrl.passArray.length}} cards selected.</h2>
             <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!</h2>
+            <h1 class ='gameMessage' id="twoMessage" ng-if="$ctrl.playTwo===true">Play the two of clubs.</h2>
+            <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.  You have {{$ctrl.passArray.length}} cards selected.</h2>
+            <h1 class ='errorMessage' id="notVoidedMessage" ng-if="$ctrl.suitError===true">The lead was {{$ctrl.leadSuit}}.  You cannot play {{$ctrl.playerSuit}} while you still have {{$ctrl.leadSuit}} in your hand.  Nice try!</h2>
             <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
         </div>
 
         <div class="playArea">
-            <image ng-if="$ctrl.playerPlayed===true" src="{$ctrl.playerPlay.image}">
-            <image ng-if="$ctrl.compPlays[1]" src="{{$ctrl.compPlays[1].image}}">
-            <image ng-if="$ctrl.compPlays[2]" src="{{$ctrl.compPlays[2].image}}">
-            <image ng-if="$ctrl.compPlays[3]" src="{{$ctrl.compPlays[3].image}}">  
+            <image ng-if="$ctrl.playedCards[0]" src="{$ctrl.playedCards[0].image}">
+            <image ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}">
+            <image ng-if="$ctrl.playedCards[2]" src="{{$ctrl.playedCards[2].image}}">
+            <image ng-if="$ctrl.playedCards[3]" src="{{$ctrl.playedCards[3].image}}">  
         </div>
 
         <div class="compHand">

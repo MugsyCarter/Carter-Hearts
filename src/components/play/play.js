@@ -14,11 +14,14 @@ function controller(shuffle, ai, timeout) {
     this.passCompleted = false;
     this.turnOver = false;
     this.playReady = false;
+    this.playerTurn = false;
     this.suitError = false;
     this.firstHandError = false;
     this.twoError = false;
     this.passTarget = 0;
     this.lead = 0;
+    this.turnOrder = [];
+    this.playedCards = [];
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
 
     this.dealCards = ()=>{
@@ -129,20 +132,18 @@ function controller(shuffle, ai, timeout) {
             }
         }
         //else, play cards
-        else{
+        else if (this.playerTurn === true){
             if(this.lead === 0 && card.code !== '2C'){
                 //if its the first hand and the player must play the two 
                 this.twoError = true;
                 timeout(()=>{this.twoError=false;}, 3000);
             }
             else if (this.lead ===0 && card.code === '2C'){
-                this.playedCards[0] = card;
-                this.nextPlayer();
+                this.playCard(card, 0);
             }
             else if (card.suit === this.playedCards[this.lead].suit){
                 //if the suit matches its a valid play
-                this.playedCards[0] = card;
-                this.nextPlayer();
+                this.playCard(card, 0);
             }
             else {
                 //check to see if player is voided 
@@ -161,10 +162,31 @@ function controller(shuffle, ai, timeout) {
                     this.firstHandError = true;
                     timeout(()=>{this.firstHandError=false;}, 3000);
                 }
+                //otherwise the play is valid
+                else{
+                    this.playCard(card, 0);
+                }
             }
         }
     };
 
+    this.playCard = (card, player)=>{
+        //this function play a card and removesit from the player's hand
+        this.playedCards[player] = card;
+        this.turnOrder.push(player);
+        if (player === 0){
+            this.hand = this.hand.filter((eachCard)=>{
+                return eachCard.code !== card.code;
+            });
+        }
+        else{
+            this.hands[player] = this.hands[player].filter((eachCard)=>{
+                return eachCard.code !== card.code;
+            });
+        }
+        //call the next player
+        this.nextPlayer();
+    };
 
     this.passCards = ()=>{
         console.log('pass cards clicked, passTarget is ', this.passTarget);
@@ -205,48 +227,60 @@ function controller(shuffle, ai, timeout) {
         for (var i = 1; i <4; i++){
             if (this.hands[i][0].code === '2C'){
                 console.log('two found in deck #',i);
-                var two = this.hands[i].shift();
-                this.playedCards[i]= two;
+                var two = this.hands[i][0];
                 this.lead = i;
-                console.log(this.hands[i]);
-                console.log(this.playedCards);
-                this.turnOrder = [i];
+                this.playCard(two, i);
+                return;
             }
         }
-        //if not, then the player has the 2
+        //if not, then the player has the 2, have them play it
         if(this.playedCards.length === 0){
             //show two message
+            this.playerTurn = true;
             this.playTwo = true;
-            this.turnOrder = [0];
             this.lead = 0;
             console.log(this.hand[0]);
             this.hand[0].toggled = true;
+            return;
         }
-        
-
-
-        //show the clear button
-        this.turnOver = true;
     };
 
 
     this.nextPlayer = ()=>{
+        console.log('in nextPlayer');
         //if not last play 
-        if (this.turnOrder.length < 4){
+        while(this.turnOrder.length < 4){
+            console.log('turn order is ', this.turnOrder);
             var lastPlayer = this.turnOrder[this.turnOrder.length-1];
             console.log('last player was ', lastPlayer);
-            var nextPlayer = lastePlayer +1;
-            if (nextPlayer === 4){
-                nextPlayer = 0;
+            var currentPlayer = lastPlayer +1;
+            if (currentPlayer === 4){
+                currentPlayer = 0;
+                this.playerTurn = true;
+                return;
                 //let the Player Play
             }
-            //code for the next player to go will go here
+            else {
+                //its the AIs turn.  Let the AI play.
+                this.PlayerTurn = false;
+                console.log('player '+ currentPlayer + ' about to play.');
+                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer]);
+                this.playCard(aiPlay, currentPlayer);
+            }
         }
-        else{
-            //all players have played so resolve the trick 
-        } 
-        //show the clear button
+        //all players have played so show the clear trick button to resolve
         this.turnOver = true;
+        return;      
+    };
+
+    this.clearTrick = ()=>{
+        console.log('clearTrick Called');
+    };
+
+    this.newHand = ()=>{
+        console.log('newHand called');
+        this.turnOrder = [];
+        this.playedCards = [];
     };
 
 

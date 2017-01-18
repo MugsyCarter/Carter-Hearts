@@ -110,6 +110,69 @@ export default function aiService() {
             console.log('playerHand is now ', aiPass.playerHand);
             console.log('computer pass object is', aiPass);
             return aiPass;
+        },
+
+        play(playedCards, lead, hand){
+            console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
+            if (playedCards[lead].code === '2C'){
+                console.log('aiPlay first hand');
+                //if its the first hand, no pointers are allowed
+                var clubs = hand.filter((card)=>{
+                    return card.suit === 'CLUBS';
+                });
+                //if player has clubs play the highest
+                if (clubs.length > 0){
+                    var sortedClubs = clubs.sort((a,b)=>{
+                        return b.number - a.number;
+                    });
+                    return sortedClubs[0];
+                }
+                else {
+                    var spades = hand.filter((card)=>{
+                        return card.suit === 'SPADES';
+                    });
+                    var diamonds= hand.filter((card)=>{
+                        return card.suit === 'DIAMONDS';
+                    });
+                    //if player is low on spades see about playing one
+                    if (spades.length < diamonds.length){
+                        var sortedSpades = spades.sort((a,b)=>{
+                            return b.number - a.number;
+                        });
+                        //if not the queen, play the higest spade
+                        if(sortedSpades[0].code !== 'QS'){
+                            return sortedSpades[0];
+                        }
+                        //if your higest spade is the queen see about playing a diamond
+                        else if (diamonds.length > 0){
+                            var sortedDiamonds = diamonds.sort((a,b)=>{
+                                return b.number - a.number;
+                            });
+                            return sortedDiamonds[0];
+                        }
+                        //if no diamonds, you have yo play your second highest spade
+                        //RUN FLAG
+                        else {
+                            return sortedSpades[1];
+                        }
+                    }
+                    //if player is low on diamonds see about playing one
+                    else{
+                        var sortedDiamonds = diamonds.sort((a,b)=>{
+                            return b.number - a.number;
+                        });
+                        return sortedDiamonds[0];
+                    }
+                }
+                this.playedCards[0] = card;
+                this.nextPlayer();
+            }
+            //it is not the lead play so pointers are OK
+            else{
+                console.log('aiPlay normal hand');
+                return;
+            }
         }
     };
-}
+};
+

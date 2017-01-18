@@ -170,8 +170,9 @@ export default function aiService() {
             //it is not the lead play so pointers are OK
             else{
                 console.log('aiPlay normal hand');
-            }
+                return;
             }
         }
     };
-}
+};
+

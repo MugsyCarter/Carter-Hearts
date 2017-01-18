@@ -20,7 +20,7 @@ function controller(shuffle, ai, timeout) {
     this.twoError = false;
     this.passTarget = 0;
     this.lead = 0;
-    ths.turnOrder = [];
+    this.turnOrder = [];
     this.playedCards = [];
     this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
 
@@ -139,15 +139,11 @@ function controller(shuffle, ai, timeout) {
                 timeout(()=>{this.twoError=false;}, 3000);
             }
             else if (this.lead ===0 && card.code === '2C'){
-                this.playedCards[0] = card;
-                this.turnOrder.push[0];
-                this.nextPlayer();
+                this.playCard(card);
             }
             else if (card.suit === this.playedCards[this.lead].suit){
                 //if the suit matches its a valid play
-                this.playedCards[0] = card;
-                this.turnOrder.push[0];
-                this.nextPlayer();
+                this.playCard(card);
             }
             else {
                 //check to see if player is voided 
@@ -168,14 +164,22 @@ function controller(shuffle, ai, timeout) {
                 }
                 //otherwise the play is valid
                 else{
-                    this.playedCards[0] = card;
-                    this.turnOrder.push[0];
-                    this.nextPlayer();
+                    this.playCard(card);
                 }
             }
         }
     };
 
+    this.playCard = (card)=>{
+        //this function play a card and removesit from the player's hand
+        this.playedCards[0] = card;
+        this.turnOrder.push[0];
+        this.hand = this.hand.filter((eachCard)=>{
+            return eachCard.code !== card.code;
+        });
+        //call the next player
+        this.nextPlayer();
+    };
 
     this.passCards = ()=>{
         console.log('pass cards clicked, passTarget is ', this.passTarget);
@@ -219,10 +223,9 @@ function controller(shuffle, ai, timeout) {
                 var two = this.hands[i].shift();
                 this.playedCards[i]= two;
                 this.lead = i;
-                console.log(this.hands[i]);
-                console.log(this.playedCards);
                 this.turnOrder = [i];
                 this.nextPlayer();
+                return;
             }
         }
         //if not, then the player has the 2, have them play it
@@ -234,6 +237,7 @@ function controller(shuffle, ai, timeout) {
             this.lead = 0;
             console.log(this.hand[0]);
             this.hand[0].toggled = true;
+            return;
         }
     };
 
@@ -257,7 +261,7 @@ function controller(shuffle, ai, timeout) {
                 console.log('player '+ currentPlayer + ' about to play.');
                 var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer]);
                 this.playedCards[currentPlayer] = aiPlay;
-                this.turnOrder.push[i];
+                this.turnOrder.push[currentPlayer];
             }
             console.log('current player is ', currentPlayer);
             //code for the next player to go will go here
@@ -265,6 +269,16 @@ function controller(shuffle, ai, timeout) {
         //all players have played so show the clear trick button to resolve
         this.turnOver = true;
         return;      
+    };
+
+    this.clearTrick = ()=>{
+        console.log('clearTrick Called');
+    };
+
+    this.newHand = ()=>{
+        console.log('newHand called');
+        this.turnOrder = [];
+        this.playedCards = [];
     };
 
 

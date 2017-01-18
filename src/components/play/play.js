@@ -14,6 +14,7 @@ function controller(shuffle, ai, timeout) {
     this.passCompleted = false;
     this.turnOver = false;
     this.playReady = false;
+    this.playerTurn = false;
     this.suitError = false;
     this.firstHandError = false;
     this.twoError = false;
@@ -129,7 +130,7 @@ function controller(shuffle, ai, timeout) {
             }
         }
         //else, play cards
-        else{
+        else if (this.playerTurn === true){
             if(this.lead === 0 && card.code !== '2C'){
                 //if its the first hand and the player must play the two 
                 this.twoError = true;
@@ -213,9 +214,10 @@ function controller(shuffle, ai, timeout) {
                 this.turnOrder = [i];
             }
         }
-        //if not, then the player has the 2
+        //if not, then the player has the 2, have them play it
         if(this.playedCards.length === 0){
             //show two message
+            this.playerTurn = true;
             this.playTwo = true;
             this.turnOrder = [0];
             this.lead = 0;
@@ -235,18 +237,19 @@ function controller(shuffle, ai, timeout) {
         if (this.turnOrder.length < 4){
             var lastPlayer = this.turnOrder[this.turnOrder.length-1];
             console.log('last player was ', lastPlayer);
-            var nextPlayer = lastePlayer +1;
+            var nextPlayer = lastPlayer +1;
             if (nextPlayer === 4){
                 nextPlayer = 0;
+                this.playerTurn = true;
                 //let the Player Play
             }
+            console.log('next player is ', nextPlayer);
             //code for the next player to go will go here
         }
         else{
-            //all players have played so resolve the trick 
-        } 
-        //show the clear button
-        this.turnOver = true;
+            //all players have played so show the clear trick button to resolve
+            this.turnOver = true;
+        }      
     };
 
 

@@ -110,6 +110,43 @@ export default function aiService() {
             console.log('playerHand is now ', aiPass.playerHand);
             console.log('computer pass object is', aiPass);
             return aiPass;
+        },
+
+        play(playedCards, lead, hand){
+            console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
+            if(this.lead === 0 && card.code !== '2C'){
+                //if its the first hand and the player must play the two 
+                this.twoError = true;
+                timeout(()=>{this.twoError=false;}, 3000);
+            }
+            else if (this.lead ===0 && card.code === '2C'){
+                this.playedCards[0] = card;
+                this.nextPlayer();
+            }
+            else if (card.suit === this.playedCards[this.lead].suit){
+                //if the suit matches its a valid play
+                this.playedCards[0] = card;
+                console.log('played cards are ', this.playedCards);
+                this.nextPlayer();
+            }
+            else {
+                //check to see if player is voided 
+                this.leadSuit = this.playedCards[this.lead].suit;
+                var suitMatches = this.hand.filter((thisCard)=>{
+                    return thisCard.suit === this.leadSuit; 
+                });
+                if (suitMatches.length > 0){
+                    //player is not yet voided
+                    this.playerSuit = card.suit;
+                    this.suitError = true;
+                    timeout(()=>{this.suitError=false;}, 3000);
+                }
+                //check to see if its the first hand and the player is trying to play a point card
+                else if(this.playedCards[this.lead].code === '2C' && card.points >0){
+                    this.firstHandError = true;
+                    timeout(()=>{this.firstHandError=false;}, 3000);
+                }
+            }
         }
     };
 }

@@ -143,6 +143,7 @@ function controller(shuffle, ai, timeout) {
             else if (card.suit === this.playedCards[this.lead].suit){
                 //if the suit matches its a valid play
                 this.playedCards[0] = card;
+                console.log('played cards are ', this.playedCards);
                 this.nextPlayer();
             }
             else {
@@ -212,6 +213,7 @@ function controller(shuffle, ai, timeout) {
                 console.log(this.hands[i]);
                 console.log(this.playedCards);
                 this.turnOrder = [i];
+                this.nextPlayer();
             }
         }
         //if not, then the player has the 2, have them play it
@@ -224,26 +226,28 @@ function controller(shuffle, ai, timeout) {
             console.log(this.hand[0]);
             this.hand[0].toggled = true;
         }
-        
-
-
-        //show the clear button
-        this.turnOver = true;
     };
 
 
     this.nextPlayer = ()=>{
+        console.log('in nextPlayer');
         //if not last play 
         if (this.turnOrder.length < 4){
             var lastPlayer = this.turnOrder[this.turnOrder.length-1];
             console.log('last player was ', lastPlayer);
-            var nextPlayer = lastPlayer +1;
-            if (nextPlayer === 4){
-                nextPlayer = 0;
+            var currentPlayer = lastPlayer +1;
+            if (currentPlayer === 4){
+                currentPlayer = 0;
                 this.playerTurn = true;
                 //let the Player Play
             }
-            console.log('next player is ', nextPlayer);
+            else {
+                //its the AIs turn.  Let the AI play.
+                this.PlayerTurn = false;
+                console.log('player '+ currentPlayer + ' about to play.');
+                ai.play(this.playedCards, this.lead, this.hands[currentPlayer]);
+            }
+            console.log('current player is ', currentPlayer);
             //code for the next player to go will go here
         }
         else{

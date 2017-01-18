@@ -245,7 +245,8 @@ function controller(shuffle, ai, timeout) {
                 //its the AIs turn.  Let the AI play.
                 this.PlayerTurn = false;
                 console.log('player '+ currentPlayer + ' about to play.');
-                ai.play(this.playedCards, this.lead, this.hands[currentPlayer]);
+                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer]);
+                this.playedCards[currentPlayer] = aiPlay;
             }
             console.log('current player is ', currentPlayer);
             //code for the next player to go will go here

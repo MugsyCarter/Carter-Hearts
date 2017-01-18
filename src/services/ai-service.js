@@ -114,38 +114,63 @@ export default function aiService() {
 
         play(playedCards, lead, hand){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
-            if(this.lead === 0 && card.code !== '2C'){
-                //if its the first hand and the player must play the two 
-                this.twoError = true;
-                timeout(()=>{this.twoError=false;}, 3000);
-            }
-            else if (this.lead ===0 && card.code === '2C'){
-                this.playedCards[0] = card;
-                this.nextPlayer();
-            }
-            else if (card.suit === this.playedCards[this.lead].suit){
-                //if the suit matches its a valid play
-                this.playedCards[0] = card;
-                console.log('played cards are ', this.playedCards);
-                this.nextPlayer();
-            }
-            else {
-                //check to see if player is voided 
-                this.leadSuit = this.playedCards[this.lead].suit;
-                var suitMatches = this.hand.filter((thisCard)=>{
-                    return thisCard.suit === this.leadSuit; 
+            if (playedCards[lead].code === '2C'){
+                console.log('aiPlay first hand');
+                //if its the first hand, no pointers are allowed
+                var clubs = hand.filter((card)=>{
+                    return card.suit === 'CLUBS';
                 });
-                if (suitMatches.length > 0){
-                    //player is not yet voided
-                    this.playerSuit = card.suit;
-                    this.suitError = true;
-                    timeout(()=>{this.suitError=false;}, 3000);
+                //if player has clubs play the highest
+                if (clubs.length > 0){
+                    var sortedClubs = clubs.sort((a,b)=>{
+                        return b.number - a.number;
+                    });
+                    return sortedClubs[0];
                 }
-                //check to see if its the first hand and the player is trying to play a point card
-                else if(this.playedCards[this.lead].code === '2C' && card.points >0){
-                    this.firstHandError = true;
-                    timeout(()=>{this.firstHandError=false;}, 3000);
+                else {
+                    var spades = hand.filter((card)=>{
+                        return card.suit === 'SPADES';
+                    });
+                    var diamonds= hand.filter((card)=>{
+                        return card.suit === 'DIAMONDS';
+                    });
+                    //if player is low on spades see about playing one
+                    if (spades.length < diamonds.length){
+                        var sortedSpades = spades.sort((a,b)=>{
+                            return b.number - a.number;
+                        });
+                        //if not the queen, play the higest spade
+                        if(sortedSpades[0].code !== 'QS'){
+                            return sortedSpades[0];
+                        }
+                        //if your higest spade is the queen see about playing a diamond
+                        else if (diamonds.length > 0){
+                            var sortedDiamonds = diamonds.sort((a,b)=>{
+                                return b.number - a.number;
+                            });
+                            return sortedDiamonds[0];
+                        }
+                        //if no diamonds, you have yo play your second highest spade
+                        //RUN FLAG
+                        else {
+                            return sortedSpades[1];
+                        }
+                    }
+                    //if player is low on diamonds see about playing one
+                    else{
+                        var sortedDiamonds = diamonds.sort((a,b)=>{
+                            return b.number - a.number;
+                        });
+                        return sortedDiamonds[0];
+                    }
                 }
+                this.playedCards[0] = card;
+                this.nextPlayer();
+            }
+            //it is not the lead play so pointers are OK
+            else{
+                console.log('aiPlay normal hand');
+            }
             }
         }
     };

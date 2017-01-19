@@ -71,9 +71,13 @@ footer {
   background-color: $red;
 }
 
+table{
+  padding-top: 4vh;
+}
+
 td{
   font-size: 2em;
-  padding-right: 2vw;
+  padding-left: 2vw;
   font-family: 'Reenie Beanie', cursive;
 }
 
@@ -268,7 +272,9 @@ a:hover{
    left: 45vw;
 }
 
-
+#score{
+  padding-left: 3vw;
+}
 
 
 /* Media Query Stuff */

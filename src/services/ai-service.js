@@ -177,15 +177,51 @@ export default function aiService() {
             else{
                 console.log('aiPlay normal hand');
                 console.log('highCard is ', highCard);
-
+                
                 //check to see if ai has cards in suit
                 var inSuit = hand.filter((card)=>{
                     return card.suit === playedCards[lead].suit;
                 });
-                console.log('matching cards are ', inSuit);
+                var sortedInSuit = hand.sort((a,b)=>{
+                    return b.number - a.number;
+                });
+
+                console.log('matching cards are ', sortedinSuit);
                 //if so, the ai must play one
                 if (inSuit.length>0){
-                  
+                  //play highest in suit below high card
+                    for(var i=0; i < sortedInSuit.length; i++){
+                        if (sortedInSuit[i].number < highCard.number){
+                            return sortedInSuit[i];
+                        }
+                    }
+                }
+                else{
+                    //play whatever
+                    var hearts = hand.filter(function(card){
+                        return card.suit === 'HEARTS';
+                    });
+                    var spades = hand.filter(function(card){
+                        return card.suit === 'SPADES';
+                    });
+                    var diamonds = hand.filter(function(card){
+                        return card.suit === 'DIAMONDS';
+                    });
+                    var clubs = hand.filter(function(card){
+                        return card.suit === 'CLUBS';
+                    });
+
+                    var theQueen = spades.filter((card)=>{
+                        return card.code = 'QS';
+                    });
+                    if (theQueen.length>0){
+                        return theQueen[0];
+                    }
+                    else if (spades.length < 4){
+                        return spades[0];
+                    }
+
+
                 }
                 return;
             }

@@ -132,6 +132,62 @@ function controller(shuffle, ai, timeout) {
         return sortedHand;
     };
 
+    this.passCards = ()=>{
+        console.log('pass cards clicked, passTarget is ', this.passTarget);
+        if (this.passArray.length === 3){
+            console.log('passing these 3 cards ', this.passArray) + ' to this person ' + this.passPlayer;
+                 //remove the pass cards from the player hand.
+            this.hand = this.hand.filter((card)=>{
+                return card !== this.passArray[0] && card !== this.passArray [1] && card !== this.passArray[2];
+            });
+        //run the algorithim from the aiService to get the pass from the computer player.  It returns an object with the new full player hand and the new computer hand which has had its pass removed. 
+            var passObject = ai.pass(this.hands[this.passTarget], this.hand);
+            console.log(passObject);
+            this.hands[this.passTarget] = passObject.compHand;
+        //add the pass to the computer's hand
+            this.hands[this.passTarget].push(this.passArray[0]);
+            this.hands[this.passTarget].push(this.passArray[1]);
+            this.hands[this.passTarget].push(this.passArray[2]);
+            console.log('computer hand is ', this.hands[this.passTarget]);
+        //re-sort the player's hand and the computer Hand
+            this.hand = this.sortHand(passObject.playerHand);
+            this.hands[this.passTarget]=this.sortHand(this.hands[this.passTarget]);
+            this.passReady = false;
+            this.passCompleted = true;
+            this.playReady = true;
+        //put the start play function call here once written
+        }
+        else{
+            this.badPass = true;
+            timeout(()=>{this.badPass=false;}, 3000);
+            console.log('not enough cards');
+        }
+    };
+
+    this.startPlay = ()=>{
+        this.playReady = false;
+        this.playedCards = [];
+        //find the two of CLUBS
+        for (var i = 1; i <4; i++){
+            if (this.hands[i][0].code === '2C'){
+                var two = this.hands[i][0];
+                this.lead = i;
+                this.playCard(two, i);
+                return;
+            }
+        }
+        //if not, then the player has the 2, have them play it
+        if(this.playedCards.length === 0){
+            //show two message
+            this.playerTurn = true;
+            this.playTwo = true;
+            this.lead = 0;
+            this.firstLead = true;
+            this.hand[0].toggled = true;
+            return;
+        }
+    };
+
     this.clicked = (card)=>{
         //adds or removes player cards to be passed
         if (this.passReady === true){
@@ -256,65 +312,6 @@ function controller(shuffle, ai, timeout) {
         //call the next player
         this.nextPlayer();
     };
-
-
-
-    this.passCards = ()=>{
-        console.log('pass cards clicked, passTarget is ', this.passTarget);
-        if (this.passArray.length === 3){
-            console.log('passing these 3 cards ', this.passArray) + ' to this person ' + this.passPlayer;
-                 //remove the pass cards from the player hand.
-            this.hand = this.hand.filter((card)=>{
-                return card !== this.passArray[0] && card !== this.passArray [1] && card !== this.passArray[2];
-            });
-        //run the algorithim from the aiService to get the pass from the computer player.  It returns an object with the new full player hand and the new computer hand which has had its pass removed. 
-            var passObject = ai.pass(this.hands[this.passTarget], this.hand);
-            console.log(passObject);
-            this.hands[this.passTarget] = passObject.compHand;
-        //add the pass to the computer's hand
-            this.hands[this.passTarget].push(this.passArray[0]);
-            this.hands[this.passTarget].push(this.passArray[1]);
-            this.hands[this.passTarget].push(this.passArray[2]);
-            console.log('computer hand is ', this.hands[this.passTarget]);
-        //re-sort the player's hand
-            this.hand = this.sortHand(passObject.playerHand);
-            this.hands[this.passTarget]=this.sortHand(this.hands[this.passTarget]);
-            this.passReady = false;
-            this.passCompleted = true;
-            this.playReady = true;
-        //put the start play function call here once written
-        }
-        else{
-            this.badPass = true;
-            timeout(()=>{this.badPass=false;}, 3000);
-            console.log('not enough cards');
-        }
-    };
-
-    this.startPlay = ()=>{
-        this.playReady = false;
-        this.playedCards = [];
-        //find the two of CLUBS
-        for (var i = 1; i <4; i++){
-            if (this.hands[i][0].code === '2C'){
-                var two = this.hands[i][0];
-                this.lead = i;
-                this.playCard(two, i);
-                return;
-            }
-        }
-        //if not, then the player has the 2, have them play it
-        if(this.playedCards.length === 0){
-            //show two message
-            this.playerTurn = true;
-            this.playTwo = true;
-            this.lead = 0;
-            this.firstLead = true;
-            this.hand[0].toggled = true;
-            return;
-        }
-    };
-
 
     this.nextPlayer = ()=>{
         console.log('in nextPlayer');

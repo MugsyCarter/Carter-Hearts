@@ -285,6 +285,13 @@ function controller(shuffle, ai, timeout) {
         return;      
     };
 
+    this.newTrick = ()=>{
+        this.turnOver = false;
+        this.turnOrder = [];
+        this.playedCards = [];
+        console.log('newTrick called');
+    };
+
     this.newHand = ()=>{
         this.turnOver = false;
         console.log('newHand called');
@@ -297,7 +304,6 @@ function controller(shuffle, ai, timeout) {
         }
         this.passPlayer = this.players[this.passTarget];
         this.passArray = [];
-
     };
 
 

@@ -276,6 +276,18 @@ function controller(shuffle, ai, timeout) {
 
     this.clearTrick = ()=>{
         console.log('clearTrick Called');
+        var suited = this.playedCards.filter((card)=>{
+            return card.suit === this.playedCards[this.lead].suit;
+        });
+        console.log('suited is ', suited);
+        var sortedSuited = suited.sort((a,b)=>{
+            return b.number - a.number;
+        });
+        var highcard = sortedSuited[0];
+        console.log('highcard is ',highcard);
+        this.high = this.playedCards.indexOf(highcard);
+        console.log(this.players[this.high] + ' took the trick');
+
     };
 
     this.newHand = ()=>{

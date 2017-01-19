@@ -22,7 +22,8 @@ function controller(shuffle, ai, timeout) {
     this.lead = 0;
     this.turnOrder = [];
     this.playedCards = [];
-    this.players = ['noone', 'George', 'Denny', 'TJ', 'Hold'];
+    this.players = ['noone', 'George', 'Denny', 'Aileen', 'Hold'];
+    this.playerScores = [0,0,0,0];
 
     this.dealCards = ()=>{
         this.sortedHand=[];

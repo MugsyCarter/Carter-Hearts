@@ -16,6 +16,24 @@
               <button class = "button" id="clear-button" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.clearTrick()"><h1 id="buttonMessage">Clear Trick</h1></button>
         </div>
 
+        <div id="scoreboard">
+            <table>
+                <th>
+                    <td>Player</td>
+                    <td>George</td>
+                    <td>Denny</td>
+                    <td>Aileen</td>
+                </th>
+                <tr>
+                    <td></td>
+                    <td>{{$ctrl.playerScores[0]}}</td>
+                    <td>{{$ctrl.playerScores[1]}}</td>
+                    <td>{{$ctrl.playerScores[2]}}</td>
+                    <td>{{$ctrl.playerScores[3]}}</td>
+                </tr>
+            </table>
+        </div>
+
         <div class="playArea">
             <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}">
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}">

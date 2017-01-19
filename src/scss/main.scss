@@ -71,6 +71,18 @@ footer {
   background-color: $red;
 }
 
+td{
+  font-size: 2em;
+  padding-right: 2vw;
+  font-family: 'Reenie Beanie', cursive;
+}
+
+img{
+  height: 24vh;
+  display: inline-block;
+border-radius: 1vh;
+}
+
 .clearfix::after {
   content: "";
   display: table;
@@ -100,6 +112,15 @@ footer {
 #play-page{
   background-color: $green;
   height: 85vh;
+}
+
+#scoreboard{
+  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+  height: 50vh;
+  width: 25vw;
+  position: fixed;
+  right: 0vw;
+  top: 10vh;
 }
 
 .hand{
@@ -151,13 +172,6 @@ footer {
   display: inline-block;
   width: 4vw;
 }
-
-img{
-  height: 24vh;
-  display: inline-block;
-border-radius: 1vh;
-}
-
 
 .playerCard:hover{
   cursor: pointer;
@@ -232,26 +246,26 @@ a:hover{
 
 #player0Card{
   position: fixed;
-  top: 40vh;
-  left: 45vw;
+  top: 45vh;
+  left: 35vw;
 }
 
 #player1Card{
   position: fixed;
   top: 30vh;
-  left: 55vw;
+  left: 25vw;
 }
 
 #player2Card{
   position: fixed;
-  top: 10vh;
-  left: 45vw;
+  top: 15vh;
+  left: 35vw;
 }
 
 #player3Card{
   position: fixed;
     top: 30vh;
-   left: 35vw;
+   left: 45vw;
 }
 
 

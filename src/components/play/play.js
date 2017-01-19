@@ -14,6 +14,7 @@ function controller(shuffle, ai, timeout) {
     this.passCompleted = false;
     this.turnOver = false;
     this.playReady = false;
+    this.playTwo = false;
     this.playerTurn = false;
     this.suitError = false;
     this.firstHandError = false;
@@ -22,7 +23,7 @@ function controller(shuffle, ai, timeout) {
     this.lead = 0;
     this.turnOrder = [];
     this.playedCards = [];
-    this.players = ['noone', 'George', 'Denny', 'Aileen', 'Hold'];
+    this.players = ['you', 'George', 'Denny', 'Aileen', 'Hold'];
     this.playerScores = [0,0,0,0];
 
     this.dealCards = ()=>{
@@ -30,9 +31,6 @@ function controller(shuffle, ai, timeout) {
         this.passReady=true;
         this.beginning = false;
         this.passTarget ++;
-        if (this.passTarget === 5){
-            this.passTarget = 1;
-        }
         this.passPlayer = this.players[this.passTarget];
         shuffle.getNewHand()
             .then((cards)=>{
@@ -140,6 +138,7 @@ function controller(shuffle, ai, timeout) {
                 timeout(()=>{this.twoError=false;}, 3000);
             }
             else if (this.lead ===0 && card.code === '2C'){
+                this.plauTwo = false;
                 this.playCard(card, 0);
             }
             else if (card.suit === this.playedCards[this.lead].suit){
@@ -269,31 +268,36 @@ function controller(shuffle, ai, timeout) {
                 this.playCard(aiPlay, currentPlayer);
             }
         }
-        //all players have played so show the clear trick button to resolve
-        this.turnOver = true;
-        return;      
-    };
-
-    this.clearTrick = ()=>{
-        console.log('clearTrick Called');
+        //all players have played so resolve the points
         var suited = this.playedCards.filter((card)=>{
             return card.suit === this.playedCards[this.lead].suit;
         });
-        console.log('suited is ', suited);
         var sortedSuited = suited.sort((a,b)=>{
             return b.number - a.number;
         });
         var highcard = sortedSuited[0];
-        console.log('highcard is ',highcard);
         this.high = this.playedCards.indexOf(highcard);
-        console.log(this.players[this.high] + ' took the trick');
-
+        this.playedCards.forEach((card)=>{
+            this.playerScores[this.high] += card.points;
+        });
+        //show newHand button and trick message
+        this.turnOver = true;
+        return;      
     };
 
     this.newHand = ()=>{
+        this.turnOver = false;
         console.log('newHand called');
         this.turnOrder = [];
         this.playedCards = [];
+        this.passReady=true;
+        this.passTarget ++;
+        if (this.passTarget === 5){
+            this.passTarget = 1;
+        }
+        this.passPlayer = this.players[this.passTarget];
+        this.passArray = [];
+
     };
 
 

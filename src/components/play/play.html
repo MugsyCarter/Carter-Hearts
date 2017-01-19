@@ -8,12 +8,13 @@
             <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.  Your target is {{$ctrl.passPlayer}}.</h1>
             <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!</h1>
             <h1 class ='gameMessage' id="twoMessage" ng-if="$ctrl.playTwo===true">Play the two of clubs.</h1>
+             <h1 class ='gameMessage' id="trickMessage" ng-if="$ctrl.turnOver===true">{{$ctrl.players[$ctrl.high]}} took the trick.</h1>
             <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.  You have {{$ctrl.passArray.length}} cards selected.</h1>
             <h1 class ='errorMessage' id="notVoidedMessage" ng-if="$ctrl.suitError===true">The lead was {{$ctrl.leadSuit}}.  You cannot play {{$ctrl.playerSuit}} while you still have {{$ctrl.leadSuit}} in your hand.  Nice try!</h1>
              <h1 class ='errorMessage' id="firstHandMessage" ng-if="$ctrl.firstHandError===true">You cannot play any point card (a Heart or the Queen of Spades) on the first hand.  Amateur!</h1>
               <h1 class ='errorMessage' id="twoErrorMessage" ng-if="$ctrl.twoError===true">If you have the deuce, you've gotta play the deuce.</h1>
             <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
-              <button class = "button" id="clear-button" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.clearTrick()"><h1 id="buttonMessage">Clear Trick</h1></button>
+              <button class = "button" id="newHandButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newHand()"><h1 id="buttonMessage">Deal New Hand</h1></button>
         </div>
 
         <div id="scoreboard">
@@ -52,7 +53,6 @@
         </div>
         <div class="compHand3">
         </div>
-
 
         <div class="playerHand">
             <ul class="hand">

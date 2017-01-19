@@ -112,6 +112,10 @@ export default function aiService() {
             return aiPass;
         },
 
+        lead(counted, hand){
+
+        },
+
         play(playedCards, lead, hand){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
             if (playedCards[lead].code === '2C'){

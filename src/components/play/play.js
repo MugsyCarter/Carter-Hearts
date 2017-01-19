@@ -23,6 +23,12 @@ function controller(shuffle, ai, timeout) {
     this.lead = 0;
     this.turnOrder = [];
     this.playedCards = [];
+    this.counted={
+        CLUBS: 0,
+        HEARTS: 0,
+        DIAMONDS: 0,
+        SPADES: 0
+    };
     this.players = ['you', 'George', 'Denny', 'Aileen', 'Hold'];
     this.playerScores = [0,0,0,0];
 
@@ -184,9 +190,13 @@ function controller(shuffle, ai, timeout) {
                 return eachCard.code !== card.code;
             });
         }
+        //count the card
+        this.counted[card.suit] ++;
         //call the next player
         this.nextPlayer();
     };
+
+
 
     this.passCards = ()=>{
         console.log('pass cards clicked, passTarget is ', this.passTarget);
@@ -281,7 +291,9 @@ function controller(shuffle, ai, timeout) {
             this.playerScores[this.high] += card.points;
         });
         //show newHand button and trick message
+        console.log(this.counted);
         this.turnOver = true;
+        this.high = this.lead;
         return;      
     };
 
@@ -290,6 +302,12 @@ function controller(shuffle, ai, timeout) {
         this.turnOrder = [];
         this.playedCards = [];
         console.log('newTrick called');
+        if(this.lead === 0){
+            this.playerTurn = true;
+        }
+        else{
+            ai.lead(this.playerHand);
+        }
     };
 
     this.newHand = ()=>{

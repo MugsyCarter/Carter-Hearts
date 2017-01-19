@@ -40,6 +40,7 @@ p {
 ul {
   list-style: none;
   padding:0;
+  margin: 0px;
 }
 
 /* Link Styles */
@@ -98,14 +99,14 @@ footer {
 
 #play-page{
   background-color: $green;
-  height: 80vh;
+  height: 85vh;
 }
 
 .hand{
  list-style-type: none;
   display: block;
   position: absolute;
-  bottom: 10vh;
+  bottom: 0vh;
 }
 
 .compHand1{
@@ -224,6 +225,37 @@ a:hover{
   color:white;
   font-size: 3em;
 }
+
+.playArea{
+  height: 80vh;
+}
+
+#player0Card{
+  position: fixed;
+  top: 40vh;
+  left: 45vw;
+}
+
+#player1Card{
+  position: fixed;
+  top: 30vh;
+  left: 55vw;
+}
+
+#player2Card{
+  position: fixed;
+  top: 10vh;
+  left: 45vw;
+}
+
+#player3Card{
+  position: fixed;
+    top: 30vh;
+   left: 35vw;
+}
+
+
+
 
 /* Media Query Stuff */
 

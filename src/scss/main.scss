@@ -40,6 +40,7 @@ p {
 ul {
   list-style: none;
   padding:0;
+  margin: 0px;
 }
 
 /* Link Styles */
@@ -70,6 +71,22 @@ footer {
   background-color: $red;
 }
 
+table{
+  padding-top: 4vh;
+}
+
+td{
+  font-size: 2em;
+  padding-left: 2vw;
+  font-family: 'Reenie Beanie', cursive;
+}
+
+img{
+  height: 24vh;
+  display: inline-block;
+border-radius: 1vh;
+}
+
 .clearfix::after {
   content: "";
   display: table;
@@ -98,14 +115,23 @@ footer {
 
 #play-page{
   background-color: $green;
-  height: 80vh;
+  height: 85vh;
+}
+
+#scoreboard{
+  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+  height: 50vh;
+  width: 25vw;
+  position: fixed;
+  right: 0vw;
+  top: 10vh;
 }
 
 .hand{
  list-style-type: none;
   display: block;
   position: absolute;
-  bottom: 10vh;
+  bottom: 0vh;
 }
 
 .compHand1{
@@ -150,13 +176,6 @@ footer {
   display: inline-block;
   width: 4vw;
 }
-
-img{
-  height: 24vh;
-  display: inline-block;
-border-radius: 1vh;
-}
-
 
 .playerCard:hover{
   cursor: pointer;
@@ -224,6 +243,39 @@ a:hover{
   color:white;
   font-size: 3em;
 }
+
+.playArea{
+  height: 80vh;
+}
+
+#player0Card{
+  position: fixed;
+  top: 45vh;
+  left: 35vw;
+}
+
+#player1Card{
+  position: fixed;
+  top: 30vh;
+  left: 25vw;
+}
+
+#player2Card{
+  position: fixed;
+  top: 15vh;
+  left: 35vw;
+}
+
+#player3Card{
+  position: fixed;
+    top: 30vh;
+   left: 45vw;
+}
+
+#score{
+  padding-left: 3vw;
+}
+
 
 /* Media Query Stuff */
 

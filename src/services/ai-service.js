@@ -70,9 +70,9 @@ export default function aiService() {
             }
             else if(hearts.length<=2){
                 while(hearts.length > 0){
-                    aiPass.compPass.push(hearts[0]);
+                    var heartPass = hearts.pop();
+                    aiPass.compPass.push(heartPass);
                 }
-                hearts=[];
             }
             if (aiPass.compPass.length ===3){
                 aiPass.compHand = hearts.concat(spades).concat(clubs).concat(diamonds);

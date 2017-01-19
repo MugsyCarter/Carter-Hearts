@@ -112,11 +112,13 @@ export default function aiService() {
             return aiPass;
         },
 
-        lead(counted, hand){
-
+        lead( hand, counted, events){
+            console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
+            //this is just a placeholder
+            return hand[0];
         },
 
-        play(playedCards, lead, hand){
+        play(playedCards, lead, hand, counted, events, highCard){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
             if (playedCards[lead].code === '2C'){
                 console.log('aiPlay first hand');
@@ -174,6 +176,17 @@ export default function aiService() {
             //it is not the lead play so pointers are OK
             else{
                 console.log('aiPlay normal hand');
+                console.log('highCard is ', highCard);
+
+                //check to see if ai has cards in suit
+                var inSuit = hand.filter((card)=>{
+                    return card.suit === playedCards[lead].suit;
+                });
+                console.log('matching cards are ', inSuit);
+                //if so, the ai must play one
+                if (inSuit.length>0){
+                  
+                }
                 return;
             }
         }

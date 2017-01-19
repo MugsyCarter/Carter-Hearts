@@ -25,22 +25,22 @@ export default function aiService() {
         // If spades and queen or greater pass first, 
         //   then pass high();
         //     If only 1 card (not spades) add card to comp pass array and remove from the comp hand
-            if (spades.length ===1 && spades[0].value >= 12){ 
+            if (spades.length ===1 && spades[0].number >= 12){ 
                 console.log(spades[0]);
                 aiPass.compPass.push(spades[0]);
                 spades = [];
             }
-            if (hearts.length === 1 && hearts[0].value >= 6){
+            if (hearts.length === 1 && hearts[0].number >= 6){
                 console.log(hearts);
                 aiPass.compPass.push(hearts[0]);
                 hearts=[];
             }
-            if (clubs.length ===1 && clubs[0].value >= 4){
+            if (clubs.length ===1 && clubs[0].number >= 4){
                 console.log(clubs);
                 aiPass.compPass.push(clubs[0]);
                 clubs=[];
             }
-            if (diamonds.length ===1 && diamonds[0].value >= 4){
+            if (diamonds.length ===1 && diamonds[0].number >= 4){
                 console.log(diamonds);
                 aiPass.compPass.push(diamonds[0]);
                 diamonds=[];
@@ -115,7 +115,13 @@ export default function aiService() {
         lead( hand, counted, events){
             console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
             //this is just a placeholder
-            return hand[0];
+           
+            if (events.heartsBroken === false){
+                //can't lead hearts
+            }
+            else{
+                //can lead hearts
+            }
         },
 
         play(playedCards, lead, hand, counted, events, highCard){
@@ -182,19 +188,21 @@ export default function aiService() {
                 var inSuit = hand.filter((card)=>{
                     return card.suit === playedCards[lead].suit;
                 });
-                var sortedInSuit = hand.sort((a,b)=>{
+                var sortedInSuit = inSuit.sort((a,b)=>{
                     return b.number - a.number;
                 });
 
-                console.log('matching cards are ', sortedinSuit);
+                console.log('matching cards are ', sortedInSuit);
                 //if so, the ai must play one
-                if (inSuit.length>0){
+                if (sortedInSuit.length>0){
                   //play highest in suit below high card
                     for(var i=0; i < sortedInSuit.length; i++){
                         if (sortedInSuit[i].number < highCard.number){
                             return sortedInSuit[i];
                         }
                     }
+                    //if none are lower, play highest
+                    return(sortedInSuit[0]);
                 }
                 else{
                     //play whatever
@@ -214,14 +222,54 @@ export default function aiService() {
                     var theQueen = spades.filter((card)=>{
                         return card.code = 'QS';
                     });
+
+                    var sortedHand = hand.sort((a,b)=>{
+                        return b.number - a.number;
+                    });
+
+                    //priority 1: dump queen
                     if (theQueen.length>0){
                         return theQueen[0];
                     }
+                    //priority 1.5: ten protection
+                    else if (hearts.length<3 && hearts[0].number > 9){
+                        return hearts[0];
+                    }
+                    //priority 2: dump to make void
+                    else if (hearts.length === 1){
+                        return hearts[0];
+                    }
+                    else if (diamonds.length === 1){
+                        return diamonds[0];
+                    }
+                    else if (clubs.length === 1){
+                        return clubs[0];
+                    }
+                    else if (spades.length === 1){
+                        return spades[0];
+                    }
+                    //priority 3 dump high spade
                     else if (spades.length < 4){
                         return spades[0];
                     }
-
-
+                    //priority 4 dump high heart
+                    else if (spades.length < 4){
+                        return spades[0];
+                    }
+                    //priority 5: dump near voids
+                    else if (diamonds.length<3 && diamonds[0].value > 9){
+                        return diamonds[0];
+                    }
+                    else if (clubs.length<3 && clubs[0].value > 9){
+                        return [0];
+                    }
+                    else if (hearts.length<3 && diamonds[0].value > 9){
+                        return hearts[0];
+                    }
+                    //priority 6: dump high
+                    else{
+                        return sortedHand[0];
+                    }
                 }
                 return;
             }

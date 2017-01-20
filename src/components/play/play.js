@@ -9,6 +9,8 @@ controller.$inject = ['shuffleService', 'aiService', '$timeout', '$rootScope'];
 
 function controller(shuffle, ai, timeout) {
     this.beginning = true;
+    this.showDeal = true;
+    this.handStart = false;
     this.passReady = false;
     this.selectedCard = false;
     this.passCompleted = false;
@@ -47,6 +49,8 @@ function controller(shuffle, ai, timeout) {
         this.sortedHand=[];
         this.passReady=true;
         this.beginning = false;
+        this.showDeal = false;
+        this.handStart = false;
         this.passTarget ++;
         this.passPlayer = this.players[this.passTarget];
         shuffle.getNewHand()
@@ -378,9 +382,6 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.newHand = ()=>{
-        this.turnOver = false;
-        this.beginning = true;
-        this.playReady = false;
         this.playedCards = [];
         this.highCard = {};
         this.counted={
@@ -399,6 +400,11 @@ function controller(shuffle, ai, timeout) {
         });
         if (totalPoints >= 100){
             this.gameOver();
+        }
+        else{
+            this.turnOver = false;
+            this.showDeal = true;
+            this.handStart = true;
         }
     };
 

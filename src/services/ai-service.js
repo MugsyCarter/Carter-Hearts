@@ -25,22 +25,22 @@ export default function aiService() {
         // If spades and queen or greater pass first, 
         //   then pass high();
         //     If only 1 card (not spades) add card to comp pass array and remove from the comp hand
-            if (spades.length ===1 && spades[0].value >= 12){ 
+            if (spades.length ===1 && spades[0].number >= 12){ 
                 console.log(spades[0]);
                 aiPass.compPass.push(spades[0]);
                 spades = [];
             }
-            if (hearts.length === 1 && hearts[0].value >= 6){
+            if (hearts.length === 1 && hearts[0].number >= 6){
                 console.log(hearts);
                 aiPass.compPass.push(hearts[0]);
                 hearts=[];
             }
-            if (clubs.length ===1 && clubs[0].value >= 4){
+            if (clubs.length ===1 && clubs[0].number >= 4){
                 console.log(clubs);
                 aiPass.compPass.push(clubs[0]);
                 clubs=[];
             }
-            if (diamonds.length ===1 && diamonds[0].value >= 4){
+            if (diamonds.length ===1 && diamonds[0].number >= 4){
                 console.log(diamonds);
                 aiPass.compPass.push(diamonds[0]);
                 diamonds=[];
@@ -112,7 +112,96 @@ export default function aiService() {
             return aiPass;
         },
 
-        play(playedCards, lead, hand){
+        lead(hand, counted, events){
+            console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
+            //this is just a placeholder
+            var hearts = hand.filter(function(card){
+                return card.suit === 'HEARTS';
+            });
+            var spades = hand.filter(function(card){
+                return card.suit === 'SPADES';
+            });
+            var diamonds = hand.filter(function(card){
+                return card.suit === 'DIAMONDS';
+            });
+            var clubs = hand.filter(function(card){
+                return card.suit === 'CLUBS';
+            });
+
+            var dangerSpades = spades.filter((card)=>{
+                return card.number >11;
+            });
+
+            var dangerHearts = hearts.filter((card)=>{
+                return card.number >9;
+            });
+
+            var aiQueen = spades.filter((card)=>{
+                return card.number === 12;
+            });
+
+            var aiTen = hearts.filter((card)=>{
+                return card.number === 10;
+            });
+
+            //first, clear any voids
+            //#1 clear spade void first 
+            if (spades.length === 1 && spades[0].number < 12 && counted.SPADES < 9){
+                return spades[0];
+            }
+            //#2 clear heart void next if broken
+            else if (hearts.length === 1 && hearts[0].number < 10 && events.heartsBroken === true && counted.HEARTS > 9){
+                return hearts[0];
+            }
+            //#3 then clear diamond void
+            else if (diamonds.length === 1 && counted.DIAMONDS > 9){
+                return diamonds[0];
+            }
+            //#4 then clear club void 
+            else if (clubs.length === 1 && counted.CLUBS < 6){
+                return clubs[0];
+            }
+            //#5 then smoke the queen
+            else if(dangerSpades.length === 0 && events.queen===false && spades.length>0){
+                return spades[spades.length-1];
+            }
+            //#6 smoke the 10 
+            else if(dangerHearts.length === 0 && events.ten===false && hearts.length>0){
+                return hearts[hearts.length-1];
+            }
+            //check to see if you have the queen or ten
+            //lead low spade
+            else if (aiQueen.length>0 && spades[0].number < 12 && counted.SPADES < 9){
+                return spades[0];
+            }
+            //lead low heart
+            else if (aiTen.length >0 && hearts[0].number < 10 && counted.HEARTS < 9){
+                return hearts[0];
+            }
+            //lead low diamond
+            else if (diamonds.length > 0 && counted.DIAMONDS <9){
+                console.log(diamonds);
+                return diamonds[0];
+            }
+            //lead low club
+            else if (clubs.length > 0 && counted.CLUBS <9){
+                return clubs[0];
+            }
+            //lead low heart
+            else if (hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
+                return hearts[0];
+            }
+            //lead low spade
+            else if (spades.length > 0 && spades[0].number <12 && counted.SPADES < 10){
+                return hearts[0];
+            }
+            else{
+                console.log('last resort lead');
+                return hand[0];
+            }
+        },
+
+        play(playedCards, lead, hand, counted, events, highCard){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
             if (playedCards[lead].code === '2C'){
                 console.log('aiPlay first hand');
@@ -170,6 +259,111 @@ export default function aiService() {
             //it is not the lead play so pointers are OK
             else{
                 console.log('aiPlay normal hand');
+                console.log('highCard is ', highCard);
+                
+                //check to see if ai has cards in suit
+                var inSuit = hand.filter((card)=>{
+                    return card.suit === playedCards[lead].suit;
+                });
+                var sortedInSuit = inSuit.sort((a,b)=>{
+                    return b.number - a.number;
+                });
+
+                console.log('matching cards are ', sortedInSuit);
+                //if so, the ai must play one
+                if (sortedInSuit.length>0){
+                    console.log('not voided'); 
+                  //play highest in suit below high card
+                    for(var i=0; i < sortedInSuit.length; i++){
+                        if (sortedInSuit[i].number < highCard.number){
+                            return sortedInSuit[i];
+                        }
+                    }
+                    //if none are lower, play highest
+                    return(sortedInSuit[0]);
+                }
+                else{
+                    console.log('VOIDED!');
+                    console.log('hand is ',hand);
+                    var hearts = [];
+                    var spades = [];
+                    var clubs = [];
+                    var diamonds = [];
+                    var theQueen = [];
+                    var theTen = [];
+                    var sortedHand = [];
+                    //play whatever
+                    hearts = hand.filter(function(card){
+                        return card.suit === 'HEARTS';
+                    });
+                    spades = hand.filter(function(card){
+                        return card.suit === 'SPADES';
+                    });
+                    diamonds = hand.filter(function(card){
+                        return card.suit === 'DIAMONDS';
+                    });
+                    clubs = hand.filter(function(card){
+                        return card.suit === 'CLUBS';
+                    });
+                    if(spades.length >0){
+                        theQueen = spades.filter((card)=>{
+                            return card.number === 12;
+                        });
+                    }
+                    if (hearts.length>0){
+                        theTen = hearts.filter((card)=>{
+                            return card.number === 10;
+                        });
+                    }
+                    sortedHand = hand.sort((a,b)=>{
+                        return a.number - b.number;
+                    });
+
+                    console.log('right above priorities');
+                    //priority 1: dump queen
+                    if (theQueen.length>0){
+                        return theQueen[0];
+                    }
+                    //priority 1.5: ten protection
+                    else if (hearts.length>0 && hearts.length<3 && hearts[0].number > 9){
+                        return hearts[0];
+                    }
+                    //priority 2: dump to make void
+                    else if (hearts.length === 1){
+                        return hearts[0];
+                    }
+                    else if (diamonds.length === 1){
+                        return diamonds[0];
+                    }
+                    else if (clubs.length === 1){
+                        return clubs[0];
+                    }
+                    else if (spades.length === 1){
+                        return spades[0];
+                    }
+                    //priority 3 dump high spade
+                    else if (spades.length > 0 && spades.length < 4){
+                        return spades[0];
+                    }
+                    //priority 4 dump high heart
+                    else if (hearts.length > 0 && hearts.length < 4){
+                        return hearts[0];
+                    }
+                    //priority 5: dump near voids
+                    else if (diamonds.length > 0 && diamonds.length<3 && diamonds[0].number > 9){
+                        return diamonds[0];
+                    }
+                    else if (clubs.length > 0 && clubs.length<3 && clubs[0].number > 9){
+                        return [0];
+                    }
+                    else if (hearts.length > 0 && hearts.length<3 && diamonds[0].number > 9){
+                        return hearts[0];
+                    }
+                    //priority 6: dump high
+                    else{
+                        return sortedHand[0];
+                    }
+                }
                 return;
             }
         }

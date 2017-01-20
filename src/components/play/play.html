@@ -2,6 +2,9 @@
  <section class ="page" id="play-page">
     <div>
         <h1 ng-if="$ctrl.beginning===true">Play Carter Hearts!</h1>
+        <h1 ng-if="$ctrl.handStart===true">Deal Next Hand</h1>
+        <h1 ng-if="$ctrl.gameOver===true">Game Over<h1>
+        <h1 class = "gameMessage" ng-if="$ctrl.gameOver===true">{{$ctrl.winMessage}}<h1>
         <div class="banner">
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true"><h1 id="buttonMessage">Deal</h1></button>
             <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>
@@ -13,6 +16,7 @@
             <h1 class ='errorMessage' id="notVoidedMessage" ng-if="$ctrl.suitError===true">The lead was {{$ctrl.leadSuit}}.  You cannot play {{$ctrl.playerSuit}} while you still have {{$ctrl.leadSuit}} in your hand.  Nice try!</h1>
              <h1 class ='errorMessage' id="firstHandMessage" ng-if="$ctrl.firstHandError===true">You cannot play any point card (a Heart or the Queen of Spades) on the first hand.  Amateur!</h1>
               <h1 class ='errorMessage' id="twoErrorMessage" ng-if="$ctrl.twoError===true">If you have the deuce, you've gotta play the deuce.</h1>
+               <h1 class ='errorMessage' id="heartsBrokenMessage" ng-if="$ctrl.heartLeadError===true">You cannot lead a heart until they've been broken (or unless you have nothing else).</h1>
             <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
               <button class = "button" id="newHandButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
         </div>
@@ -43,11 +47,11 @@
         </div>
 
         <div class="compHand">
-            <!--<ul class="comp1Hand">
+            <ul class="comp1Hand">
                 <li class="comp1Card" ng-repeat="compCard in $ctrl.hands[1]" >
                     <img src="{{compCard.image}}" >
                 </li>
-            </ul>-->
+            </ul>
         </div>
         <div class="compHand2">
         </div>

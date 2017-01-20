@@ -332,7 +332,16 @@ function controller(shuffle, ai, timeout) {
             console.log(this.counted);
             this.turnOver = true;
             this.lead = this.high;
-            return; 
+            //count cards to check if hand is over
+            this.totalCards = this.counted.HEARTS + this.counted.SPADES + this.counted.DIAMONDS + this.counted.CLUBS;
+            if (this.totalCards === 52){
+            //game is over
+                this.turnOver = false;
+                this.beginning = true;
+                this.playReady = false;
+                return;
+            }
+            return;
         }
         //else figure out it its the user or the AI
         else{
@@ -361,12 +370,12 @@ function controller(shuffle, ai, timeout) {
             this.playerTurn = true;
         }
         else{
-            this.leadCard = this.leadTrick(this.hands[this.lead], this.counted, this.events);
+            this.leadCard = ai.lead(this.hands[this.lead], this.counted, this.events);
             this.playedCards[this.lead]=this.leadCard;
             console.log(this.leadCard, ' this is the leadCard');
             console.log(this.leadCard);
             this.playCard(this.leadCard, this.lead);
-        }
+        }  
     };
 
     this.newHand = ()=>{
@@ -381,95 +390,6 @@ function controller(shuffle, ai, timeout) {
         // }
         // this.passPlayer = this.players[this.passTarget];
         // this.passArray = [];
-    };
-
-    this.leadTrick = (hand, counted, events)=>{
-        console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
-        //this is just a placeholder
-        var hearts = hand.filter(function(card){
-            return card.suit === 'HEARTS';
-        });
-        var spades = hand.filter(function(card){
-            return card.suit === 'SPADES';
-        });
-        var diamonds = hand.filter(function(card){
-            return card.suit === 'DIAMONDS';
-        });
-        var clubs = hand.filter(function(card){
-            return card.suit === 'CLUBS';
-        });
-
-        var dangerSpades = spades.filter((card)=>{
-            return card.number >11;
-        });
-
-        var dangerHearts = hearts.filter((card)=>{
-            return card.number >9;
-        });
-
-        var aiQueen = spades.filter((card)=>{
-            return card.number === 12;
-        });
-
-        var aiTen = hearts.filter((card)=>{
-            return card.number === 10;
-        });
-
-        //first, clear any voids
-        //#1 clear spade void first 
-        if (spades.length === 1 && spades[0].number < 12 && counted.SPADES < 9){
-            return spades[0];
-        }
-        //#2 clear heart void next if broken
-        else if (hearts.length === 1 && hearts[0].number < 10 && events.heartsBroken === true && counted.HEARTS > 9){
-            return hearts[0];
-        }
-        //#3 then clear diamond void
-        else if (diamonds.length === 1 && counted.DIAMONDS > 9){
-            return diamonds[0];
-        }
-        //#4 then clear club void 
-        else if (clubs.length === 1 && counted.CLUBS < 6){
-            return clubs[0];
-        }
-        //#5 then smoke the queen
-        else if(dangerSpades.length === 0 && events.queen===false && spades.length>0){
-            return spades[spades.length-1];
-        }
-        //#6 smoke the 10 
-        else if(dangerHearts.length === 0 && events.ten===false && hearts.length>0){
-            return hearts[hearts.length-1];
-        }
-        //check to see if you have the queen or ten
-        //lead low spade
-        else if (aiQueen.length>0 && spades[0].number < 12 && counted.SPADES < 9){
-            return spades[0];
-        }
-        //lead low heart
-        else if (aiTen.length >0 && hearts[0].number < 10 && counted.HEARTS < 9){
-            return hearts[0];
-        }
-        //lead low diamond
-        else if (diamonds.length > 0 && counted.DIAMONDS <9){
-            console.log(diamonds);
-            return diamonds[0];
-        }
-         //lead low club
-        else if (clubs.length > 0 && counted.CLUBS <9){
-            return clubs[0];
-        }
-         //lead low heart
-        else if (hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
-            return hearts[0];
-        }
-         //lead low spade
-        else if (spades.length > 0 && spades[0].number <12 && counted.SPADES < 10){
-            return hearts[0];
-        }
-        else{
-            console.log('last resort lead');
-            return hand[0];
-        }
     };
 
 };

@@ -112,7 +112,7 @@ export default function aiService() {
             return aiPass;
         },
 
-        lead( hand, counted, events){
+        lead(hand, counted, events){
             console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
             //this is just a placeholder
             var hearts = hand.filter(function(card){
@@ -128,14 +128,76 @@ export default function aiService() {
                 return card.suit === 'CLUBS';
             });
 
-            if (events.heartsBroken === false){
-                //can't lead hearts
-                if (diamonds.length <3 && counted.diamonds === 0){
-                    console.log(diamonds);
-                }
+            var dangerSpades = spades.filter((card)=>{
+                return card.number >11;
+            });
+
+            var dangerHearts = hearts.filter((card)=>{
+                return card.number >9;
+            });
+
+            var aiQueen = spades.filter((card)=>{
+                return card.number === 12;
+            });
+
+            var aiTen = hearts.filter((card)=>{
+                return card.number === 10;
+            });
+
+            //first, clear any voids
+            //#1 clear spade void first 
+            if (spades.length === 1 && spades[0].number < 12 && counted.SPADES < 9){
+                return spades[0];
+            }
+            //#2 clear heart void next if broken
+            else if (hearts.length === 1 && hearts[0].number < 10 && events.heartsBroken === true && counted.HEARTS > 9){
+                return hearts[0];
+            }
+            //#3 then clear diamond void
+            else if (diamonds.length === 1 && counted.DIAMONDS > 9){
+                return diamonds[0];
+            }
+            //#4 then clear club void 
+            else if (clubs.length === 1 && counted.CLUBS < 6){
+                return clubs[0];
+            }
+            //#5 then smoke the queen
+            else if(dangerSpades.length === 0 && events.queen===false && spades.length>0){
+                return spades[spades.length-1];
+            }
+            //#6 smoke the 10 
+            else if(dangerHearts.length === 0 && events.ten===false && hearts.length>0){
+                return hearts[hearts.length-1];
+            }
+            //check to see if you have the queen or ten
+            //lead low spade
+            else if (aiQueen.length>0 && spades[0].number < 12 && counted.SPADES < 9){
+                return spades[0];
+            }
+            //lead low heart
+            else if (aiTen.length >0 && hearts[0].number < 10 && counted.HEARTS < 9){
+                return hearts[0];
+            }
+            //lead low diamond
+            else if (diamonds.length > 0 && counted.DIAMONDS <9){
+                console.log(diamonds);
+                return diamonds[0];
+            }
+            //lead low club
+            else if (clubs.length > 0 && counted.CLUBS <9){
+                return clubs[0];
+            }
+            //lead low heart
+            else if (hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
+                return hearts[0];
+            }
+            //lead low spade
+            else if (spades.length > 0 && spades[0].number <12 && counted.SPADES < 10){
+                return hearts[0];
             }
             else{
-                //can lead hearts
+                console.log('last resort lead');
+                return hand[0];
             }
         },
 
@@ -245,12 +307,12 @@ export default function aiService() {
                     });
                     if(spades.length >0){
                         theQueen = spades.filter((card)=>{
-                            return card.number = 12;
+                            return card.number === 12;
                         });
                     }
                     if (hearts.length>0){
                         theTen = hearts.filter((card)=>{
-                            return card.number = 10;
+                            return card.number === 10;
                         });
                     }
                     sortedHand = hand.sort((a,b)=>{

@@ -2,6 +2,9 @@
  <section class ="page" id="play-page">
     <div>
         <h1 ng-if="$ctrl.beginning===true">Play Carter Hearts!</h1>
+        <h1 ng-if="$ctrl.handStart===true">Deal Next Hand</h1>
+        <h1 ng-if="$ctrl.gameOver===true">Game Over<h1>
+        <h1 class = "gameMessage" ng-if="$ctrl.gameOver===true">{{$ctrl.winMessage}}<h1>
         <div class="banner">
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.beginning===true"><h1 id="buttonMessage">Deal</h1></button>
             <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>

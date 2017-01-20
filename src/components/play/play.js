@@ -23,6 +23,7 @@ function controller(shuffle, ai, timeout) {
     this.passTarget = 0;
     this.lead = 0;
     this.firstLead = false;
+    this.gameOver = false;
     this.turnOrder = [];
     this.playedCards = [];
     this.highCard = {};
@@ -42,6 +43,7 @@ function controller(shuffle, ai, timeout) {
     this.playerScores = [0,0,0,0];
 
     this.dealCards = ()=>{
+        this.gameOver = false;
         this.sortedHand=[];
         this.passReady=true;
         this.beginning = false;
@@ -335,10 +337,29 @@ function controller(shuffle, ai, timeout) {
             //count cards to check if hand is over
             this.totalCards = this.counted.HEARTS + this.counted.SPADES + this.counted.DIAMONDS + this.counted.CLUBS;
             if (this.totalCards === 52){
-            //game is over
+            //hand is over
                 this.turnOver = false;
                 this.beginning = true;
                 this.playReady = false;
+                this.playedCards = [];
+                this.highCard = {};
+                this.counted={
+                    CLUBS: 0,
+                    HEARTS: 0,
+                    DIAMONDS: 0,
+                    SPADES: 0
+                };
+                this.events={
+                    queen: false,
+                    ten: false,
+                    heartsBroken: false,
+                };
+                var totalPoints = this.playerScores.reduce((total, num)=>{
+                    return total + num;
+                });
+                if (totalPoints >= 100){
+                    this.gameOver();
+                }
                 return;
             }
             return;
@@ -390,6 +411,22 @@ function controller(shuffle, ai, timeout) {
         // }
         // this.passPlayer = this.players[this.passTarget];
         // this.passArray = [];
+    };
+
+    this.gameOver = ()=>{
+        var winner = 0;
+        for (var i = 1; i < 4; i++){
+            if (this.playerScores[i] > this.playerScores[i-1]){
+                winner = i;
+            }
+        } 
+        if (winner===0){
+            this.winMessage = 'You won Carter Hearts!  Congratulations!';
+        }
+        else{
+            this.winMessage = this.players[i] + ' has won the game.  You can\'t win them all';
+        }
+        this.gameOver = true;
     };
 
 };

@@ -232,7 +232,7 @@ function controller(shuffle, ai, timeout) {
                         var playerNonHearts = this.hand.filter(function(card){
                             return card.suit !== 'HEARTS';
                         });
-                        if(playerNonHearts.length >0){
+                        if(playerNonHearts.length <1){
                             //if player has no non-hearts, the play is OK
                             this.playCard(card, 0); 
                         }
@@ -338,29 +338,7 @@ function controller(shuffle, ai, timeout) {
             this.totalCards = this.counted.HEARTS + this.counted.SPADES + this.counted.DIAMONDS + this.counted.CLUBS;
             if (this.totalCards === 52){
             //hand is over
-                this.turnOver = false;
-                this.beginning = true;
-                this.playReady = false;
-                this.playedCards = [];
-                this.highCard = {};
-                this.counted={
-                    CLUBS: 0,
-                    HEARTS: 0,
-                    DIAMONDS: 0,
-                    SPADES: 0
-                };
-                this.events={
-                    queen: false,
-                    ten: false,
-                    heartsBroken: false,
-                };
-                var totalPoints = this.playerScores.reduce((total, num)=>{
-                    return total + num;
-                });
-                if (totalPoints >= 100){
-                    this.gameOver();
-                }
-                return;
+                this.newHand();
             }
             return;
         }
@@ -400,17 +378,28 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.newHand = ()=>{
-        // this.turnOver = false;
-        // console.log('newHand called');
-        // this.turnOrder = [];
-        // this.playedCards = [];
-        // this.passReady=true;
-        // this.passTarget ++;
-        // if (this.passTarget === 5){
-        //     this.passTarget = 1;
-        // }
-        // this.passPlayer = this.players[this.passTarget];
-        // this.passArray = [];
+        this.turnOver = false;
+        this.beginning = true;
+        this.playReady = false;
+        this.playedCards = [];
+        this.highCard = {};
+        this.counted={
+            CLUBS: 0,
+            HEARTS: 0,
+            DIAMONDS: 0,
+            SPADES: 0
+        };
+        this.events={
+            queen: false,
+            ten: false,
+            heartsBroken: false,
+        };
+        var totalPoints = this.playerScores.reduce((total, num)=>{
+            return total + num;
+        });
+        if (totalPoints >= 100){
+            this.gameOver();
+        }
     };
 
     this.gameOver = ()=>{

@@ -227,7 +227,7 @@ function controller(shuffle, ai, timeout) {
                         this.playCard(card, 0);
                     }
                     else{
-                        var playerNonHearts = hand.filter(function(card){
+                        var playerNonHearts = this.hand.filter(function(card){
                             return card.suit !== 'HEARTS';
                         });
                         if(playerNonHearts.length >0){
@@ -322,7 +322,7 @@ function controller(shuffle, ai, timeout) {
         console.log('last player was ', lastPlayer);
         var currentPlayer = lastPlayer +1;
         //if all players have played resolve the trick
-        if(this.playedCards.length > 3){
+        if(this.turnOrder.length > 3){
             console.log('end of trick');
             //all players have played so resolve the points
             this.playedCards.forEach((card)=>{
@@ -433,11 +433,11 @@ function controller(shuffle, ai, timeout) {
             return clubs[0];
         }
         //#5 then smoke the queen
-        else if(dangerSpades.length === 0 && events.queen===false){
+        else if(dangerSpades.length === 0 && events.queen===false && spades.length>0){
             return spades[spades.length-1];
         }
         //#6 smoke the 10 
-        else if(dangerHearts.length === 0 && events.ten===false){
+        else if(dangerHearts.length === 0 && events.ten===false && hearts.length>0){
             return hearts[hearts.length-1];
         }
         //check to see if you have the queen or ten
@@ -450,20 +450,20 @@ function controller(shuffle, ai, timeout) {
             return hearts[0];
         }
         //lead low diamond
-        else if ( counted.DIAMONDS <9){
+        else if (diamonds.length > 0 && counted.DIAMONDS <9){
             console.log(diamonds);
             return diamonds[0];
         }
          //lead low club
-        else if ( counted.CLUBS <9){
+        else if (clubs.length > 0 && counted.CLUBS <9){
             return clubs[0];
         }
          //lead low heart
-        else if (hearts[0].number < 10 && counted.HEARTS < 10){
+        else if (hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
             return hearts[0];
         }
          //lead low spade
-        else if (spades[0].number <12 && counted.SPADES < 10){
+        else if (spades.length > 0 && spades[0].number <12 && counted.SPADES < 10){
             return hearts[0];
         }
         else{

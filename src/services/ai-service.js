@@ -222,6 +222,7 @@ export default function aiService() {
                 }
                 else{
                     console.log('VOIDED!');
+                    console.log('hand is ',hand);
                     var hearts = [];
                     var spades = [];
                     var clubs = [];
@@ -256,12 +257,13 @@ export default function aiService() {
                         return a.number - b.number;
                     });
 
+                    console.log('right above priorities');
                     //priority 1: dump queen
                     if (theQueen.length>0){
                         return theQueen[0];
                     }
                     //priority 1.5: ten protection
-                    else if (hearts.length<3 && hearts[0].number > 9){
+                    else if (hearts.length>0 && hearts.length<3 && hearts[0].number > 9){
                         return hearts[0];
                     }
                     //priority 2: dump to make void
@@ -278,21 +280,21 @@ export default function aiService() {
                         return spades[0];
                     }
                     //priority 3 dump high spade
-                    else if (spades.length < 4){
+                    else if (spades.length > 0 && spades.length < 4){
                         return spades[0];
                     }
                     //priority 4 dump high heart
-                    else if (spades.length < 4){
-                        return spades[0];
+                    else if (hearts.length > 0 && hearts.length < 4){
+                        return hearts[0];
                     }
                     //priority 5: dump near voids
-                    else if (diamonds.length<3 && diamonds[0].number > 9){
+                    else if (diamonds.length > 0 && diamonds.length<3 && diamonds[0].number > 9){
                         return diamonds[0];
                     }
-                    else if (clubs.length<3 && clubs[0].number > 9){
+                    else if (clubs.length > 0 && clubs.length<3 && clubs[0].number > 9){
                         return [0];
                     }
-                    else if (hearts.length<3 && diamonds[0].number > 9){
+                    else if (hearts.length > 0 && hearts.length<3 && diamonds[0].number > 9){
                         return hearts[0];
                     }
                     //priority 6: dump high

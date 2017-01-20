@@ -210,6 +210,7 @@ export default function aiService() {
                 console.log('matching cards are ', sortedInSuit);
                 //if so, the ai must play one
                 if (sortedInSuit.length>0){
+                    console.log('not voided'); 
                   //play highest in suit below high card
                     for(var i=0; i < sortedInSuit.length; i++){
                         if (sortedInSuit[i].number < highCard.number){
@@ -220,26 +221,39 @@ export default function aiService() {
                     return(sortedInSuit[0]);
                 }
                 else{
+                    console.log('VOIDED!');
+                    var hearts = [];
+                    var spades = [];
+                    var clubs = [];
+                    var diamonds = [];
+                    var theQueen = [];
+                    var theTen = [];
+                    var sortedHand = [];
                     //play whatever
-                    var hearts = hand.filter(function(card){
+                    hearts = hand.filter(function(card){
                         return card.suit === 'HEARTS';
                     });
-                    var spades = hand.filter(function(card){
+                    spades = hand.filter(function(card){
                         return card.suit === 'SPADES';
                     });
-                    var diamonds = hand.filter(function(card){
+                    diamonds = hand.filter(function(card){
                         return card.suit === 'DIAMONDS';
                     });
-                    var clubs = hand.filter(function(card){
+                    clubs = hand.filter(function(card){
                         return card.suit === 'CLUBS';
                     });
-
-                    var theQueen = spades.filter((card)=>{
-                        return card.code = 'QS';
-                    });
-
-                    var sortedHand = hand.sort((a,b)=>{
-                        return b.number - a.number;
+                    if(spades.length >0){
+                        theQueen = spades.filter((card)=>{
+                            return card.number = 12;
+                        });
+                    }
+                    if (hearts.length>0){
+                        theTen = hearts.filter((card)=>{
+                            return card.number = 10;
+                        });
+                    }
+                    sortedHand = hand.sort((a,b)=>{
+                        return a.number - b.number;
                     });
 
                     //priority 1: dump queen
@@ -272,13 +286,13 @@ export default function aiService() {
                         return spades[0];
                     }
                     //priority 5: dump near voids
-                    else if (diamonds.length<3 && diamonds[0].value > 9){
+                    else if (diamonds.length<3 && diamonds[0].number > 9){
                         return diamonds[0];
                     }
-                    else if (clubs.length<3 && clubs[0].value > 9){
+                    else if (clubs.length<3 && clubs[0].number > 9){
                         return [0];
                     }
-                    else if (hearts.length<3 && diamonds[0].value > 9){
+                    else if (hearts.length<3 && diamonds[0].number > 9){
                         return hearts[0];
                     }
                     //priority 6: dump high

@@ -316,11 +316,26 @@ function controller(shuffle, ai, timeout) {
     this.nextPlayer = ()=>{
         console.log('in nextPlayer');
         //if not last play 
-        while(this.turnOrder.length < 4){
-            console.log('turn order is ', this.turnOrder);
-            var lastPlayer = this.turnOrder[this.turnOrder.length-1];
-            console.log('last player was ', lastPlayer);
-            var currentPlayer = lastPlayer +1;
+        // while(this.turnOrder.length < 4){
+        console.log('turn order is ', this.turnOrder);
+        var lastPlayer = this.turnOrder[this.turnOrder.length-1];
+        console.log('last player was ', lastPlayer);
+        var currentPlayer = lastPlayer +1;
+        //if all players have played resolve the trick
+        if(this.playedCards.length > 3){
+            console.log('end of trick');
+            //all players have played so resolve the points
+            this.playedCards.forEach((card)=>{
+                this.playerScores[this.high] += card.points;
+            });
+            //show newHand button and trick message
+            console.log(this.counted);
+            this.turnOver = true;
+            this.lead = this.high;
+            return; 
+        }
+        //else figure out it its the user or the AI
+        else{
             if (currentPlayer === 4){
                 currentPlayer = 0;
                 this.playerTurn = true;
@@ -335,15 +350,6 @@ function controller(shuffle, ai, timeout) {
                 this.playCard(aiPlay, currentPlayer);
             }
         }
-        //all players have played so resolve the points
-        this.playedCards.forEach((card)=>{
-            this.playerScores[this.high] += card.points;
-        });
-        //show newHand button and trick message
-        console.log(this.counted);
-        this.turnOver = true;
-        this.lead = this.high;
-        return;      
     };
 
     this.newTrick = ()=>{
@@ -397,32 +403,72 @@ function controller(shuffle, ai, timeout) {
             return card.number >11;
         });
 
+        var dangerHearts = hearts.filter((card)=>{
+            return card.number >9;
+        });
 
-        if (events.heartsBroken === false){
-            //can't lead hearts
-                     //first, clear any voids
-            if (spades.length === 1 && spades[0].number < 12){
-               return spades[0];
-            }
-             if (diamonds.length === 1){
-               return diamonds[0];
-            }
-            if (clubs.length === 1 && counted.CLUBS){
-    
-            }
-            else if(dangerSpades.length === 0 && events.queen===false){
-                  //smoke the queen
-                return spades[spades.length-1];
-            }
-            else if (diamonds.length <3 && counted.DIAMONDS === 0){
-                console.log(diamonds);
-                return diamonds[0];
-            }
-            else if(clubs.length <3 && counted.CLUBS <5){
-                return clubs[clubs.length-1];
-            }
+        var aiQueen = spades.filter((card)=>{
+            return card.number === 12;
+        });
+
+        var aiTen = hearts.filter((card)=>{
+            return card.number === 10;
+        });
+
+        //first, clear any voids
+        //#1 clear spade void first 
+        if (spades.length === 1 && spades[0].number < 12 && counted.SPADES < 9){
+            return spades[0];
+        }
+        //#2 clear heart void next if broken
+        else if (hearts.length === 1 && hearts[0].number < 10 && events.heartsBroken === true && counted.HEARTS > 9){
+            return hearts[0];
+        }
+        //#3 then clear diamond void
+        else if (diamonds.length === 1 && counted.DIAMONDS > 9){
+            return diamonds[0];
+        }
+        //#4 then clear club void 
+        else if (clubs.length === 1 && counted.CLUBS < 6){
+            return clubs[0];
+        }
+        //#5 then smoke the queen
+        else if(dangerSpades.length === 0 && events.queen===false){
+            return spades[spades.length-1];
+        }
+        //#6 smoke the 10 
+        else if(dangerHearts.length === 0 && events.ten===false){
+            return hearts[hearts.length-1];
+        }
+        //check to see if you have the queen or ten
+        //lead low spade
+        else if (aiQueen.length>0 && spades[0].number < 12 && counted.SPADES < 9){
+            return spades[0];
+        }
+        //lead low heart
+        else if (aiTen.length >0 && hearts[0].number < 10 && counted.HEARTS < 9){
+            return hearts[0];
+        }
+        //lead low diamond
+        else if ( counted.DIAMONDS <9){
+            console.log(diamonds);
+            return diamonds[0];
+        }
+         //lead low club
+        else if ( counted.CLUBS <9){
+            return clubs[0];
+        }
+         //lead low heart
+        else if (hearts[0].number < 10 && counted.HEARTS < 10){
+            return hearts[0];
+        }
+         //lead low spade
+        else if (spades[0].number <12 && counted.SPADES < 10){
+            return hearts[0];
+        }
         else{
-            //can lead hearts
+            console.log('last resort lead');
+            return hand[0];
         }
     };
 

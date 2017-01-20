@@ -73,7 +73,7 @@ function controller(shuffle, ai, timeout) {
                     if(card.code==='QS'){
                         card.points = 13;
                     }
-                    else if(card.code ==='10H'){
+                    else if(card.code ==='0H'){
                         card.points = 10;
                     }
                     else if (card.suit === 'HEARTS'){
@@ -355,9 +355,9 @@ function controller(shuffle, ai, timeout) {
             this.playerTurn = true;
         }
         else{
-            this.leadCard = ai.lead(this.hands[this.lead], this.counted, this.events);
+            this.leadCard = this.leadTrick(this.hands[this.lead], this.counted, this.events);
             this.playedCards[this.lead]=this.leadCard;
-            console.log(this.leadCard, ' came back from the ai service.lead');
+            console.log(this.leadCard, ' this is the leadCard');
             console.log(this.leadCard);
             this.playCard(this.leadCard, this.lead);
         }
@@ -377,6 +377,53 @@ function controller(shuffle, ai, timeout) {
         // this.passArray = [];
     };
 
+    this.leadTrick = (hand, counted, events)=>{
+        console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
+        //this is just a placeholder
+        var hearts = hand.filter(function(card){
+            return card.suit === 'HEARTS';
+        });
+        var spades = hand.filter(function(card){
+            return card.suit === 'SPADES';
+        });
+        var diamonds = hand.filter(function(card){
+            return card.suit === 'DIAMONDS';
+        });
+        var clubs = hand.filter(function(card){
+            return card.suit === 'CLUBS';
+        });
 
+        var dangerSpades = spades.filter((card)=>{
+            return card.number >11;
+        });
+
+
+        if (events.heartsBroken === false){
+            //can't lead hearts
+                     //first, clear any voids
+            if (spades.length === 1 && spades[0].number < 12){
+               return spades[0];
+            }
+             if (diamonds.length === 1){
+               return diamonds[0];
+            }
+            if (clubs.length === 1 && counted.CLUBS){
+    
+            }
+            else if(dangerSpades.length === 0 && events.queen===false){
+                  //smoke the queen
+                return spades[spades.length-1];
+            }
+            else if (diamonds.length <3 && counted.DIAMONDS === 0){
+                console.log(diamonds);
+                return diamonds[0];
+            }
+            else if(clubs.length <3 && counted.CLUBS <5){
+                return clubs[clubs.length-1];
+            }
+        else{
+            //can lead hearts
+        }
+    };
 
 };

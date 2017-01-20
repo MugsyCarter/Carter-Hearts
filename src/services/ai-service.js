@@ -115,9 +115,24 @@ export default function aiService() {
         lead( hand, counted, events){
             console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
             //this is just a placeholder
-           
+            var hearts = hand.filter(function(card){
+                return card.suit === 'HEARTS';
+            });
+            var spades = hand.filter(function(card){
+                return card.suit === 'SPADES';
+            });
+            var diamonds = hand.filter(function(card){
+                return card.suit === 'DIAMONDS';
+            });
+            var clubs = hand.filter(function(card){
+                return card.suit === 'CLUBS';
+            });
+
             if (events.heartsBroken === false){
                 //can't lead hearts
+                if (diamonds.length <3 && counted.diamonds === 0){
+                    console.log(diamonds);
+                }
             }
             else{
                 //can lead hearts

@@ -9,6 +9,8 @@ controller.$inject = ['shuffleService', 'aiService', '$timeout', '$rootScope'];
 
 function controller(shuffle, ai, timeout) {
     this.beginning = true;
+    this.showDeal = true;
+    this.handStart = false;
     this.passReady = false;
     this.selectedCard = false;
     this.passCompleted = false;
@@ -22,8 +24,10 @@ function controller(shuffle, ai, timeout) {
     this.heartLeadError = false;
     this.passTarget = 0;
     this.lead = 0;
+    this.trickPoints = 0;
     this.firstLead = false;
     this.gameOver = false;
+    this.cardPlayed = false;
     this.turnOrder = [];
     this.playedCards = [];
     this.highCard = {};
@@ -47,6 +51,8 @@ function controller(shuffle, ai, timeout) {
         this.sortedHand=[];
         this.passReady=true;
         this.beginning = false;
+        this.showDeal = false;
+        this.handStart = false;
         this.passTarget ++;
         this.passPlayer = this.players[this.passTarget];
         shuffle.getNewHand()
@@ -168,7 +174,9 @@ function controller(shuffle, ai, timeout) {
 
     this.startPlay = ()=>{
         this.playReady = false;
+        this.cardPlayed = false;
         this.playedCards = [];
+        this.turnOrder = [];
         //find the two of CLUBS
         for (var i = 1; i <4; i++){
             if (this.hands[i][0].code === '2C'){
@@ -183,6 +191,7 @@ function controller(shuffle, ai, timeout) {
             //show two message
             this.playerTurn = true;
             this.playTwo = true;
+            this.playedCard = false;
             this.lead = 0;
             this.firstLead = true;
             this.hand[0].toggled = true;
@@ -191,84 +200,86 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.clicked = (card)=>{
-        //adds or removes player cards to be passed
-        if (this.passReady === true){
-            if (card.toggled===true){
-                card.toggled = false;
-                this.passArray.splice(this.passArray.indexOf(card),1);
-            }
-            else{
-                card.toggled = true;
-                this.selectedCard = true;
-                this.passArray.push(card);
-            }
-        }
-        //else, play cards
-        else if (this.playerTurn === true){
-            //first hand options
-            if(this.firstLead === true && card.code !== '2C'){
-                //if its the first hand and the player must play the two 
-                this.twoError = true;
-                timeout(()=>{this.twoError=false;}, 3000);
-            }
-            else if (this.firstLead ===true && card.code === '2C'){
-                this.playTwo = false;
-                this.playCard(card, 0);
-                this.firstLead = false;
-            }
-            //player lead options
-            else if (this.lead === 0){
-            //player can lead anything but hearts
-                if(card.suit !== 'HEARTS'){
-                    //non-pointers are OK
-                    this.playCard(card, 0);
+        if (this.cardPlayed === false){
+            //adds or removes player cards to be passed
+            if (this.passReady === true){
+                if (card.toggled===true){
+                    card.toggled = false;
+                    this.passArray.splice(this.passArray.indexOf(card),1);
                 }
                 else{
-                    if (this.events.heartsBroken === true){
-                        //if hearts have been broken, its OK
+                    card.toggled = true;
+                    this.selectedCard = true;
+                    this.passArray.push(card);
+                }
+            }
+            //else, play cards
+            else if (this.playerTurn === true){
+                //first hand options
+                if(this.firstLead === true && card.code !== '2C'){
+                    //if its the first hand and the player must play the two 
+                    this.twoError = true;
+                    timeout(()=>{this.twoError=false;}, 3000);
+                }
+                else if (this.firstLead ===true && card.code === '2C'){
+                    this.playTwo = false;
+                    this.playCard(card, 0);
+                    this.firstLead = false;
+                }
+                //player lead options
+                else if (this.lead === 0){
+                //player can lead anything but hearts
+                    if(card.suit !== 'HEARTS'){
+                        //non-pointers are OK
                         this.playCard(card, 0);
                     }
                     else{
-                        var playerNonHearts = this.hand.filter(function(card){
-                            return card.suit !== 'HEARTS';
-                        });
-                        if(playerNonHearts.length >0){
-                            //if player has no non-hearts, the play is OK
-                            this.playCard(card, 0); 
+                        if (this.events.heartsBroken === true){
+                            //if hearts have been broken, its OK
+                            this.playCard(card, 0);
                         }
                         else{
-                            //invalid play
-                            this.heartLeadError = true;
-                            timeout(()=>{this.heartLeadError=false;}, 5000);
+                            var playerNonHearts = this.hand.filter(function(card){
+                                return card.suit !== 'HEARTS';
+                            });
+                            if(playerNonHearts.length <1){
+                                //if player has no non-hearts, the play is OK
+                                this.playCard(card, 0); 
+                            }
+                            else{
+                                //invalid play
+                                this.heartLeadError = true;
+                                timeout(()=>{this.heartLeadError=false;}, 5000);
+                            }
                         }
                     }
                 }
-            }
-            //player play options
-            else if (card.suit === this.playedCards[this.lead].suit){
-                //if the suit matches its a valid play
-                this.playCard(card, 0);
-            }
-            else {
-                //check to see if player is voided 
-                this.leadSuit = this.playedCards[this.lead].suit;
-                var suitMatches = this.hand.filter((thisCard)=>{
-                    return thisCard.suit === this.leadSuit; 
-                });
-                if (suitMatches.length > 0){
-                    //player is not yet voided
-                    this.playerSuit = card.suit;
-                    this.suitError = true;
-                    timeout(()=>{this.suitError=false;}, 3000);
-                }
-                //check to see if its the first hand and the player is trying to play a point card
-                else if(this.playedCards[this.lead].code === '2C' && card.points >0){
-                    this.firstHandError = true;
-                    timeout(()=>{this.firstHandError=false;}, 3000);
-                }
-                //otherwise the play is valid
-                else{
+                //player play options
+                else if (card.suit === this.playedCards[this.lead].suit){
+                    //if the suit matches its a valid play
                     this.playCard(card, 0);
+                }
+                else {
+                    //check to see if player is voided 
+                    this.leadSuit = this.playedCards[this.lead].suit;
+                    var suitMatches = this.hand.filter((thisCard)=>{
+                        return thisCard.suit === this.leadSuit; 
+                    });
+                    if (suitMatches.length > 0){
+                        //player is not yet voided
+                        this.playerSuit = card.suit;
+                        this.suitError = true;
+                        timeout(()=>{this.suitError=false;}, 3000);
+                    }
+                    //check to see if its the first hand and the player is trying to play a point card
+                    else if(this.playedCards[this.lead].code === '2C' && card.points >0){
+                        this.firstHandError = true;
+                        timeout(()=>{this.firstHandError=false;}, 3000);
+                    }
+                    //otherwise the play is valid
+                    else{
+                        this.playCard(card, 0);
+                    }
                 }
             }
         }
@@ -279,6 +290,7 @@ function controller(shuffle, ai, timeout) {
         this.playedCards[player] = card;
         this.turnOrder.push(player);
         if (player === 0){
+            this.cardPlayed = true;
             this.hand = this.hand.filter((eachCard)=>{
                 return eachCard.code !== card.code;
             });
@@ -290,6 +302,8 @@ function controller(shuffle, ai, timeout) {
         }
         //count the card
         this.counted[card.suit] ++;
+        //add trick points
+        this.trickPoints += card.points;
         //check for special events
         if (card.code === 'QS'){
             this.events.queen = true;
@@ -319,9 +333,7 @@ function controller(shuffle, ai, timeout) {
         console.log('in nextPlayer');
         //if not last play 
         // while(this.turnOrder.length < 4){
-        console.log('turn order is ', this.turnOrder);
         var lastPlayer = this.turnOrder[this.turnOrder.length-1];
-        console.log('last player was ', lastPlayer);
         var currentPlayer = lastPlayer +1;
         //if all players have played resolve the trick
         if(this.turnOrder.length > 3){
@@ -331,36 +343,13 @@ function controller(shuffle, ai, timeout) {
                 this.playerScores[this.high] += card.points;
             });
             //show newHand button and trick message
-            console.log(this.counted);
             this.turnOver = true;
             this.lead = this.high;
             //count cards to check if hand is over
             this.totalCards = this.counted.HEARTS + this.counted.SPADES + this.counted.DIAMONDS + this.counted.CLUBS;
             if (this.totalCards === 52){
             //hand is over
-                this.turnOver = false;
-                this.beginning = true;
-                this.playReady = false;
-                this.playedCards = [];
-                this.highCard = {};
-                this.counted={
-                    CLUBS: 0,
-                    HEARTS: 0,
-                    DIAMONDS: 0,
-                    SPADES: 0
-                };
-                this.events={
-                    queen: false,
-                    ten: false,
-                    heartsBroken: false,
-                };
-                var totalPoints = this.playerScores.reduce((total, num)=>{
-                    return total + num;
-                });
-                if (totalPoints >= 100){
-                    this.gameOver();
-                }
-                return;
+                this.newHand();
             }
             return;
         }
@@ -375,8 +364,7 @@ function controller(shuffle, ai, timeout) {
             else {
                 //its the AIs turn.  Let the AI play.
                 this.PlayerTurn = false;
-                console.log('player '+ currentPlayer + ' about to play.');
-                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard);
+                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard, this.trickPoints);
                 this.playCard(aiPlay, currentPlayer);
             }
         }
@@ -386,7 +374,7 @@ function controller(shuffle, ai, timeout) {
         this.turnOver = false;
         this.turnOrder = [];
         this.playedCards = [];
-        console.log('newTrick called');
+        this.trickPoints = 0;
         if(this.lead === 0){
             this.playerTurn = true;
         }
@@ -394,26 +382,39 @@ function controller(shuffle, ai, timeout) {
             this.leadCard = ai.lead(this.hands[this.lead], this.counted, this.events);
             this.playedCards[this.lead]=this.leadCard;
             console.log(this.leadCard, ' this is the leadCard');
-            console.log(this.leadCard);
             this.playCard(this.leadCard, this.lead);
         }  
     };
 
     this.newHand = ()=>{
-        // this.turnOver = false;
-        // console.log('newHand called');
-        // this.turnOrder = [];
-        // this.playedCards = [];
-        // this.passReady=true;
-        // this.passTarget ++;
-        // if (this.passTarget === 5){
-        //     this.passTarget = 1;
-        // }
-        // this.passPlayer = this.players[this.passTarget];
-        // this.passArray = [];
+        this.cardPlayed = false;
+        this.playedCards = [];
+        this.turnOrder = [];
+        this.highCard = {};
+        this.trickPoints = 0;
+        this.counted={
+            CLUBS: 0,
+            HEARTS: 0,
+            DIAMONDS: 0,
+            SPADES: 0
+        };
+        this.events={
+            queen: false,
+            ten: false,
+            heartsBroken: false,
+        };
+        this.playerScores.forEach((playerScore)=>{
+            if (playerScore >99){
+                this.endGame();
+                return;
+            }
+        });
+        this.turnOver = false;
+        this.showDeal = true;
+        this.handStart = true;
     };
 
-    this.gameOver = ()=>{
+    this.endGame = ()=>{
         var winner = 0;
         for (var i = 1; i < 4; i++){
             if (this.playerScores[i] > this.playerScores[i-1]){
@@ -424,7 +425,7 @@ function controller(shuffle, ai, timeout) {
             this.winMessage = 'You won Carter Hearts!  Congratulations!';
         }
         else{
-            this.winMessage = this.players[i] + ' has won the game.  You can\'t win them all';
+            this.winMessage = this.players[i] + ' has won the game.  You can\'t win them all.';
         }
         this.gameOver = true;
     };

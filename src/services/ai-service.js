@@ -193,7 +193,7 @@ export default function aiService() {
             }
             //lead low spade
             else if (spades.length > 0 && spades[0].number <12 && counted.SPADES < 10){
-                return hearts[0];
+                return spades[0];
             }
             else{
                 console.log('last resort lead');
@@ -201,7 +201,7 @@ export default function aiService() {
             }
         },
 
-        play(playedCards, lead, hand, counted, events, highCard){
+        play(playedCards, lead, hand, counted, events, highCard, trickPoints){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
             if (playedCards[lead].code === '2C'){
                 console.log('aiPlay first hand');
@@ -239,7 +239,7 @@ export default function aiService() {
                             });
                             return sortedDiamonds[0];
                         }
-                        //if no diamonds, you have yo play your second highest spade
+                        //if no diamonds, you have to play your second highest spade
                         //RUN FLAG
                         else {
                             return sortedSpades[1];
@@ -253,8 +253,6 @@ export default function aiService() {
                         return sortedDiamonds[0];
                     }
                 }
-                this.playedCards[0] = card;
-                this.nextPlayer();
             }
             //it is not the lead play so pointers are OK
             else{
@@ -272,15 +270,23 @@ export default function aiService() {
                 console.log('matching cards are ', sortedInSuit);
                 //if so, the ai must play one
                 if (sortedInSuit.length>0){
-                    console.log('not voided'); 
-                  //play highest in suit below high card
-                    for(var i=0; i < sortedInSuit.length; i++){
-                        if (sortedInSuit[i].number < highCard.number){
-                            return sortedInSuit[i];
-                        }
+                    console.log('not voided');
+                        //if no pointers, go big
+                    console.log('trick points are ', trickPoints);
+                    if(trickPoints<1 && playedCards.length > 2 &&sortedInSuit[0].points===0){
+                        //no points so go big
+                        return sortedInSuit[0];
                     }
-                    //if none are lower, play highest
-                    return(sortedInSuit[0]);
+                    else{
+                    //play highest in suit below high card
+                        for(var i=0; i < sortedInSuit.length; i++){
+                            if (sortedInSuit[i].number < highCard.number){
+                                return sortedInSuit[i];
+                            }
+                        }
+                        //if none are lower, play highest
+                        return(sortedInSuit[0]);
+                    }
                 }
                 else{
                     console.log('VOIDED!');
@@ -316,7 +322,7 @@ export default function aiService() {
                         });
                     }
                     sortedHand = hand.sort((a,b)=>{
-                        return a.number - b.number;
+                        return b.number - a.number;
                     });
 
                     console.log('right above priorities');
@@ -354,7 +360,7 @@ export default function aiService() {
                         return diamonds[0];
                     }
                     else if (clubs.length > 0 && clubs.length<3 && clubs[0].number > 9){
-                        return [0];
+                        return clubs[0];
                     }
                     else if (hearts.length > 0 && hearts.length<3 && diamonds[0].number > 9){
                         return hearts[0];

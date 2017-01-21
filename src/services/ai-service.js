@@ -274,8 +274,9 @@ export default function aiService() {
                         //if no pointers, go big
                     var trickPoints = 0;
                     for (var j=0; j<4;j++){
-                        trickPoints += playedCards[i];
+                        trickPoints += playedCards[j];
                     } 
+                    console.log('trick points are ', trickPoints);
                     if(trickPoints<1){
                         //no points so go big
                         return sortedinSuit[0];

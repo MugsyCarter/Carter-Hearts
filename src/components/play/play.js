@@ -173,6 +173,7 @@ function controller(shuffle, ai, timeout) {
     this.startPlay = ()=>{
         this.playReady = false;
         this.playedCards = [];
+        this.turnOrder = [];
         //find the two of CLUBS
         for (var i = 1; i <4; i++){
             if (this.hands[i][0].code === '2C'){
@@ -383,6 +384,7 @@ function controller(shuffle, ai, timeout) {
 
     this.newHand = ()=>{
         this.playedCards = [];
+        this.turnOrder = [];
         this.highCard = {};
         this.counted={
             CLUBS: 0,

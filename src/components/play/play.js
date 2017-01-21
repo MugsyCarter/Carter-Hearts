@@ -24,6 +24,7 @@ function controller(shuffle, ai, timeout) {
     this.heartLeadError = false;
     this.passTarget = 0;
     this.lead = 0;
+    this.trickPoints = 0;
     this.firstLead = false;
     this.gameOver = false;
     this.turnOrder = [];
@@ -295,6 +296,8 @@ function controller(shuffle, ai, timeout) {
         }
         //count the card
         this.counted[card.suit] ++;
+        //add trick points
+        this.trickPoints += card.points;
         //check for special events
         if (card.code === 'QS'){
             this.events.queen = true;
@@ -359,7 +362,7 @@ function controller(shuffle, ai, timeout) {
                 //its the AIs turn.  Let the AI play.
                 this.PlayerTurn = false;
                 console.log('player '+ currentPlayer + ' about to play.');
-                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard);
+                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard, this.trickPoints);
                 this.playCard(aiPlay, currentPlayer);
             }
         }
@@ -369,6 +372,7 @@ function controller(shuffle, ai, timeout) {
         this.turnOver = false;
         this.turnOrder = [];
         this.playedCards = [];
+        this.trickPoints = 0;
         console.log('newTrick called');
         if(this.lead === 0){
             this.playerTurn = true;
@@ -386,6 +390,7 @@ function controller(shuffle, ai, timeout) {
         this.playedCards = [];
         this.turnOrder = [];
         this.highCard = {};
+        this.trickPoints = 0;
         this.counted={
             CLUBS: 0,
             HEARTS: 0,

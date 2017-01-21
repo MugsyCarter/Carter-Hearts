@@ -201,7 +201,7 @@ export default function aiService() {
             }
         },
 
-        play(playedCards, lead, hand, counted, events, highCard){
+        play(playedCards, lead, hand, counted, events, highCard, trickPoints){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
             if (playedCards[lead].code === '2C'){
                 console.log('aiPlay first hand');
@@ -272,14 +272,10 @@ export default function aiService() {
                 if (sortedInSuit.length>0){
                     console.log('not voided');
                         //if no pointers, go big
-                    var trickPoints = 0;
-                    for (var j=0; j<4;j++){
-                        trickPoints += playedCards[j];
-                    } 
                     console.log('trick points are ', trickPoints);
-                    if(trickPoints<1){
+                    if(trickPoints<1 && playedCards.length > 2 &&sortedInSuit[0].points===0){
                         //no points so go big
-                        return sortedinSuit[0];
+                        return sortedInSuit[0];
                     }
                     else{
                     //play highest in suit below high card

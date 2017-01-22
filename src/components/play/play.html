@@ -9,7 +9,7 @@
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.showDeal===true"><h1 id="buttonMessage">Deal</h1></button>
             <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>
             <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.  Your target is {{$ctrl.passPlayer}}.</h1>
-            <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!</h1>
+            <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!  No passing.</h1>
             <h1 class ='gameMessage' id="twoMessage" ng-if="$ctrl.playTwo===true">Play the two of clubs.</h1>
              <h1 class ='gameMessage' id="trickMessage" ng-if="$ctrl.turnOver===true">{{$ctrl.players[$ctrl.high]}} took the trick</h1>
             <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.  You have {{$ctrl.passArray.length}} cards selected.</h1>
@@ -24,18 +24,28 @@
         <div id="scoreboard">
             <table>
                 <th>
-                    <td>Player</td>
+                    <td>You</td>
                     <td>George</td>
                     <td>Denny</td>
                     <td>Aileen</td>
                 </th>
+
                 <tr>
-                    <td></td>
+                    <td id="semitotal">Hand Points</td>
+                    <td id="semitotal"> {{$ctrl.playerSemis[0]}}</td>
+                    <td id="semitotal"> {{$ctrl.playerSemis[1]}}</td>
+                    <td id="semitotal"> {{$ctrl.playerSemis[2]}}</td>
+                    <td id="semitotal"> {{$ctrl.playerSemis[3]}}</td>
+                </tr>
+
+                <tr>
+                    <td>Total Points</td>
                     <td id="score"> {{$ctrl.playerScores[0]}}</td>
                     <td id="score"> {{$ctrl.playerScores[1]}}</td>
                     <td id="score"> {{$ctrl.playerScores[2]}}</td>
                     <td id="score"> {{$ctrl.playerScores[3]}}</td>
                 </tr>
+              
             </table>
         </div>
 

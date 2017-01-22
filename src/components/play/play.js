@@ -26,6 +26,7 @@ function controller(shuffle, ai, timeout) {
     this.lead = 0;
     this.trickPoints = 0;
     this.firstLead = false;
+    this.holdHand = false;
     this.gameOver = false;
     this.cardPlayed = false;
     this.turnOrder = [];
@@ -43,18 +44,28 @@ function controller(shuffle, ai, timeout) {
         heartsBroken: false,
     };
 
-    this.players = ['you', 'George', 'Denny', 'Aileen', 'Hold'];
+    this.players = ['you', 'George', 'Denny', 'Aileen'];
     this.playerScores = [0,0,0,0];
+    this.playerSemis =[0,0,0,0];
 
     this.dealCards = ()=>{
         this.gameOver = false;
         this.sortedHand=[];
-        this.passReady=true;
+        
         this.beginning = false;
         this.showDeal = false;
         this.handStart = false;
+        this.playerSemis = [0,0,0,0];
         this.passTarget ++;
         this.passPlayer = this.players[this.passTarget];
+        if (this.passTarget === 4){
+            this.passTarget === 0;
+            this.holdHand = true;
+        }
+        else{
+            this.passReady=true;
+        }
+
         shuffle.getNewHand()
             .then((cards)=>{
                 console.log(cards);
@@ -173,6 +184,7 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.startPlay = ()=>{
+        this.holdHand = false;
         this.playReady = false;
         this.cardPlayed = false;
         this.playedCards = [];
@@ -200,6 +212,8 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.clicked = (card)=>{
+        console.log('clicked');
+        console.log('card is ', card);
         if (this.cardPlayed === false){
             //adds or removes player cards to be passed
             if (this.passReady === true){
@@ -341,6 +355,7 @@ function controller(shuffle, ai, timeout) {
             //all players have played so resolve the points
             this.playedCards.forEach((card)=>{
                 this.playerScores[this.high] += card.points;
+                this.playerSemis[this.high] += card.points;
             });
             //show newHand button and trick message
             this.turnOver = true;
@@ -375,6 +390,7 @@ function controller(shuffle, ai, timeout) {
         this.turnOrder = [];
         this.playedCards = [];
         this.trickPoints = 0;
+        this.cardPlayed = false;
         if(this.lead === 0){
             this.playerTurn = true;
         }

@@ -426,12 +426,13 @@ function controller(shuffle, ai, timeout) {
     this.newHand = ()=>{
         //check for run scoring
         for (var i = 0; i < this.playerSemis.length; i++){
-            if(playerSemis[i] === 35){
+            if(this.playerSemis[i] === 35){
                 this.run = i;
             }
         }
         //if run, adjust scores
         if(this.run !== 5){
+            this.runMessage = true;
             for (var j = 0; j < this.playerSemis.length; j++){
                 if(j === this.run){
                     this.playerSemis[j] = 0;
@@ -443,7 +444,6 @@ function controller(shuffle, ai, timeout) {
                 }
             } 
         }
-        this.runMessage = true;
         this.cardPlayed = false;
         this.playedCards = [];
         this.turnOrder = [];

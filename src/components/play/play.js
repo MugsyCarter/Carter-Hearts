@@ -59,6 +59,7 @@ function controller(shuffle, ai, timeout) {
         this.showDeal = false;
         this.handStart = false;
         this.playerSemis = [0,0,0,0];
+        this.playAgain = false;
         this.passTarget ++;
         this.passPlayer = this.players[this.passTarget];
         if (this.passTarget === 4){
@@ -461,21 +462,21 @@ function controller(shuffle, ai, timeout) {
             ten: false,
             heartsBroken: false,
         };
+        this.turnOver = false;
+        this.showDeal = true;
+        this.handStart = true;
         this.playerScores.forEach((playerScore)=>{
             if (playerScore >99){
                 this.endGame();
                 return;
             }
         });
-        this.turnOver = false;
-        this.showDeal = true;
-        this.handStart = true;
     };
 
     this.endGame = ()=>{
         var winner = 0;
         for (var i = 1; i < 4; i++){
-            if (this.playerScores[i] > this.playerScores[i-1]){
+            if (this.playerScores[i] < this.playerScores[i-1]){
                 winner = i;
             }
         } 
@@ -483,9 +484,12 @@ function controller(shuffle, ai, timeout) {
             this.winMessage = 'You won Carter Hearts!  Congratulations!';
         }
         else{
-            this.winMessage = this.players[i] + ' has won the game.  You can\'t win them all.';
+            this.winMessage = this.players[winner] + ' has won the game.  You can\'t win them all.';
         }
         this.gameOver = true;
+        this.playAgain = true;
+        this.handStart = false;
+        this.showDeal = false;
     };
 
 };

@@ -20,6 +20,7 @@
                <h1 class ='errorMessage' id="heartsBrokenMessage" ng-if="$ctrl.heartLeadError===true">You cannot lead a heart until they've been broken (or unless you have nothing else).</h1>
             <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
               <button class = "button" id="newHandButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
+               <button class="button" id="playButton" ng-if="$ctrl.playAgain===true" ng-click="$ctrl.dealCards()"><h1 id="playMessage" >Play Again</h1></button>
         </div>
 
         <div id="scoreboard">

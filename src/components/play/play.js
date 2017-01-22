@@ -61,6 +61,7 @@ function controller(shuffle, ai, timeout) {
         if (this.passTarget === 4){
             this.passTarget === 0;
             this.holdHand = true;
+            this.playReady = true;
         }
         else{
             this.passReady=true;

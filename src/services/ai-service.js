@@ -112,7 +112,7 @@ export default function aiService() {
             return aiPass;
         },
 
-        lead(hand, counted, events){
+        lead(hand, counted, events, runFlag){
             console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
             //this is just a placeholder
             var hearts = hand.filter(function(card){
@@ -144,64 +144,74 @@ export default function aiService() {
                 return card.number === 10;
             });
 
-            //first, clear any voids
-            //#1 clear spade void first 
-            if (spades.length === 1 && spades[0].number < 12 && counted.SPADES < 9){
-                return spades[0];
-            }
-            //#2 clear heart void next if broken
-            else if (hearts.length === 1 && hearts[0].number < 10 && events.heartsBroken === true && counted.HEARTS > 9){
-                return hearts[0];
-            }
-            //#3 then clear diamond void
-            else if (diamonds.length === 1 && counted.DIAMONDS > 9){
-                return diamonds[0];
-            }
-            //#4 then clear club void 
-            else if (clubs.length === 1 && counted.CLUBS < 6){
-                return clubs[0];
-            }
-            //#5 then smoke the queen
-            else if(dangerSpades.length === 0 && events.queen===false && spades.length>0){
-                return spades[spades.length-1];
-            }
-            //#6 smoke the 10 
-            else if(dangerHearts.length === 0 && events.ten===false && hearts.length>0){
-                return hearts[hearts.length-1];
-            }
-            //check to see if you have the queen or ten
-            //lead low spade
-            else if (aiQueen.length>0 && spades[0].number < 12 && counted.SPADES < 9){
-                return spades[0];
-            }
-            //lead low heart
-            else if (aiTen.length >0 && hearts[0].number < 10 && counted.HEARTS < 9){
-                return hearts[0];
-            }
-            //lead low diamond
-            else if (diamonds.length > 0 && counted.DIAMONDS <9){
-                console.log(diamonds);
-                return diamonds[0];
-            }
-            //lead low club
-            else if (clubs.length > 0 && counted.CLUBS <9){
-                return clubs[0];
-            }
-            //lead low heart
-            else if (hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
-                return hearts[0];
-            }
-            //lead low spade
-            else if (spades.length > 0 && spades[0].number <12 && counted.SPADES < 10){
-                return spades[0];
+            if (runFlag === 1){
+                //ai is trying to run it
+                //implement run lead
+                console.log('run lead');
+                return hand[hand.length-1];
             }
             else{
-                console.log('last resort lead');
-                return hand[0];
+                //no run, try to stay alive
+                //first, clear any voids
+                //#1 clear spade void first 
+                if (spades.length === 1 && spades[0].number < 12 && counted.SPADES < 9){
+                    return spades[0];
+                }
+                //#2 clear heart void next if broken
+                else if (hearts.length === 1 && hearts[0].number < 10 && events.heartsBroken === true && counted.HEARTS > 9){
+                    return hearts[0];
+                }
+                //#3 then clear diamond void
+                else if (diamonds.length === 1 && counted.DIAMONDS > 9){
+                    return diamonds[0];
+                }
+                //#4 then clear club void 
+                else if (clubs.length === 1 && counted.CLUBS < 6){
+                    return clubs[0];
+                }
+                //#5 then smoke the queen
+                else if(dangerSpades.length === 0 && events.queen===false && spades.length>0){
+                    return spades[spades.length-1];
+                }
+                //#6 smoke the 10 
+                else if(dangerHearts.length === 0 && events.ten===false && hearts.length>0){
+                    return hearts[hearts.length-1];
+                }
+
+                //check to see if you have the queen or ten
+                //lead low spade
+                else if (aiQueen.length<1 && spades[0].number < 12 && counted.SPADES < 9){
+                    return spades[0];
+                }
+                //lead low heart
+                else if (aiTen.length <1 && hearts[0].number < 10 && counted.HEARTS < 9){
+                    return hearts[0];
+                }
+                //lead low diamond
+                else if (diamonds.length > 0 && counted.DIAMONDS <9){
+                    console.log(diamonds);
+                    return diamonds[0];
+                }
+                //lead low club
+                else if (clubs.length > 0 && counted.CLUBS <9){
+                    return clubs[0];
+                }
+                //lead low heart
+                else if (hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
+                    return hearts[0];
+                }
+                //lead low spade
+                else if (spades.length > 0 && spades[0].number <12 && counted.SPADES < 10){
+                    return spades[0];
+                }
+                else{
+                    console.log('last resort lead');
+                    return hand[0];
+                }
             }
         },
 
-        play(playedCards, lead, hand, counted, events, highCard, trickPoints){
+        play(playedCards, lead, hand, counted, events, highCard, trickPoints, runFlag){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
             if (playedCards[lead].code === '2C'){
                 console.log('aiPlay first hand');
@@ -240,7 +250,7 @@ export default function aiService() {
                             return sortedDiamonds[0];
                         }
                         //if no diamonds, you have to play your second highest spade
-                        //RUN FLAG
+                        //RUN FLAG?
                         else {
                             return sortedSpades[1];
                         }
@@ -258,7 +268,7 @@ export default function aiService() {
             else{
                 console.log('aiPlay normal hand');
                 console.log('highCard is ', highCard);
-                
+              
                 //check to see if ai has cards in suit
                 var inSuit = hand.filter((card)=>{
                     return card.suit === playedCards[lead].suit;
@@ -268,9 +278,14 @@ export default function aiService() {
                 });
 
                 console.log('matching cards are ', sortedInSuit);
-                //if so, the ai must play one
+
+                    //if so, the ai must play one
                 if (sortedInSuit.length>0){
                     console.log('not voided');
+                    if (runFlag === 1){
+                        console.log('run play!')
+                        return sortedInSuit[0];
+                    }
                         //if no pointers, go big
                     console.log('trick points are ', trickPoints);
                     if(trickPoints<1 && playedCards.length > 2 &&sortedInSuit[0].points===0){
@@ -324,7 +339,10 @@ export default function aiService() {
                     sortedHand = hand.sort((a,b)=>{
                         return b.number - a.number;
                     });
-
+                    if (runFlag === 1){
+                        console.log('run play!');
+                        return sortedHand[sortedHand.length];
+                    }
                     console.log('right above priorities');
                     //priority 1: dump queen
                     if (theQueen.length>0){

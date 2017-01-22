@@ -402,7 +402,7 @@ function controller(shuffle, ai, timeout) {
             total += score;
         });
         for (var i = 0; i <5; i++){
-            if (this.playerSemis[i] > 20 && total === this.playerSemis[i]){
+            if (this.playerSemis[i] > 16 && total === this.playerSemis[i]){
                 //player has high score and may be trying to run it
                 this.runFlag = 1;
             }

@@ -114,7 +114,7 @@ export default function aiService() {
 
         lead(hand, counted, events, runFlag){
             console.log('ai leading.  hand: '+hand+' counted: '+counted+' events: '+events);
-            //this is just a placeholder
+            console.log('runFlag for the lead is ', runFlag);
             var hearts = hand.filter(function(card){
                 return card.suit === 'HEARTS';
             });
@@ -180,11 +180,11 @@ export default function aiService() {
 
                 //check to see if you have the queen or ten
                 //lead low spade
-                else if (aiQueen.length<1 && spades[0].number < 12 && counted.SPADES < 9){
+                else if (aiQueen.length<1 && spades.length > 0 && spades[0].number < 12 && counted.SPADES < 9){
                     return spades[0];
                 }
                 //lead low heart
-                else if (aiTen.length <1 && hearts[0].number < 10 && counted.HEARTS < 9){
+                else if (aiTen.length <1 && hearts.length > 0 && hearts[0].number < 10 && counted.HEARTS < 9){
                     return hearts[0];
                 }
                 //lead low diamond
@@ -213,6 +213,7 @@ export default function aiService() {
 
         play(playedCards, lead, hand, counted, events, highCard, trickPoints, runFlag){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
+            console.log('run flag is ', runFlag);
             if (playedCards[lead].code === '2C'){
                 console.log('aiPlay first hand');
                 //if its the first hand, no pointers are allowed
@@ -283,7 +284,7 @@ export default function aiService() {
                 if (sortedInSuit.length>0){
                     console.log('not voided');
                     if (runFlag === 1){
-                        console.log('run play!')
+                        console.log('run play!');
                         return sortedInSuit[0];
                     }
                         //if no pointers, go big
@@ -341,7 +342,7 @@ export default function aiService() {
                     });
                     if (runFlag === 1){
                         console.log('run play!');
-                        return sortedHand[sortedHand.length];
+                        return sortedHand[sortedHand.length-1];
                     }
                     console.log('right above priorities');
                     //priority 1: dump queen

@@ -174,7 +174,7 @@ export default function aiService() {
                     return spades[spades.length-1];
                 }
                 //#6 smoke the 10 
-                else if(dangerHearts.length === 0 && events.ten===false && hearts.length>0){
+                else if(events.heartsBroken ===true && dangerHearts.length === 0 && events.ten===false && hearts.length>0){
                     return hearts[hearts.length-1];
                 }
 
@@ -184,7 +184,7 @@ export default function aiService() {
                     return spades[0];
                 }
                 //lead low heart
-                else if (aiTen.length <1 && hearts.length > 0 && hearts[0].number < 10 && counted.HEARTS < 9){
+                else if (events.heartsBroken === true && aiTen.length <1 && hearts.length > 0 && hearts[0].number < 10 && counted.HEARTS < 9){
                     return hearts[0];
                 }
                 //lead low diamond
@@ -197,7 +197,7 @@ export default function aiService() {
                     return clubs[0];
                 }
                 //lead low heart
-                else if (hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
+                else if (events.heartsBroken === true && hearts.length>0 && hearts[0].number < 10 && counted.HEARTS < 10){
                     return hearts[0];
                 }
                 //lead low spade

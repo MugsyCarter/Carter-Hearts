@@ -24,6 +24,7 @@ function controller(shuffle, ai, timeout) {
     this.heartLeadError = false;
     this.passTarget = 0;
     this.lead = 0;
+    this.run = 5;
     this.trickPoints = 0;
     this.firstLead = false;
     this.holdHand = false;
@@ -49,9 +50,10 @@ function controller(shuffle, ai, timeout) {
     this.playerSemis =[0,0,0,0];
 
     this.dealCards = ()=>{
+        this.runMessage = false;
         this.gameOver = false;
         this.sortedHand=[];
-        
+        this.run = 5;
         this.beginning = false;
         this.showDeal = false;
         this.handStart = false;
@@ -59,7 +61,7 @@ function controller(shuffle, ai, timeout) {
         this.passTarget ++;
         this.passPlayer = this.players[this.passTarget];
         if (this.passTarget === 4){
-            this.passTarget === 0;
+            this.passTarget = 0;
             this.holdHand = true;
             this.playReady = true;
         }
@@ -358,6 +360,7 @@ function controller(shuffle, ai, timeout) {
                 this.playerScores[this.high] += card.points;
                 this.playerSemis[this.high] += card.points;
             });
+            //check for run scoring
             //show newHand button and trick message
             this.turnOver = true;
             this.lead = this.high;
@@ -404,6 +407,26 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.newHand = ()=>{
+        //check for run scoring
+        for (var i = 0; i < this.playerSemis.length; i++){
+            if(playerSemis[i] === 35){
+                this.run = i;
+            }
+        }
+        //if run, adjust scores
+        if(this.run !== 5){
+            for (var j = 0; j < this.playerSemis.length; j++){
+                if(j === this.run){
+                    this.playerSemis[j] = 0;
+                    this.playerScores[j] -= 35;
+                }
+                else{
+                    this.playerSemis[j] = 35;
+                    this.playerScores[j] += 35;
+                }
+            } 
+        }
+        this.runMessage = true;
         this.cardPlayed = false;
         this.playedCards = [];
         this.turnOrder = [];

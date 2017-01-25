@@ -56,6 +56,7 @@
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}">
             <image id="player2Card" ng-if="$ctrl.playedCards[2]" src="{{$ctrl.playedCards[2].image}}">
             <image id="player3Card" ng-if="$ctrl.playedCards[3]" src="{{$ctrl.playedCards[3].image}}">  
+            <button class="button" id="newTrickButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
         </div>
 
         <div class="compHand">
@@ -70,7 +71,7 @@
         <div class="compHand3">
         </div>
 
-        <button class = "button" id="newHandButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
+      
         <div class="playerHand">
             <ul class="hand">
                 <li class="playerCard" ng-repeat="card in $ctrl.hand" >

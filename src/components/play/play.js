@@ -50,6 +50,13 @@ function controller(shuffle, ai, timeout) {
     this.playerScores = [0,0,0,0];
     this.playerSemis =[0,0,0,0];
 
+    this.newGame = ()=>{
+        this.passTarget = 0;
+        this.playerScores = [0,0,0,0];
+        this.playerSemis =[0,0,0,0];
+        this.dealCards();
+    };
+
     this.dealCards = ()=>{
         this.runMessage = false;
         this.gameOver = false;

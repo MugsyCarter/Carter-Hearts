@@ -19,8 +19,8 @@
               <h1 class ='errorMessage' id="twoErrorMessage" ng-if="$ctrl.twoError===true">If you have the deuce, you've gotta play the deuce.</h1>
                <h1 class ='errorMessage' id="heartsBrokenMessage" ng-if="$ctrl.heartLeadError===true">You cannot lead a heart until they've been broken (or unless you have nothing else).</h1>
             <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
-              <button class = "button" id="newHandButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
-               <button class="button" id="playButton" ng-if="$ctrl.playAgain===true" ng-click="$ctrl.dealCards()"><h1 id="playMessage" >Play Again</h1></button>
+           
+               <button class="button" id="playButton" ng-if="$ctrl.playAgain===true" ng-click="$ctrl.newGame()"><h1 id="playMessage" >Play Again</h1></button>
         </div>
 
         <div id="scoreboard">
@@ -70,6 +70,7 @@
         <div class="compHand3">
         </div>
 
+        <button class = "button" id="newHandButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
         <div class="playerHand">
             <ul class="hand">
                 <li class="playerCard" ng-repeat="card in $ctrl.hand" >

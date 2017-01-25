@@ -256,26 +256,44 @@ a:hover{
 
 #player0Card{
   position: fixed;
-  top: 45vh;
+  top: 50vh;
   left: 35vw;
 }
 
 #player1Card{
   position: fixed;
-  top: 30vh;
+  top: 45vh;
   left: 25vw;
+}
+
+#player1Image{
+  position: fixed;
+  top: 45vh;
+  left: 5vw;
 }
 
 #player2Card{
   position: fixed;
-  top: 15vh;
+  top: 25vh;
+  left: 35vw;
+}
+
+#player2Image{
+  position: fixed;
+  top: 8vh;
   left: 35vw;
 }
 
 #player3Card{
   position: fixed;
-    top: 30vh;
-   left: 45vw;
+    top: 45vh;
+    left: 45vw;
+}
+
+#player3Image{
+  position: fixed;
+  top: 45vh;
+  left: 65vw;
 }
 
 #score{

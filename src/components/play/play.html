@@ -53,13 +53,16 @@
 
         <div class="playArea">
             <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}">
+            <image class="playerImage" id="player1Image" ng-if="$ctrl.beginning===false" src="../images/dalecarter.png">
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}">
+             <image class="playerImage" id="player2Image" ng-if="$ctrl.beginning===false" src="../images/dennycarter.png">
             <image id="player2Card" ng-if="$ctrl.playedCards[2]" src="{{$ctrl.playedCards[2].image}}">
+            <image class="playerImage" id="player3Image" ng-if="$ctrl.beginning===false" src="../images/aileencole.png">
             <image id="player3Card" ng-if="$ctrl.playedCards[3]" src="{{$ctrl.playedCards[3].image}}">  
             <button class="button" id="newTrickButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
         </div>
 
-        <div class="compHand">
+        <!--<div class="compHand">
             <ul class="comp1Hand">
                 <li class="comp1Card" ng-repeat="compCard in $ctrl.hands[1]" >
                     <img src="{{compCard.image}}" >
@@ -69,7 +72,7 @@
         <div class="compHand2">
         </div>
         <div class="compHand3">
-        </div>
+        </div>-->
 
       
         <div class="playerHand">

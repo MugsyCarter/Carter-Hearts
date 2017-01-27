@@ -312,14 +312,17 @@ a:hover{
 #rules-page{
   background-color: black;
 }
+
 .rulesRow{
   display: inline-flex;
   float: right;
+  background-color: black;
 }
 
 .rulesRowLeft{
   display: inline-flex;
   float: left;
+  background-color: black;
 }
 .rulesImageRight{
   padding-left: 10vw;
@@ -334,6 +337,9 @@ a:hover{
   color: $red;
 }
 
+.rulesLink{
+  color: $green;
+}
 
 /* Media Query Stuff */
 

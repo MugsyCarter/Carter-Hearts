@@ -96,11 +96,11 @@ border-radius: 1vh;
 .gameMessage{
     font-size: 3em;
     color: white;
-     padding-left: 10vw;
+     padding-left: 1vw;
 }
 
 .errorMessage{    
-    font-size: 3em;
+    font-size: 2em;
     color: $red;
 }
 
@@ -254,46 +254,49 @@ a:hover{
   height: 80vh;
 }
 
+.playerImage{
+  height: 120px;
+}
 #player0Card{
+  position: fixed;
+  top: 50vh;
+  left: 45vw;
+}
+
+#player1Card{
   position: fixed;
   top: 50vh;
   left: 35vw;
 }
 
-#player1Card{
-  position: fixed;
-  top: 45vh;
-  left: 25vw;
-}
-
 #player1Image{
   position: fixed;
-  top: 45vh;
-  left: 5vw;
+  top: 55vh;
+  left: 15vw;
 }
 
 #player2Card{
   position: fixed;
   top: 25vh;
-  left: 35vw;
+  left: 45vw;
 }
 
 #player2Image{
   position: fixed;
-  top: 8vh;
-  left: 35vw;
+  top: 18vh;
+  left: 45vw;
 }
 
 #player3Card{
   position: fixed;
-    top: 45vh;
-    left: 45vw;
+  top: 50vh;
+  left: 55vw;
 }
 
 #player3Image{
   position: fixed;
-  top: 45vh;
-  left: 65vw;
+  top: 55vh;
+  left: 75vw;
 }
 
 #score{

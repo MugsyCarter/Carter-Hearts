@@ -49,7 +49,7 @@ a, a:link, a:active {
 }
 
 nav {
-  color:#FFF;
+  color:black;
   margin:0 auto;
 }
 
@@ -107,7 +107,7 @@ border-radius: 1vh;
 .main-nav {
   display: block;
   margin:0 auto;
-  background-color:#000000;
+  background-color:black;
   opacity:0.85;
   list-style: none;
   width: 100%;
@@ -307,6 +307,33 @@ a:hover{
   padding-left: 3vw;
   color: $red;
 }
+
+// rules page
+#rules-page{
+  background-color: black;
+}
+.rulesRow{
+  display: inline-flex;
+  float: right;
+}
+
+.rulesRowLeft{
+  display: inline-flex;
+  float: left;
+}
+.rulesImageRight{
+  padding-left: 10vw;
+}
+
+.rulesImageLeft{
+  padding-right: 10vw; 
+}
+
+.rulesMessage{
+  font-size: 3em;
+  color: $red;
+}
+
 
 /* Media Query Stuff */
 

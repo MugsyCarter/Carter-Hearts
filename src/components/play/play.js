@@ -24,11 +24,13 @@ function controller(shuffle, ai, timeout) {
     this.heartLeadError = false;
     this.passTarget = 0;
     this.lead = 0;
+    this.run = 5;
     this.trickPoints = 0;
     this.firstLead = false;
     this.holdHand = false;
     this.gameOver = false;
     this.cardPlayed = false;
+    this.runFlag = 0;
     this.turnOrder = [];
     this.playedCards = [];
     this.highCard = {};
@@ -44,22 +46,31 @@ function controller(shuffle, ai, timeout) {
         heartsBroken: false,
     };
 
-    this.players = ['you', 'George', 'Denny', 'Aileen'];
+    this.players = ['you', 'Dale', 'Denny', 'Aileen'];
     this.playerScores = [0,0,0,0];
     this.playerSemis =[0,0,0,0];
 
+    this.newGame = ()=>{
+        this.passTarget = 0;
+        this.playerScores = [0,0,0,0];
+        this.playerSemis =[0,0,0,0];
+        this.dealCards();
+    };
+
     this.dealCards = ()=>{
+        this.runMessage = false;
         this.gameOver = false;
         this.sortedHand=[];
-        
+        this.run = 5;
         this.beginning = false;
         this.showDeal = false;
         this.handStart = false;
         this.playerSemis = [0,0,0,0];
+        this.playAgain = false;
         this.passTarget ++;
         this.passPlayer = this.players[this.passTarget];
         if (this.passTarget === 4){
-            this.passTarget === 0;
+            this.passTarget = 0;
             this.holdHand = true;
             this.playReady = true;
         }
@@ -358,6 +369,7 @@ function controller(shuffle, ai, timeout) {
                 this.playerScores[this.high] += card.points;
                 this.playerSemis[this.high] += card.points;
             });
+            //check for run scoring
             //show newHand button and trick message
             this.turnOver = true;
             this.lead = this.high;
@@ -380,7 +392,7 @@ function controller(shuffle, ai, timeout) {
             else {
                 //its the AIs turn.  Let the AI play.
                 this.PlayerTurn = false;
-                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard, this.trickPoints);
+                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard, this.trickPoints, this.runFlag);
                 this.playCard(aiPlay, currentPlayer);
             }
         }
@@ -392,11 +404,27 @@ function controller(shuffle, ai, timeout) {
         this.playedCards = [];
         this.trickPoints = 0;
         this.cardPlayed = false;
+        //check to see is anyone is trying to/should run it
+        var total = 0;
+        this.playerSemis.forEach((score)=>{
+            total += score;
+        });
+        for (var i = 0; i <5; i++){
+            if (this.playerSemis[i] > 13 && total === this.playerSemis[i]){
+                //player has high score and may be trying to run it
+                this.runFlag = 1;
+            }
+            else if (this.playerSemis[i] >0 && total !== this.playerSemis[i]){
+                //someone has some points, but less than the total so the run has been broken
+                this.runFlag = 0;
+            }
+        }
+
         if(this.lead === 0){
             this.playerTurn = true;
         }
         else{
-            this.leadCard = ai.lead(this.hands[this.lead], this.counted, this.events);
+            this.leadCard = ai.lead(this.hands[this.lead], this.counted, this.events, this.runFlag);
             this.playedCards[this.lead]=this.leadCard;
             console.log(this.leadCard, ' this is the leadCard');
             this.playCard(this.leadCard, this.lead);
@@ -404,11 +432,32 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.newHand = ()=>{
+        //check for run scoring
+        for (var i = 0; i < this.playerSemis.length; i++){
+            if(this.playerSemis[i] === 35){
+                this.run = i;
+            }
+        }
+        //if run, adjust scores
+        if(this.run !== 5){
+            this.runMessage = true;
+            for (var j = 0; j < this.playerSemis.length; j++){
+                if(j === this.run){
+                    this.playerSemis[j] = 0;
+                    this.playerScores[j] -= 35;
+                }
+                else{
+                    this.playerSemis[j] = 35;
+                    this.playerScores[j] += 35;
+                }
+            } 
+        }
         this.cardPlayed = false;
         this.playedCards = [];
         this.turnOrder = [];
         this.highCard = {};
         this.trickPoints = 0;
+        this.runFlag = 0;
         this.counted={
             CLUBS: 0,
             HEARTS: 0,
@@ -420,21 +469,21 @@ function controller(shuffle, ai, timeout) {
             ten: false,
             heartsBroken: false,
         };
+        this.turnOver = false;
+        this.showDeal = true;
+        this.handStart = true;
         this.playerScores.forEach((playerScore)=>{
             if (playerScore >99){
                 this.endGame();
                 return;
             }
         });
-        this.turnOver = false;
-        this.showDeal = true;
-        this.handStart = true;
     };
 
     this.endGame = ()=>{
         var winner = 0;
         for (var i = 1; i < 4; i++){
-            if (this.playerScores[i] > this.playerScores[i-1]){
+            if (this.playerScores[i] < this.playerScores[i-1]){
                 winner = i;
             }
         } 
@@ -442,9 +491,12 @@ function controller(shuffle, ai, timeout) {
             this.winMessage = 'You won Carter Hearts!  Congratulations!';
         }
         else{
-            this.winMessage = this.players[i] + ' has won the game.  You can\'t win them all.';
+            this.winMessage = this.players[winner] + ' has won the game.  You can\'t win them all.';
         }
         this.gameOver = true;
+        this.playAgain = true;
+        this.handStart = false;
+        this.showDeal = false;
     };
 
 };

@@ -4,12 +4,13 @@
   "description": "A Hearts game app that uses the superior Carter family rules.",
   "main": "index.js",
   "scripts": {
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
     "test": "karma start",
     "update-webdriver": "webdriver-manager update",
     "e2e": "protractor",
     "start": "webpack-dev-server --inline",
-    "build": "webpack"
+    "build": "webpack",
+    "heroku-build": "webpack",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",

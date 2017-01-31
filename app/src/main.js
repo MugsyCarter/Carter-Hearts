@@ -12,7 +12,7 @@ const app = angular.module('myApp', [components, services, uiRouter]);
 
 // app.value('apiUrl', 'https://deckofcardsapi.com/api/deck/new/draw/?count=52');
 
-const apiUrl = 'https://wikidiet.herokuapp.com/api';
+const apiUrl = 'https://carterhearts.herokuapp.com/';
 
 app.config(routes);
 

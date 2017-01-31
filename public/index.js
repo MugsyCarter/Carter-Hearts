@@ -78,6 +78,8 @@
 	
 	app.value('apiUrl', 'https://deckofcardsapi.com/api/deck/new/draw/?count=52');
 	
+	// const apiUrl = 'https://carterhearts.herokuapp.com/';
+	
 	app.config(_routes2.default);
 	
 	//route debugger
@@ -33725,7 +33727,7 @@
 /* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<section class =\"page\" id=\"home-page\">\n<div>HOME PAGE</div>\n</section>\n";
+	module.exports = "\n<section class =\"page\" id=\"home-page\">\n<h1>Carter Hearts</h1>\n<h2>Just like normal hearts, but in poor taste</h2>\n<image id='goatImage' src=\"./images/goat.png\">\n</section>\n";
 
 /***/ },
 /* 20 */

@@ -34,7 +34,7 @@ b {
 }
 
 p {
-  font-size: .95em;
+  font-size: 2em;
 }
 
 ul {
@@ -310,6 +310,7 @@ a:hover{
 
 // rules page
 #rules-page{
+  height: 85vh;
   background-color: black;
 }
 
@@ -341,6 +342,39 @@ a:hover{
   color: $green;
 }
 
+#about-page{
+  height: 85vh;
+}
+
+.tab { 
+  margin-left: 40px; 
+}
+
+#home-page{
+  height: 85vh;
+  background-color: $red;
+}
+
+#homeTitle{
+   margin-left: 30vw; 
+  font-size: 6em;
+}
+
+#homeSubtitle{
+  margin-left: 20vw; 
+}
+#goatImage{
+  margin-left: 40vw;
+  height: 40vh;
+}
+
+#playGameButton{
+  margin-left: 40vw;
+  background-color: white;
+  &:hover{
+    background-color: black;
+  }
+}
 /* Media Query Stuff */
 
 @media only screen and (min-width: 481px) {
@@ -358,14 +392,6 @@ a:hover{
 
 @media only screen and (min-width: 640px) {
   /* First break point - switch to tablet design: 2+ columns */
-
-  h2 {
-    font-size: 1.5em;
-  }
-
-  p {
-    font-size: 1em;
-  }
 }
 
 @media only screen and (min-width: 1024px) {

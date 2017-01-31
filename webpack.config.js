@@ -9,7 +9,7 @@ module.exports = {
     target: 'web',
     entry: './app/src/main.js',
     output: {
-        path: '../public',
+        path: './public',
         filename: 'index.js'
     },
     devtool: 'source-map',

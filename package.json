@@ -4,9 +4,9 @@
   "description": "A Hearts game app that uses the superior Carter family rules.  Originally buily in jQuery in the fall of 2016 and thhen rebuilt using the MEAN stack in January 2017.",
   "main": "index.js",
   "scripts": {
+    "build": "cd app && webpack.config.js --progress --colors",
     "start": "cd app && npm i && cd .. && npm i && node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd app && webpack"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

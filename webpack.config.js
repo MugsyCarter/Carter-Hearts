@@ -15,7 +15,7 @@ module.exports = {
     devtool: 'source-map',
     plugins: [
         new HtmlWebpackPlugin({
-            template: '.app/src/index.html'
+            template: './app/src/index.html'
         }),
         cssExtract
     ],
@@ -45,6 +45,6 @@ module.exports = {
         }]
     },
     sassLoader:{
-        includePaths: ['.app/src/scss/partials']
+        includePaths: ['./app/src/scss/partials']
     }
 };

@@ -4,10 +4,11 @@
   "description": "A Hearts game app that uses the superior Carter family rules.  Originally buily in jQuery in the fall of 2016 and thhen rebuilt using the MEAN stack in January 2017.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack.config.js --progress --colors",
+    "build": "webpack",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-build": "webpack"
+    "heroku-build": "webpack",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",

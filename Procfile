@@ -1,1 +1,0 @@
-web: node web.js && cd app && npm run build

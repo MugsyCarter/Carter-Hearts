@@ -1,0 +1,15 @@
+{
+  "name": "WikiDiet",
+  "scripts": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

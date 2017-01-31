@@ -33727,7 +33727,7 @@
 /* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<section class =\"page\" id=\"home-page\">\n<h1 id=\"homeTitle\">Carter Hearts</h1>\n<h1 class=\"gameMessage\" id=\"homeSubtitle\">Just like normal hearts, but in poor taste</h1>\n<image id='goatImage' src=\"./images/goat.png\">\n<br>\n<button class=\"button\" id=\"playGameButton\"><h1 id=\"playMessage\">Play Now</h1></button>\n</section>\n";
+	module.exports = "\n<section class =\"page\" id=\"home-page\">\n<h1 id=\"homeTitle\">Carter Hearts</h1>\n<h1 class=\"gameMessage\" id=\"homeSubtitle\">Just like normal hearts, but in poor taste</h1>\n<image id='goatImage' src=\"./images/goat.png\">\n<br>\n<button class=\"button\" id=\"playGameButton\" ui-sref=\"play\"><h1 id=\"playMessage\">Play Now</h1></button>\n</section>\n";
 
 /***/ },
 /* 20 */

@@ -351,7 +351,7 @@ a:hover{
 }
 
 #home-page{
-  height: 85vh;
+  height: 80vh;
   background-color: $red;
 }
 
@@ -365,10 +365,11 @@ a:hover{
 }
 #goatImage{
   margin-left: 40vw;
-  height: 40vh;
+  height: 43vh;
 }
 
 #playGameButton{
+  // width: 20vw;
   margin-left: 40vw;
   background-color: white;
   &:hover{

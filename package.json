@@ -4,13 +4,17 @@
   "description": "A Hearts game app that uses the superior Carter family rules.  Originally buily in jQuery in the fall of 2016 and thhen rebuilt using the MEAN stack in January 2017.",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm i && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "webpack"
+    "postinstall": "cd app && npm i && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MugsyCarter/Carter-Hearts.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
   },
   "author": "",
   "license": "ISC",

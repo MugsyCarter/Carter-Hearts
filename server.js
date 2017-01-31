@@ -7,8 +7,10 @@ var app = express();
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
-var distDir = __dirname + '/public/';
-app.use(express.static(distDir));
+var pubDir = __dirname + '/public/';
+app.use(express.static(pubDir));
+
+// app.use(express.static('./public'));
 
   // Initialize the app.
 var server = app.listen(process.env.PORT || 8080, function () {

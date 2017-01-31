@@ -33658,7 +33658,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class =\"page\" id=\"about-page\">\n    <h1>About Carter Hearts</h1>\n    <p>This app was made out of an apprection of the card game, Hearts, the preferred game of the Carter Family.  This app was made by Mugsy Carter, using the the javascript MEAN stack.  You can send any comments or questions to <a href=\"https://github.com/MugsyCarter\"> https://github.com/MugsyCarter</a>.  Mugsy has the traditional Carter family love of hearts, the outdoors, science, literature, good company, and bad taste.  The Carters depicted in this game are not fictional, and are much better at hearts, and much worse at polite converation, in person.<p>\n    <!--image here?  -->\n</section>";
+	module.exports = "<section class =\"page\" id=\"about-page\">\n    <h1>About Carter Hearts</h1>\n     <p class=\"tab\"> This app was made out of an apprection of Hearts, the preferred card game of the Carter Family.  This app was made by Mugsy Carter, using the the javascript MEAN stack.  You can send any comments or questions to <a href=\"https://github.com/MugsyCarter\"> https://github.com/MugsyCarter</a>. <p class=\"tab\"></p>\n    <br>  \n    <br>\n    <p class=\"tab\">Mugsy has the traditional Carter family love of hearts, the outdoors, science, literature, good company, and bad taste.  The Carters depicted in this game are real people, and are much better at hearts, and much worse at polite converation in person.</p>\n    <!--image here?  -->\n</section>";
 
 /***/ },
 /* 14 */
@@ -33727,7 +33727,7 @@
 /* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<section class =\"page\" id=\"home-page\">\n<h1>Carter Hearts</h1>\n<h2>Just like normal hearts, but in poor taste</h2>\n<image id='goatImage' src=\"./images/goat.png\">\n</section>\n";
+	module.exports = "\n<section class =\"page\" id=\"home-page\">\n<h1 id=\"homeTitle\">Carter Hearts</h1>\n<h1 class=\"gameMessage\" id=\"homeSubtitle\">Just like normal hearts, but in poor taste</h1>\n<image id='goatImage' src=\"./images/goat.png\">\n<br>\n<button class=\"button\" id=\"playGameButton\"><h1 id=\"playMessage\">Play Now</h1></button>\n</section>\n";
 
 /***/ },
 /* 20 */
@@ -34269,7 +34269,7 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class =\"page\" id=\"rules-page\">\n    <h1>IS THIS VIEWABLE???</h1>\n    <h1 class=\"rulesMessage\">The ten of hearts counts as 10 points, this is the Carter Family rule.  </h1> <image class=\"rulesImageRight\" src=\"./images/10H.png\">\n   <h1 class=\"rulesMessage\">All other hearts count as 1 point.</h1><image class=\"rulesImageLeft\" src=\"./images/7H.png\"> \n    <h1 class=\"rulesMessage\">The queen of spades hits for 13 points!  </h1><image class=\"rulesImageRight\" src=\"./images/QS.png\">\n    <h1 class=\"rulesMessage\">  Every other card is worth zero points.</h1><image class=\"rulesImageLeft\" src=\"./images/4S.png\">\n    <h1 class=\"rulesMessage\">  There are a total of <em>35</em> points per hand.</h1>\n    <h1 class=\"rulesMessage\">  For hearts beginners, please see <a class=\"rulesLink\" href=\"http://www.bicyclecards.com/how-to-play/hearts/\">basic hearts rules</a></h1>\n</section>\n  ";
+	module.exports = "<section class =\"page\" id=\"rules-page\">\n    <h1 class=\"rulesMessage\">  For hearts beginners, please see <a class=\"rulesLink\" href=\"http://www.bicyclecards.com/how-to-play/hearts/\">basic hearts rules</a></h1>\n    <h1 class=\"rulesMessage\">The ten of hearts counts as 10 points, this is the Carter Family rule.  </h1> <image class=\"rulesImageRight\" src=\"./images/10H.png\">\n   <h1 class=\"rulesMessage\">All other hearts count as 1 point.</h1><image class=\"rulesImageLeft\" src=\"./images/7H.png\"> \n    <h1 class=\"rulesMessage\">The queen of spades hits for 13 points!  </h1><image class=\"rulesImageRight\" src=\"./images/QS.png\">\n    <h1 class=\"rulesMessage\">  Every other card is worth zero points.</h1><image class=\"rulesImageLeft\" src=\"./images/4S.png\">\n    <h1 class=\"rulesMessage\">  There are a total of <em>35</em> points per hand.</h1>\n</section>\n  ";
 
 /***/ },
 /* 24 */

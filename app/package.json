@@ -9,8 +9,7 @@
     "e2e": "protractor",
     "start": "webpack-dev-server --inline",
     "build": "webpack",
-    "heroku-build": "webpack",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "heroku-build": "webpack"
   },
   "repository": {
     "type": "git",

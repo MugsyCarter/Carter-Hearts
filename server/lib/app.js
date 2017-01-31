@@ -8,7 +8,7 @@ const errorHandler = require('./error-handler');
 // const users = require('./routes/users');
 // const foods = require('./routes/foods');
 // const userFoods = require('./routes/userFoods');
-const getCards = require('./routes/getCards');
+// const getCards = require('./routes/getCards');
 
 app.use(morgan('dev'));
 
@@ -28,7 +28,7 @@ app.use(express.static('./public'));
 // app.use('/api/foods', foods);
 // app.use('/api/userFoods', userFoods);
 
-app.use('/api/getCards', getCards);
+// app.use('/api/getCards', getCards);
 
 app.use(errorHandler);
 

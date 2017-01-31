@@ -2,19 +2,14 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Server for the Carter Hearts app",
-   "main": "server.js",
-   "directories": {
+  "main": "server.js",
+  "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "npm run test:unit && npm run test:api",
-    "test:unit": "mocha ./test/model-tests",
-    "test:api": "mocha ./test/api-tests",
-    "lint": "eslint .",
-    "pretest": "npm run lint && export MONGODB_URI='mongodb://localhost/food-dudes-test'",
     "start": "nodemon server.js"
   },
-    "dependencies": {
+  "dependencies": {
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",

@@ -10,7 +10,9 @@ import 'angular-ui-router/release/stateEvents';
 
 const app = angular.module('myApp', [components, services, uiRouter]);
 
-app.value('apiUrl', 'https://deckofcardsapi.com/api/deck/new/draw/?count=52');
+// app.value('apiUrl', 'https://deckofcardsapi.com/api/deck/new/draw/?count=52');
+
+const apiUrl = 'https://wikidiet.herokuapp.com/api';
 
 app.config(routes);
 

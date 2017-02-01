@@ -223,6 +223,13 @@ a:hover {
 .playerImage {
   height: 120px; }
 
+.passPlayerImage {
+  height: 120px;
+  padding: 1vh;
+  background-color: red;
+  border-radius: 2vh;
+  border-color: black; }
+
 #player0Card {
   position: fixed;
   top: 50vh;

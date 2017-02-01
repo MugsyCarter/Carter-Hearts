@@ -175,7 +175,7 @@ img {
 .selectedCard {
   padding: 1vh;
   bottom: +30px;
-  background-color: red;
+  background-color: #D40000;
   border-radius: 2vh;
   border-color: black; }
 
@@ -226,7 +226,7 @@ a:hover {
 .passPlayerImage {
   height: 120px;
   padding: 1vh;
-  background-color: red;
+  background-color: #D40000;
   border-radius: 2vh;
   border-color: black; }
 

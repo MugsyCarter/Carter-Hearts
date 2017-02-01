@@ -34,6 +34,7 @@ function controller(shuffle, ai, timeout) {
     this.turnOrder = [];
     this.playedCards = [];
     this.highCard = {};
+    this.passFlag = [];
     this.counted={
         CLUBS: 0,
         HEARTS: 0,
@@ -68,6 +69,7 @@ function controller(shuffle, ai, timeout) {
         this.playerSemis = [0,0,0,0];
         this.playAgain = false;
         this.passTarget ++;
+        this.passFlag[this.passTarget] = true;
         this.passPlayer = this.players[this.passTarget];
         if (this.passTarget === 4){
             this.passTarget = 0;
@@ -186,6 +188,7 @@ function controller(shuffle, ai, timeout) {
             this.passReady = false;
             this.passCompleted = true;
             this.playReady = true;
+            this.passFlag[this.passTarget] = false;
         //put the start play function call here once written
         }
         else{

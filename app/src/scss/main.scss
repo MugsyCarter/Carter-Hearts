@@ -197,7 +197,7 @@ border-radius: 1vh;
 .selectedCard{
     padding: 1vh;
     bottom: +30px;
-    background-color: red;
+    background-color:$red;
     border-radius: 2vh;
     border-color: black;
 }
@@ -256,12 +256,13 @@ a:hover{
 
 .playerImage{
   height: 120px;
+  padding: 0vh;
 }
 
 .passPlayerImage{
   height: 120px;
     padding: 1vh;
-    background-color: red;
+    background-color:$red;
     border-radius: 2vh;
     border-color: black;
 }

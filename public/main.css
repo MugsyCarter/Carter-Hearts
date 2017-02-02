@@ -190,7 +190,7 @@ img {
 
 .branding {
   color: #FFF;
-  font-size: 1.75em;
+  font-size: 3vh;
   font-weight: bold;
   text-shadow: 3px 4px 4px black; }
 
@@ -290,14 +290,12 @@ a:hover {
   float: left;
   background-color: black; }
 
-.rulesImageRight {
-  padding-left: 10vw; }
-
-.rulesImageLeft {
-  padding-right: 10vw; }
+.rulesImage {
+  padding-right: 10vw;
+  height: 10vh; }
 
 .rulesMessage {
-  font-size: 3em;
+  font-size: 5vh;
   color: #D40000; }
 
 .rulesLink {

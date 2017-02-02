@@ -22,7 +22,7 @@ h1 {
 
 h2 {
   color: black;
-  font-size: 15vh;
+  font-size: 10vh;
 }
 
 h3 {
@@ -71,6 +71,7 @@ footer {
   color:#FFF;
   background-color: $red;
   position: absolute;
+  height: 5vh;
   bottom: 0px;
 }
 
@@ -88,6 +89,11 @@ img{
   height: 24vh;
   display: inline-block;
 border-radius: 1vh;
+}
+
+.footerText{
+  padding: 0vh;
+  margin: 0vh;
 }
 
 .clearfix::after {
@@ -377,6 +383,7 @@ a:hover{
 
 .tab { 
   margin-left: 40px; 
+  font-size: 5vh;
 }
 //home page
 #home-page{

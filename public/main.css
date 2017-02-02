@@ -233,12 +233,12 @@ a:hover {
   height: 900vh; }
 
 .playerImage {
-  height: 120px;
+  height: 15vh;
   padding: 0vh;
   border-radius: 2vh; }
 
 .passPlayerImage {
-  height: 120px;
+  height: 15px;
   padding: 3vh;
   background-color: #D40000;
   border-radius: 2vh;
@@ -346,6 +346,9 @@ a:hover {
   #playGameButton:hover {
     background-color: black; }
 
+#phoneMessage {
+  display: none; }
+
 /* Media Query Stuff */
 @media only screen and (min-width: 481px) {
   /* Larger cell screen, changes image only */
@@ -364,6 +367,8 @@ a:hover {
     padding: 1% 5%; }
   .icon-menu {
     font-size: 3.3vh; }
+  #phoneMessage {
+    display: block; }
   #home-page {
     height: 90vh; }
   #homeTitle {

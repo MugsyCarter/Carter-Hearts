@@ -413,6 +413,11 @@ a:hover{
     background-color: black;
   }
 }
+
+#phoneMessage{
+  display: none;
+}
+
 /* Media Query Stuff */
 
 @media only screen and (min-width: 481px) {
@@ -442,6 +447,10 @@ a:hover{
   .icon-menu {
     font-size: 3.3vh;
   }
+
+#phoneMessage{
+  display: block;
+}
 
 //home page fullscreen
 #home-page{

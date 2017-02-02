@@ -52,13 +52,13 @@
         </div>
 
         <div class="playArea">
-            <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}" ng-class="$ctrl.lead===0" ? 'leadCardImage' : 'playerCard'>
+            <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}" ng-class="{'leadCardImage': $ctrl.lead === 0}">
             <image id="player1Image" ng-if="$ctrl.beginning===false" src="./images/dalecarter.png" ng-class="$ctrl.passFlag[1] ? 'passPlayerImage' : 'playerImage'">
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}" ng-class="{'leadCardImage': $ctrl.lead === 1}">
              <image ng-class="$ctrl.passFlag[2] ? 'passPlayerImage' : 'playerImage'" id="player2Image" ng-if="$ctrl.beginning===false" src="./images/dennycarter.png">
-            <image id="player2Card" ng-if="$ctrl.playedCards[2]" src="{{$ctrl.playedCards[2].image}}">
+            <image id="player2Card" ng-if="$ctrl.playedCards[2]" src="{{$ctrl.playedCards[2].image}}" ng-class="{'leadCardImage': $ctrl.lead === 2}">
             <image ng-class="$ctrl.passFlag[3] ? 'passPlayerImage' : 'playerImage'"id="player3Image" ng-if="$ctrl.beginning===false" src="./images/aileencole.png">
-            <image id="player3Card" ng-if="$ctrl.playedCards[3]" src="{{$ctrl.playedCards[3].image}}">  
+            <image id="player3Card" ng-if="$ctrl.playedCards[3]" src="{{$ctrl.playedCards[3].image}}" ng-class="{'leadCardImage': $ctrl.lead === 3}">  
             <button class="button" id="newTrickButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
         </div>
 

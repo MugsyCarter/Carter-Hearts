@@ -33684,13 +33684,36 @@
 	};
 	
 	
-	function controller() {};
+	function controller() {
+	    var _this = this;
+	
+	    this.link = {
+	        home: true,
+	        play: false,
+	        rules: false,
+	        about: false
+	
+	    };
+	
+	    this.clicked = function (page) {
+	        if (_this.link[page] === false) {
+	            console.log('updating link');
+	            _this.link = {
+	                home: false,
+	                play: false,
+	                rules: false,
+	                about: false
+	            };
+	            _this.link[page] = true;
+	        }
+	    };
+	};
 
 /***/ },
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = " <section>\n    <header>\n        <nav class=\"main-nav\">\n            <ul>\n            <div class=\"icon-menu\"></div>\n            <li class=\"link\"><a href=\"/\" id=\"home-link\"><span class=\"branding\">Carter-Hearts</span></a></li>\n            <li class=\"link\"><a ui-sref=\"play\" id=\"play-link\">Play Now</a></li>\n            <li class=\"link\"><a ui-sref=\"rules\" id=\"rules-link\">Rules</a></li>\n            <li class=\"link\"><a ui-sref=\"about\" id=\"about-link\">About</a></li>\n            </ul>\n        </nav>\n    </header>\n  \n <div  class=\"main-content\">\n        <ui-view></ui-view>\n    </div>\n  </section>";
+	module.exports = " <section>\n    <header>\n        <nav class=\"main-nav\">\n            <ul>\n            <div class=\"icon-menu\"></div>\n            <li class=\"link\"><a href=\"/\" id=\"home-link\"  ng-class='{\"activeLink\":$ctrl.link[\"home\"]===true}' ng-click=\"$ctrl.clicked('home')\"><span class=\"branding\">Carter-Hearts</span></a></li>\n            <li class=\"link\"><a ui-sref=\"play\" id=\"play-link\" ng-class='{\"activeLink\":$ctrl.link[\"play\"]===true}' ng-click=\"$ctrl.clicked('play')\">Play Now</a></li>\n            <li class=\"link\"><a ui-sref=\"rules\" id=\"rules-link\"  ng-class='{\"activeLink\":$ctrl.link[\"rules\"]===true}' ng-click=\"$ctrl.clicked('rules')\">Rules</a></li>\n            <li class=\"link\"><a ui-sref=\"about\" id=\"about-link\"  ng-class='{\"activeLink\":$ctrl.link[\"about\"]===true}' ng-click=\"$ctrl.clicked('about')\">About</a></li>\n            </ul>\n        </nav>\n    </header>\n  \n <div  class=\"main-content\">\n        <ui-view></ui-view>\n    </div>\n  </section>";
 
 /***/ },
 /* 16 */
@@ -34222,7 +34245,7 @@
 	    this.endGame = function () {
 	        var winner = 0;
 	        for (var i = 1; i < 4; i++) {
-	            if (_this.playerScores[i] < _this.playerScores[i - 1]) {
+	            if (_this.playerScores[i] < _this.playerScores[winner]) {
 	                winner = i;
 	            }
 	        }

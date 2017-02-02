@@ -14,7 +14,7 @@ function controller() {
         rules: false,
         about: false
 
-    }
+    };
 
     this.clicked = (page)=>{
         if (this.link[page] === false){

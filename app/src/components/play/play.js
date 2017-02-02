@@ -486,7 +486,7 @@ function controller(shuffle, ai, timeout) {
     this.endGame = ()=>{
         var winner = 0;
         for (var i = 1; i < 4; i++){
-            if (this.playerScores[i] < this.playerScores[i-1]){
+            if (this.playerScores[i] < this.playerScores[winner]){
                 winner = i;
             }
         } 

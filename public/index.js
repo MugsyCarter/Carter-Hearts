@@ -33830,6 +33830,24 @@
 	    };
 	
 	    this.dealCards = function () {
+	        _this.cardPlayed = false;
+	        _this.playedCards = [];
+	        _this.turnOrder = [];
+	        _this.highCard = {};
+	        _this.trickPoints = 0;
+	        _this.runFlag = 0;
+	        _this.counted = {
+	            CLUBS: 0,
+	            HEARTS: 0,
+	            DIAMONDS: 0,
+	            SPADES: 0
+	        };
+	        _this.events = {
+	            queen: false,
+	            ten: false,
+	            heartsBroken: false
+	        };
+	        _this.turnOver = false;
 	        _this.runMessage = false;
 	        _this.gameOver = false;
 	        _this.sortedHand = [];
@@ -34214,23 +34232,6 @@
 	                }
 	            }
 	        }
-	        _this.cardPlayed = false;
-	        _this.playedCards = [];
-	        _this.turnOrder = [];
-	        _this.highCard = {};
-	        _this.trickPoints = 0;
-	        _this.runFlag = 0;
-	        _this.counted = {
-	            CLUBS: 0,
-	            HEARTS: 0,
-	            DIAMONDS: 0,
-	            SPADES: 0
-	        };
-	        _this.events = {
-	            queen: false,
-	            ten: false,
-	            heartsBroken: false
-	        };
 	        _this.turnOver = false;
 	        _this.showDeal = true;
 	        _this.handStart = true;

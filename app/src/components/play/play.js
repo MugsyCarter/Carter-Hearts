@@ -59,6 +59,24 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.dealCards = ()=>{
+        this.cardPlayed = false;
+        this.playedCards = [];
+        this.turnOrder = [];
+        this.highCard = {};
+        this.trickPoints = 0;
+        this.runFlag = 0;
+        this.counted={
+            CLUBS: 0,
+            HEARTS: 0,
+            DIAMONDS: 0,
+            SPADES: 0
+        };
+        this.events={
+            queen: false,
+            ten: false,
+            heartsBroken: false,
+        };
+        this.turnOver = false;
         this.runMessage = false;
         this.gameOver = false;
         this.sortedHand=[];
@@ -455,23 +473,6 @@ function controller(shuffle, ai, timeout) {
                 }
             } 
         }
-        this.cardPlayed = false;
-        this.playedCards = [];
-        this.turnOrder = [];
-        this.highCard = {};
-        this.trickPoints = 0;
-        this.runFlag = 0;
-        this.counted={
-            CLUBS: 0,
-            HEARTS: 0,
-            DIAMONDS: 0,
-            SPADES: 0
-        };
-        this.events={
-            queen: false,
-            ten: false,
-            heartsBroken: false,
-        };
         this.turnOver = false;
         this.showDeal = true;
         this.handStart = true;

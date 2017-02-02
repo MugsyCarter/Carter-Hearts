@@ -24,7 +24,7 @@
                <button class="button" id="playButton" ng-if="$ctrl.playAgain===true" ng-click="$ctrl.newGame()"><h1 id="playMessage" >Play Again</h1></button>
         </div>
 
-        <div id="scoreboard">
+        <div id="scoreboard" ng-if="$ctrl.beginning === false">
             <table>
                 <th>
                     <td>You</td>

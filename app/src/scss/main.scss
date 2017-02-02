@@ -125,7 +125,7 @@ border-radius: 1vh;
 
 #play-page{
   background-color: $green;
-  height: 95vh;
+  height: 97vh;
 }
 
 #scoreboard{
@@ -275,7 +275,7 @@ a:hover{
 }
 
 .passPlayerImage{
-  height: 15px;
+  height: 15vh;
     padding: 3vh;
     background-color:$red;
     border-radius: 2vh;
@@ -415,7 +415,9 @@ a:hover{
 }
 
 #phoneMessage{
-  display: none;
+  display: block;
+  color: white;
+  font-size: 10vh;
 }
 
 /* Media Query Stuff */
@@ -449,7 +451,7 @@ a:hover{
   }
 
 #phoneMessage{
-  display: block;
+  display: none;
 }
 
 //home page fullscreen

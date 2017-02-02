@@ -63,12 +63,15 @@ hr {
 }
 
 footer {
+  width: 100vw;
   clear:both;
   text-align:center;
   font-size:0.75em;
   padding:1%;
   color:#FFF;
   background-color: $red;
+  position: absolute;
+  bottom: 0px;
 }
 
 table{
@@ -115,7 +118,7 @@ border-radius: 1vh;
 
 #play-page{
   background-color: $green;
-  height: 85vh;
+  height: 95vh;
 }
 
 #scoreboard{
@@ -251,7 +254,7 @@ a:hover{
 }
 
 .playArea{
-  height: 80vh;
+  height: 900vh;
 }
 
 .playerImage{
@@ -353,6 +356,7 @@ a:hover{
   color: $green;
 }
 
+//about page 
 #about-page{
   height: 85vh;
 }
@@ -360,7 +364,7 @@ a:hover{
 .tab { 
   margin-left: 40px; 
 }
-
+//home page
 #home-page{
   height: 80vh;
   background-color: $red;

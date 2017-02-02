@@ -64,12 +64,15 @@ hr {
   margin-bottom: 3%; }
 
 footer {
+  width: 100vw;
   clear: both;
   text-align: center;
   font-size: 0.75em;
   padding: 1%;
   color: #FFF;
-  background-color: #D40000; }
+  background-color: #D40000;
+  position: absolute;
+  bottom: 0px; }
 
 table {
   padding-top: 4vh; }
@@ -108,7 +111,7 @@ img {
 
 #play-page {
   background-color: #105910;
-  height: 85vh; }
+  height: 95vh; }
 
 #scoreboard {
   background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
@@ -218,10 +221,11 @@ a:hover {
   left: 15vw; }
 
 .playArea {
-  height: 80vh; }
+  height: 900vh; }
 
 .playerImage {
-  height: 120px; }
+  height: 120px;
+  padding: 0vh; }
 
 .passPlayerImage {
   height: 120px;

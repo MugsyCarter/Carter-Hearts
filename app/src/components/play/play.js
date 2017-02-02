@@ -492,10 +492,10 @@ function controller(shuffle, ai, timeout) {
             }
         } 
         if (winner===0){
-            this.winMessage = 'You won Carter Hearts!  Congratulations!';
+            this.winMessage = 'You won Carter Hearts!  <br>Congratulations!';
         }
         else{
-            this.winMessage = this.players[winner] + ' has won the game.  You can\'t win them all.';
+            this.winMessage = this.players[winner] + ' has won the game.  <br>You can\'t win them all.';
         }
         this.gameOver = true;
         this.playAgain = true;

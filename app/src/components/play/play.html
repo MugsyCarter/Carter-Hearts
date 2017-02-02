@@ -14,10 +14,10 @@
              <h1 class ='gameMessage' id="trickMessage" ng-if="$ctrl.turnOver===true">{{$ctrl.players[$ctrl.high]}} took the trick</h1>
             <h1 class ='gameMessage' id="runMessage" ng-if="$ctrl.runMessage===true">{{$ctrl.players[$ctrl.run]}} successfully shot the moon!</h1>
             <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.<br>You have {{$ctrl.passArray.length}} cards selected.</h1>
-            <h1 class ='errorMessage' id="notVoidedMessage" ng-if="$ctrl.suitError===true">The lead was {{$ctrl.leadSuit}}.  <br>You cannot play {{$ctrl.playerSuit}} while you still have {{$ctrl.leadSuit}} in your hand.  Nice try!</h1>
-             <h1 class ='errorMessage' id="firstHandMessage" ng-if="$ctrl.firstHandError===true">You cannot play any point card (a Heart or the Queen of Spades) on the first hand.<br>Amateur!</h1>
-              <h1 class ='errorMessage' id="twoErrorMessage" ng-if="$ctrl.twoError===true">If you have the deuce, you've gotta play the deuce.</h1>
-               <h1 class ='errorMessage' id="heartsBrokenMessage" ng-if="$ctrl.heartLeadError===true">You cannot lead a heart until they've been broken (or unless you have nothing else).</h1>
+            <h1 class ='errorMessage' id="notVoidedMessage" ng-if="$ctrl.suitError===true">The lead was {{$ctrl.leadSuit}}.  <br>You cannot play {{$ctrl.playerSuit}} while you still have {{$ctrl.leadSuit}} in your hand.  <br>Nice try!</h1>
+             <h1 class ='errorMessage' id="firstHandMessage" ng-if="$ctrl.firstHandError===true">You cannot play any point card <br>(a Heart or the Queen of Spades) on the first hand.<br>Amateur!</h1>
+              <h1 class ='errorMessage' id="twoErrorMessage" ng-if="$ctrl.twoError===true">If you have the deuce, <br>you've gotta play the deuce.</h1>
+               <h1 class ='errorMessage' id="heartsBrokenMessage" ng-if="$ctrl.heartLeadError===true">You cannot lead a heart until they've been broken<br> (or unless you have nothing else).</h1>
             <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
            
                <button class="button" id="playButton" ng-if="$ctrl.playAgain===true" ng-click="$ctrl.newGame()"><h1 id="playMessage" >Play Again</h1></button>

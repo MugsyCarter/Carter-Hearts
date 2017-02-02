@@ -1,9 +1,9 @@
 
  <section class ="page" id="play-page">
     <div>
-        <h1 ng-if="$ctrl.beginning===true">Play Carter Hearts!</h1>
+        <h2 ng-if="$ctrl.beginning===true">Play Carter Hearts!</h2>
         <h1 id="phoneMessage" ng-if="$ctrl.beginning===true">Turn your phone sideways.</h1>    
-        <h1 ng-if="$ctrl.handStart===true">Deal Next Hand</h1>
+        <h2 ng-if="$ctrl.handStart===true">Deal Next Hand</h2>
         <h1 ng-if="$ctrl.gameOver===true">Game Over</h1>
         <h1 class = "gameMessage" ng-if="$ctrl.gameOver===true">{{$ctrl.winMessage}}</h1>
         <div class="banner">

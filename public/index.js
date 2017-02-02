@@ -34136,7 +34136,9 @@
 	        _this.high = _this.playedCards.indexOf(_this.highCard);
 	
 	        //call the next player
-	        _this.nextPlayer();
+	        timeout(function () {
+	            _this.nextPlayer();
+	        }, 500);
 	    };
 	
 	    this.nextPlayer = function () {

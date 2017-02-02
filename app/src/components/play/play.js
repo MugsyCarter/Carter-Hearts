@@ -373,7 +373,7 @@ function controller(shuffle, ai, timeout) {
         this.high = this.playedCards.indexOf(this.highCard);
 
         //call the next player
-        this.nextPlayer();
+        timeout(()=>{this.nextPlayer();}, 500);
     };
 
     this.nextPlayer = ()=>{

@@ -393,7 +393,6 @@ function controller(shuffle, ai, timeout) {
             //check for run scoring
             //show newHand button and trick message
             this.turnOver = true;
-            this.lead = this.high;
             //count cards to check if hand is over
             this.totalCards = this.counted.HEARTS + this.counted.SPADES + this.counted.DIAMONDS + this.counted.CLUBS;
             if (this.totalCards === 52){
@@ -420,6 +419,7 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.newTrick = ()=>{
+        this.lead = this.high;
         this.turnOver = false;
         this.turnOrder = [];
         this.playedCards = [];

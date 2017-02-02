@@ -272,7 +272,15 @@ a:hover{
     padding: 3vh;
     background-color:$red;
     border-radius: 2vh;
-    border-color: black;
+    border: 1vh solid black;
+}
+
+.leadCardImage{
+    padding: 0.5vh;
+    background-color:black;
+    border-radius: 2vh;
+    border: 0.5vh solid $red;
+    top: +1vh;
 }
 
 

@@ -14,7 +14,7 @@ body {
 }
 
 h1 {       
-  font-size: 5em;
+  font-size: 15vh;
   /*font-family: 'Open Sans', serif;*/
   font-weight:800;
   margin:0 auto;
@@ -22,11 +22,11 @@ h1 {
 
 h2 {
   color: black;
-  font-size: 5em;
+  font-size: 15vh;
 }
 
 h3 {
-  font-size: 1.1em;
+  font-size: 3.3vh;
 }
 
 b {
@@ -34,7 +34,7 @@ b {
 }
 
 p {
-  font-size: 2em;
+  font-size: 6vh;
 }
 
 ul {
@@ -66,7 +66,7 @@ footer {
   width: 100vw;
   clear:both;
   text-align:center;
-  font-size:0.75em;
+  font-size:2.25vh;
   padding:1%;
   color:#FFF;
   background-color: $red;
@@ -97,13 +97,13 @@ border-radius: 1vh;
 }
 
 .gameMessage{
-    font-size: 3em;
+    font-size: 5vh;
     color: white;
      padding-left: 1vw;
 }
 
 .errorMessage{    
-    font-size: 2em;
+    font-size: 4vh;
     color: $red;
 }
 
@@ -209,7 +209,7 @@ border-radius: 1vh;
   display: none;
   padding: 1% 5%;
   text-align: center;
-  font-size: .95em;
+  font-size: 3vh;
 }
 
 .activeLink{
@@ -225,7 +225,7 @@ border-radius: 1vh;
 
 .icon-menu {
   text-align: center;
-  font-size: 2em;
+  font-size: 6vh;
 }
 
 a:hover{
@@ -236,7 +236,7 @@ a:hover{
 
 #playMessage{
   color:$red;
-  font-size: 3em;
+  font-size: 5vh;
 }
 
 #playButton{
@@ -248,13 +248,13 @@ a:hover{
 
 #buttonMessage{
   color:white;
-  font-size: 3em;
+  font-size: 3vh;
 }
 
 #newTrickButton{
   position: absolute;
   bottom: 25vh;
-  left: 15vw;
+  left: 21.5vw;
 }
 
 .playArea{
@@ -432,7 +432,7 @@ a:hover{
   }
 
   .icon-menu {
-    font-size: 1.1em;
+    font-size: 3.3vh;
   }
 }
 
@@ -444,7 +444,7 @@ a:hover{
 
 
   .icon-menu {
-    font-size: 1.2em;
+    font-size: 3.6vh;
   }
 }
 

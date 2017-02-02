@@ -228,7 +228,8 @@ a:hover {
 
 .playerImage {
   height: 120px;
-  padding: 0vh; }
+  padding: 0vh;
+  border-radius: 2vh; }
 
 .passPlayerImage {
   height: 120px;
@@ -248,6 +249,7 @@ a:hover {
   left: 35vw; }
 
 #player1Image {
+  padding: 3vh;
   position: fixed;
   top: 55vh;
   left: 15vw; }
@@ -258,8 +260,9 @@ a:hover {
   left: 45vw; }
 
 #player2Image {
+  padding: 3vh;
   position: fixed;
-  top: 18vh;
+  top: 8vh;
   left: 45vw; }
 
 #player3Card {
@@ -268,6 +271,7 @@ a:hover {
   left: 55vw; }
 
 #player3Image {
+  padding: 3vh;
   position: fixed;
   top: 55vh;
   left: 75vw; }

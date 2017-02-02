@@ -23,6 +23,7 @@ h1 {
 h2 {
   color: black;
   font-size: 10vh;
+  margin: 1vh;
 }
 
 h3 {
@@ -71,7 +72,7 @@ footer {
   color:#FFF;
   background-color: $red;
   position: absolute;
-  height: 5vh;
+  height: 8vh;
   bottom: 0px;
 }
 
@@ -93,7 +94,7 @@ border-radius: 1vh;
 
 .footerText{
   padding: 0vh;
-  margin: 0vh;
+  margin: 0vh 0vh 2vh 0vh;
 }
 
 .clearfix::after {
@@ -387,26 +388,26 @@ a:hover{
 }
 //home page
 #home-page{
-  height: 80vh;
+  height: 92vh;
   background-color: $red;
 }
 
 #homeTitle{
-   margin-left: 30vw; 
-  font-size: 6em;
+   margin-left: 10vw; 
+  font-size: 10vh;
 }
 
 #homeSubtitle{
-  margin-left: 20vw; 
 }
+
 #goatImage{
-  margin-left: 42vw;
-  height: 43vh;
+  margin-left: 30vw;
+  height: 35vh;
 }
 
 #playGameButton{
   // width: 20vw;
-  margin-left: 40vw;
+  margin-left: 26.5vw;
   background-color: white;
   &:hover{
     background-color: black;
@@ -441,6 +442,36 @@ a:hover{
   .icon-menu {
     font-size: 3.3vh;
   }
+
+//home page fullscreen
+#home-page{
+  height: 90vh;
+}
+
+#homeTitle{
+   margin-left: 30vw; 
+  font-size: 6em;
+}
+#homeSubtitle{
+  margin-left: 20vw; 
+}
+
+#goatImage{
+  margin-left: 42vw;
+  height: 43vh;
+}
+
+#playGameButton{
+  // width: 20vw;
+  margin-left: 40vw;
+  background-color: white;
+  &:hover{
+    background-color: black;
+  }
+}
+
+
+
 }
 
 @media only screen and (min-width: 1600px) {

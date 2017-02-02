@@ -25,23 +25,24 @@ body {
   font-weight: 300; }
 
 h1 {
-  font-size: 5em;
+  font-size: 15vh;
   /*font-family: 'Open Sans', serif;*/
   font-weight: 800;
   margin: 0 auto; }
 
 h2 {
   color: black;
-  font-size: 5em; }
+  font-size: 10vh;
+  margin: 1vh; }
 
 h3 {
-  font-size: 1.1em; }
+  font-size: 3.3vh; }
 
 b {
   font-weight: 600; }
 
 p {
-  font-size: 2em; }
+  font-size: 6vh; }
 
 ul {
   list-style: none;
@@ -67,11 +68,12 @@ footer {
   width: 100vw;
   clear: both;
   text-align: center;
-  font-size: 0.75em;
+  font-size: 2.25vh;
   padding: 1%;
   color: #FFF;
   background-color: #D40000;
   position: absolute;
+  height: 8vh;
   bottom: 0px; }
 
 table {
@@ -87,18 +89,22 @@ img {
   display: inline-block;
   border-radius: 1vh; }
 
+.footerText {
+  padding: 0vh;
+  margin: 0vh 0vh 2vh 0vh; }
+
 .clearfix::after {
   content: "";
   display: table;
   clear: both; }
 
 .gameMessage {
-  font-size: 3em;
+  font-size: 5vh;
   color: white;
   padding-left: 1vw; }
 
 .errorMessage {
-  font-size: 2em;
+  font-size: 4vh;
   color: #D40000; }
 
 .main-nav {
@@ -186,7 +192,7 @@ img {
   display: none;
   padding: 1% 5%;
   text-align: center;
-  font-size: .95em; }
+  font-size: 3vh; }
 
 .activeLink {
   color: #105910; }
@@ -199,7 +205,7 @@ img {
 
 .icon-menu {
   text-align: center;
-  font-size: 2em; }
+  font-size: 6vh; }
 
 a:hover {
   cursor: pointer;
@@ -207,7 +213,7 @@ a:hover {
 
 #playMessage {
   color: #D40000;
-  font-size: 3em; }
+  font-size: 5vh; }
 
 #playButton {
   background-color: white; }
@@ -216,12 +222,12 @@ a:hover {
 
 #buttonMessage {
   color: white;
-  font-size: 3em; }
+  font-size: 3vh; }
 
 #newTrickButton {
   position: absolute;
   bottom: 25vh;
-  left: 15vw; }
+  left: 21.5vw; }
 
 .playArea {
   height: 900vh; }
@@ -319,25 +325,23 @@ a:hover {
   height: 85vh; }
 
 .tab {
-  margin-left: 40px; }
+  margin-left: 40px;
+  font-size: 5vh; }
 
 #home-page {
-  height: 80vh;
+  height: 92vh;
   background-color: #D40000; }
 
 #homeTitle {
-  margin-left: 30vw;
-  font-size: 6em; }
-
-#homeSubtitle {
-  margin-left: 20vw; }
+  margin-left: 10vw;
+  font-size: 10vh; }
 
 #goatImage {
-  margin-left: 42vw;
-  height: 43vh; }
+  margin-left: 30vw;
+  height: 35vh; }
 
 #playGameButton {
-  margin-left: 40vw;
+  margin-left: 26.5vw;
   background-color: white; }
   #playGameButton:hover {
     background-color: black; }
@@ -359,13 +363,28 @@ a:hover {
   .main-nav ul li {
     padding: 1% 5%; }
   .icon-menu {
-    font-size: 1.1em; } }
+    font-size: 3.3vh; }
+  #home-page {
+    height: 90vh; }
+  #homeTitle {
+    margin-left: 30vw;
+    font-size: 6em; }
+  #homeSubtitle {
+    margin-left: 20vw; }
+  #goatImage {
+    margin-left: 42vw;
+    height: 43vh; }
+  #playGameButton {
+    margin-left: 40vw;
+    background-color: white; }
+    #playGameButton:hover {
+      background-color: black; } }
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */
   .main-nav ul li {
     padding: 1% 8%; }
   .icon-menu {
-    font-size: 1.2em; } }
+    font-size: 3.6vh; } }
 
 /*# sourceMappingURL=main.css.map*/

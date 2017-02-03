@@ -1,4 +1,5 @@
 .button {
+  margin: 1vw;
   font-weight: 700;
   border: none;
   color: #FFF;
@@ -47,9 +48,6 @@ h4 {
 
 input {
   margin-left: 10vw; }
-
-input[type='radio'] {
-  transform: scale(2); }
 
 b {
   font-weight: 600; }
@@ -236,6 +234,10 @@ a:hover {
 #buttonMessage {
   color: white;
   font-size: 3vh; }
+
+#bigButtonMessage {
+  color: white;
+  font-size: 10vh; }
 
 #newTrickButton {
   position: absolute;

@@ -42,9 +42,9 @@ input{
   margin-left: 10vw;
 }
 
-input[type='radio'] { 
-  transform: scale(2); 
-}
+// input[type='radio'] { 
+//   transform: scale(2); 
+// }
 
 b {
   font-weight:600;
@@ -120,9 +120,9 @@ border-radius: 1vh;
 }
 
 .gameMessage{
-    font-size: 5vh;
-    color: white;
-     padding-left: 1vw;
+  font-size: 5vh;
+  color: white;
+  padding-left: 1vw;
 }
 
 .errorMessage{    
@@ -274,6 +274,12 @@ a:hover{
   color:white;
   font-size: 3vh;
 }
+
+#bigButtonMessage{
+  color:white;
+  font-size: 10vh;
+}
+
 
 #newTrickButton{
   position: absolute;

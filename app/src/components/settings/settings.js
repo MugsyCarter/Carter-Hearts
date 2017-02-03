@@ -5,4 +5,17 @@ export default {
     controller
 };
 
-function controller() {};
+function controller() {
+    this.easyMode = ()=>{
+        localStorage.setItem('easy', true);
+        localStorage.setItem('hard', false);
+        console.log('easymode');
+    };
+    
+    this.hardMode = ()=>{
+        localStorage.setItem('hard', true);
+        localStorage.setItem('easy', false);
+        console.log('hardmode');
+    };
+
+};

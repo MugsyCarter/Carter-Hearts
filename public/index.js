@@ -33612,9 +33612,10 @@
 	var map = {
 		"./about/about.js": 12,
 		"./app/app.js": 14,
-		"./home/home.js": 18,
-		"./play/play.js": 20,
-		"./rules/rules.js": 22
+		"./home/home.js": 16,
+		"./play/play.js": 18,
+		"./rules/rules.js": 20,
+		"./settings/settings.js": 22
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -33674,8 +33675,6 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	__webpack_require__(16);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
@@ -33691,7 +33690,8 @@
 	        home: true,
 	        play: false,
 	        rules: false,
-	        about: false
+	        about: false,
+	        settings: false
 	
 	    };
 	
@@ -33702,7 +33702,8 @@
 	                home: false,
 	                play: false,
 	                rules: false,
-	                about: false
+	                about: false,
+	                settings: false
 	            };
 	            _this.link[page] = true;
 	        }
@@ -33713,17 +33714,10 @@
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = " <section>\n    <header>\n        <nav class=\"main-nav\">\n            <ul>\n            <div class=\"icon-menu\"></div>\n            <li class=\"link\"><a href=\"/\" id=\"home-link\"  ng-class='{\"activeLink\":$ctrl.link[\"home\"]===true}' ng-click=\"$ctrl.clicked('home')\"><span class=\"branding\">Carter-Hearts</span></a></li>\n            <li class=\"link\"><a ui-sref=\"play\" id=\"play-link\" ng-class='{\"activeLink\":$ctrl.link[\"play\"]===true}' ng-click=\"$ctrl.clicked('play')\">Play Now</a></li>\n            <li class=\"link\"><a ui-sref=\"rules\" id=\"rules-link\"  ng-class='{\"activeLink\":$ctrl.link[\"rules\"]===true}' ng-click=\"$ctrl.clicked('rules')\">Rules</a></li>\n            <li class=\"link\"><a ui-sref=\"about\" id=\"about-link\"  ng-class='{\"activeLink\":$ctrl.link[\"about\"]===true}' ng-click=\"$ctrl.clicked('about')\">About</a></li>\n            </ul>\n        </nav>\n    </header>\n  \n <div  class=\"main-content\">\n        <ui-view></ui-view>\n    </div>\n  </section>";
+	module.exports = " <section>\n    <header>\n        <nav class=\"main-nav\">\n            <ul>\n            <div class=\"icon-menu\"></div>\n            <li class=\"firstLink\"><a href=\"/\" id=\"home-link\"  ng-class='{\"activeLink\":$ctrl.link[\"home\"]===true}' ng-click=\"$ctrl.clicked('home')\"><span class=\"branding\">Carter-Hearts</span></a></li>\n            <li class=\"link\"><a ui-sref=\"play\" id=\"play-link\" ng-class='{\"activeLink\":$ctrl.link[\"play\"]===true}' ng-click=\"$ctrl.clicked('play')\">Play Now</a></li>\n            <li class=\"link\"><a ui-sref=\"rules\" id=\"rules-link\"  ng-class='{\"activeLink\":$ctrl.link[\"rules\"]===true}' ng-click=\"$ctrl.clicked('rules')\">Rules</a></li>\n            <li class=\"link\"><a ui-sref=\"settings\" id=\"settings-link\"  ng-class='{\"activeLink\":$ctrl.link[\"settings\"]===true}' ng-click=\"$ctrl.clicked('settings')\">Useless Settings</a></li>\n            <li class=\"link\"><a ui-sref=\"about\" id=\"about-link\"  ng-class='{\"activeLink\":$ctrl.link[\"about\"]===true}' ng-click=\"$ctrl.clicked('about')\">About</a></li>\n            </ul>\n        </nav>\n    </header>\n  \n <div  class=\"main-content\">\n        <ui-view></ui-view>\n    </div>\n  </section>";
 
 /***/ },
 /* 16 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 17 */,
-/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33732,7 +33726,7 @@
 	    value: true
 	});
 	
-	var _home = __webpack_require__(19);
+	var _home = __webpack_require__(17);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
@@ -33747,13 +33741,13 @@
 	function controller() {};
 
 /***/ },
-/* 19 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<section class =\"page\" id=\"home-page\">\n    <h1 id=\"homeTitle\">Carter Hearts</h1>\n    <h1 class=\"gameMessage\" id=\"homeSubtitle\">Just like normal hearts, but in poor taste.</h1>\n    <br>\n    <image id='goatImage' src=\"./images/goat.png\">\n    <br>\n    <br>\n    <button class=\"button\" id=\"playGameButton\" ui-sref=\"play\"><h1 id=\"playMessage\">Play Now</h1></button>\n    <footer>\n      <p class=\"footerText\"><span class=\"branding\">&copy; Mugsy Carter, 2016</span></p>\n    </footer>\n</section>\n";
 
 /***/ },
-/* 20 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33762,7 +33756,7 @@
 	    value: true
 	});
 	
-	var _play = __webpack_require__(21);
+	var _play = __webpack_require__(19);
 	
 	var _play2 = _interopRequireDefault(_play);
 	
@@ -34265,13 +34259,13 @@
 	};
 
 /***/ },
-/* 21 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = "\n <section class =\"page\" id=\"play-page\">\n    <div>\n        <h2 ng-if=\"$ctrl.beginning===true\">Play Carter Hearts!</h2>\n        <h1 id=\"phoneMessage\" ng-if=\"$ctrl.beginning===true\">Turn your phone sideways.</h1>    \n        <h2 ng-if=\"$ctrl.handStart===true\">Deal Next Hand</h2>\n        <h1 ng-if=\"$ctrl.gameOver===true\">Game Over</h1>\n        <h1 class = \"gameMessage\" ng-if=\"$ctrl.gameOver===true\">{{$ctrl.winMessage}}</h1>\n        <div class=\"banner\">\n            <button class=\"button\" id=\"deal-button\" ng-click=\"$ctrl.dealCards()\" ng-if=\"$ctrl.showDeal===true\"><h1 id=\"buttonMessage\">Deal</h1></button>\n            <button class = \"button\" id=\"pass-button\" ng-if=\"$ctrl.passReady===true\" ng-click=\"$ctrl.passCards()\"><h1 id=\"buttonMessage\">Pass</h1></button>\n            <h1 class='gameMessage' id=\"passing-message\" ng-if=\"$ctrl.passReady===true\">Select three cards to pass.<br>Your target is {{$ctrl.passPlayer}}.</h1>\n            <h1 class ='gameMessage' id=\"hold-hand-message\" ng-if=\"$ctrl.holdHand===true\">It's a Hold Hand!<br>No passing.</h1>\n            <h1 class ='gameMessage' id=\"twoMessage\" ng-if=\"$ctrl.playTwo===true\">Play the two of clubs.</h1>\n             <h1 class='gameMessage' id=\"your-play-message\" ng-if=\"$ctrl.playerTurn===true\">Your play.</h1>\n             <h1 class ='gameMessage' id=\"trickMessage\" ng-if=\"$ctrl.turnOver===true\">{{$ctrl.players[$ctrl.high]}} took the trick</h1>\n            <h1 class ='gameMessage' id=\"runMessage\" ng-if=\"$ctrl.runMessage===true\">{{$ctrl.players[$ctrl.run]}} successfully shot the moon!</h1>\n            <h1 class ='errorMessage' id=\"small-pass-message\" ng-if=\"$ctrl.badPass===true\">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.<br>You have {{$ctrl.passArray.length}} cards selected.</h1>\n            <h1 class ='errorMessage' id=\"notVoidedMessage\" ng-if=\"$ctrl.suitError===true\">The lead was {{$ctrl.leadSuit}}.  <br>You cannot play {{$ctrl.playerSuit}} while you still <br>have {{$ctrl.leadSuit}} in your hand.  <br>Nice try!</h1>\n             <h1 class ='errorMessage' id=\"firstHandMessage\" ng-if=\"$ctrl.firstHandError===true\">You cannot play any point card <br>(a Heart or the Queen of Spades) on the first hand.<br>Amateur!</h1>\n              <h1 class ='errorMessage' id=\"twoErrorMessage\" ng-if=\"$ctrl.twoError===true\">If you have the deuce, <br>you've gotta play the deuce.</h1>\n               <h1 class ='errorMessage' id=\"heartsBrokenMessage\" ng-if=\"$ctrl.heartLeadError===true\">You cannot lead a heart until they've been broken<br> (or unless you have nothing else).</h1>\n            <button class=\"button\" id=\"playButton\" ng-if=\"$ctrl.playReady===true\" ng-click=\"$ctrl.startPlay()\"><h1 id=\"playMessage\" >Begin Play!</h1></button>\n           \n               <button class=\"button\" id=\"playButton\" ng-if=\"$ctrl.playAgain===true\" ng-click=\"$ctrl.newGame()\"><h1 id=\"playMessage\" >Play Again</h1></button>\n        </div>\n\n        <div id=\"scoreboard\" ng-if=\"$ctrl.beginning === false\">\n            <table>\n                <th>\n                    <td>You</td>\n                    <td>Dale</td>\n                    <td>Denny</td>\n                    <td>Aileen</td>\n                </th>\n\n                <tr>\n                    <td id=\"semitotal\">Hand Points</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[0]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[1]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[2]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[3]}}</td>\n                </tr>\n\n                <tr>\n                    <td>Total Points</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[0]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[1]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[2]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[3]}}</td>\n                </tr>\n              \n            </table>\n        </div>\n\n        <div class=\"playArea\">\n            <image id=\"player0Card\" ng-if=\"$ctrl.playedCards[0]\" src=\"{{$ctrl.playedCards[0].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 0}\">\n            <image id=\"player1Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/dalecarter.png\" ng-class=\"$ctrl.passFlag[1] ? 'passPlayerImage' : 'playerImage'\">\n            <image id=\"player1Card\" ng-if=\"$ctrl.playedCards[1]\" src=\"{{$ctrl.playedCards[1].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 1}\">\n             <image ng-class=\"$ctrl.passFlag[2] ? 'passPlayerImage' : 'playerImage'\" id=\"player2Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/dennycarter.png\">\n            <image id=\"player2Card\" ng-if=\"$ctrl.playedCards[2]\" src=\"{{$ctrl.playedCards[2].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 2}\">\n            <image ng-class=\"$ctrl.passFlag[3] ? 'passPlayerImage' : 'playerImage'\"id=\"player3Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/aileencole.png\">\n            <image id=\"player3Card\" ng-if=\"$ctrl.playedCards[3]\" src=\"{{$ctrl.playedCards[3].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 3}\">  \n            <button class=\"button\" id=\"newTrickButton\" ng-if=\"$ctrl.turnOver===true\" ng-click=\"$ctrl.newTrick()\"><h1 id=\"buttonMessage\">Next Trick</h1></button>\n        </div>\n\n        <!--<div class=\"compHand\">\n            <ul class=\"comp1Hand\">\n                <li class=\"comp1Card\" ng-repeat=\"compCard in $ctrl.hands[1]\" >\n                    <img src=\"{{compCard.image}}\" >\n                </li>\n            </ul>\n        </div>\n        <div class=\"compHand2\">\n        </div>\n        <div class=\"compHand3\">\n        </div>-->\n\n      \n        <div class=\"playerHand\">\n            <ul class=\"hand\">\n                <li class=\"playerCard\" ng-repeat=\"card in $ctrl.hand\" >\n                    <button ng-click=\"$ctrl.clicked(card)\" ng-class=\"{'selectedCard' : card.toggled, 'cardButton' : !card.toggled}\"><img src=\"{{card.image}}\" ></button>\n                </li>\n            </ul>\n        </div>\n\n    </div>\n</section>\n";
 
 /***/ },
-/* 22 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34280,7 +34274,7 @@
 	    value: true
 	});
 	
-	var _rules = __webpack_require__(23);
+	var _rules = __webpack_require__(21);
 	
 	var _rules2 = _interopRequireDefault(_rules);
 	
@@ -34295,10 +34289,40 @@
 	function controller() {};
 
 /***/ },
-/* 23 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class =\"page\" id=\"rules-page\">\n    <h1 class=\"gameMessage\">Rules</h2>\n    <h1 class=\"rulesMessage\">  For hearts beginners, please see <a class=\"rulesLink\" href=\"http://www.bicyclecards.com/how-to-play/hearts/\">basic hearts rules</a></h1>\n    <h1 class=\"rulesMessage\">The ten of hearts counts as 10 points, this is the Carter Family rule.   <image class=\"rulesImage\" src=\"./images/10H.png\"></h1>\n   <h1 class=\"rulesMessage\">All other hearts count as 1 point.<image class=\"rulesImage\" src=\"./images/7H.png\"></h1>\n    <h1 class=\"rulesMessage\">The queen of spades hits for 13 points! <image class=\"rulesImage\" src=\"./images/QS.png\"></h1>\n    <h1 class=\"rulesMessage\">  Every other card is worth zero points.<image class=\"rulesImage\" src=\"./images/4S.png\"></h1>\n    <br>\n    <br>\n    <h1 class=\"rulesMessage\">  There are a total of <em>35</em> points per hand.</h1>\n    <footer>\n      <p class=\"footerText\"><span class=\"branding\">&copy; Mugsy Carter, 2016</span></p>\n    </footer>\n</section>\n  ";
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _settings = __webpack_require__(23);
+	
+	var _settings2 = _interopRequireDefault(_settings);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	    template: _settings2.default,
+	    controller: controller
+	};
+	
+	
+	function controller() {};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	module.exports = "<section class =\"page\" id=\"settings-page\">\n    <h1 class=\"gameMessage\">Useless Settings</h2>\n\n    <h3>Dave Jokes</h3>\n    <form>\n        <input type=\"radio\" name=\"daveJokes\" value=\"on\" checked> <h4>off</h4><br>\n        <input type=\"radio\" name=\"daveJokes\" value=\"off\"> <h4> on (impolite company only) </h4><br>\n    </form>\n    <br>\n\n    <h3>Farts</h3>\n    <form>\n        <input type=\"radio\" name=\"farts\" value=\"audible\" checked> <h4> Audible</h4> <br>\n        <input type=\"radio\" name=\"farts\" value=\"deadly\"> <h4> Deadly </h4><br>\n    </form>\n    <br>\n\n    <h3>Farts</h3>\n    <form>\n        <input type=\"radio\" name=\"difficultyLevel\" value=\"easy\" checked> <h4> Non-Carter (Easy)</h4> <br>\n        <input type=\"radio\" name=\"difficultyLevel\" value=\"hard\"> <h4> Carter (Hard)</h4><br>\n    </form>\n    <br>\n\n\n    <footer>\n      <p class=\"footerText\"><span class=\"branding\">&copy; Mugsy Carter, 2016</span></p>\n    </footer>\n</section>";
 
 /***/ },
 /* 24 */
@@ -43165,62 +43189,18 @@
 	    });
 	
 	    $stateProvider.state({
+	        name: 'settings',
+	        url: '/settings',
+	        data: { public: true },
+	        component: 'settings'
+	    });
+	
+	    $stateProvider.state({
 	        name: 'about',
 	        url: '/about',
 	        data: { public: true },
 	        component: 'about'
 	    });
-	
-	    // $stateProvider.state({
-	    //     name: 'stores',
-	    //     url: '/stores',
-	    //     abstract: true,
-	    //     default: '.all',
-	    //     component: 'stores',
-	    //     resolve: {
-	    //             stores: ['storeService', stores => {
-	    //                 return stores.getAll();
-	    //         }]
-	    //     } 
-	    // });
-	
-	    // $stateProvider.state({
-	    //     name: 'stores.all',
-	    //     url: '/all',
-	    //     component: 'allStores'
-	    // });
-	
-	    // $stateProvider.state({
-	    //     name: 'stores.add',
-	    //     url: '/add',
-	    //     component: 'addNewStore'
-	    // });
-	
-	    // $stateProvider.state({
-	    //     name: 'store',
-	    //     url: '/store/{id}',
-	    //     abstract: true,
-	    //     default: '.pets',
-	    //     resolve: {
-	    //         store: ['storeService', '$transition$', (Store, t) => {
-	    //             return Store.get(t.params().id);
-	    //         }],
-	    //         pets: ['store', a => a.pets]
-	    //     },
-	    //     component: 'store' 
-	    // });
-	
-	    // $stateProvider.state({
-	    //     name: 'store.pets',
-	    //     url: '/pets',
-	    //     component: 'viewPets'
-	    // });
-	
-	    // $stateProvider.state({
-	    //     name: 'store.addPet',
-	    //     url: '/add',
-	    //     component: 'addPet'
-	    // });
 	
 	    $urlRouterProvider.otherwise('/');
 	}

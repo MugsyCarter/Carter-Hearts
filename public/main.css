@@ -36,7 +36,20 @@ h2 {
   margin: 0vh 1vh 1vh 1vh; }
 
 h3 {
-  font-size: 3.3vh; }
+  margin-left: 5vw;
+  font-size: 3.3vh;
+  color: #D40000; }
+
+h4 {
+  font-size: 3.3vh;
+  color: white;
+  display: inline; }
+
+input {
+  margin-left: 10vw; }
+
+input[type='radio'] {
+  transform: scale(2); }
 
 b {
   font-weight: 600; }
@@ -351,6 +364,10 @@ a:hover {
   color: white;
   font-size: 10vh; }
 
+#settings-page {
+  height: 85vh;
+  background-color: black; }
+
 /* Media Query Stuff */
 @media only screen and (min-width: 481px) {
   /* Larger cell screen, changes image only */
@@ -358,7 +375,9 @@ a:hover {
     display: none; }
   .main-nav ul li {
     display: inline-block;
-    padding: 0.5% 5%; } }
+    padding: 0.5% 5%; }
+  .firstLink {
+    padding-left: 0%; } }
 
 @media only screen and (min-width: 640px) {
   /* First break point - switch to tablet design: 2+ columns */ }
@@ -389,9 +408,11 @@ a:hover {
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */
-  .main-nav ul li {
+  .link {
     padding: 1% 8%; }
   .icon-menu {
-    font-size: 3.6vh; } }
+    font-size: 3.6vh; }
+  .firstLink {
+    padding-left: 0%; } }
 
 /*# sourceMappingURL=main.css.map*/

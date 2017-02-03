@@ -1,5 +1,4 @@
 import template from './app.html';
-import './app.scss';
 
 export default {
     template,
@@ -12,7 +11,8 @@ function controller() {
         home: true,
         play: false,
         rules: false,
-        about: false
+        about: false,
+        settings: false
 
     };
 
@@ -23,7 +23,8 @@ function controller() {
                 home: false,
                 play: false,
                 rules: false,
-                about: false
+                about: false,
+                settings: false
             };
             this.link[page] = true;
         }

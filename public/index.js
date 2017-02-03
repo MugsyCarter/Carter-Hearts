@@ -33818,7 +33818,7 @@
 	        heartsBroken: false
 	    };
 	
-	    this.players = ['you', 'Dale', 'Denny', 'Aileen'];
+	    this.players = ['You', 'Dale', 'Denny', 'Aileen'];
 	    this.playerScores = [0, 0, 0, 0];
 	    this.playerSemis = [0, 0, 0, 0];
 	

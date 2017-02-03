@@ -212,6 +212,7 @@ border-radius: 1vh;
     border-color: black;
 }
 
+
 .link {
   display: none;
   padding: 1% 5%;
@@ -433,6 +434,10 @@ a:hover{
     display: inline-block;
     padding: 0.5% 5%;
   }
+
+  .firstLink{
+    padding-left: 0%;
+  }
 }
 
 @media only screen and (min-width: 640px) {
@@ -487,7 +492,7 @@ a:hover{
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */
-  .main-nav ul li {
+   .link{
     padding: 1% 8%;
   }
 
@@ -495,5 +500,10 @@ a:hover{
   .icon-menu {
     font-size: 3.6vh;
   }
+
+  .firstLink{
+    padding-left: 0%;
+  }
+
 }
 

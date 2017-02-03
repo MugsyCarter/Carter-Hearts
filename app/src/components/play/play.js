@@ -31,6 +31,7 @@ function controller(shuffle, ai, timeout) {
     this.gameOver = false;
     this.cardPlayed = false;
     this.smoking = false;
+    this.whomp = false;
     this.runFlag = 0;
     this.turnOrder = [];
     this.playedCards = [];
@@ -370,10 +371,12 @@ function controller(shuffle, ai, timeout) {
         if (card.code === 'QS'){
             this.events.queen = true;
             this.smoking = false;
+            this.whomp = true;
         }
         else if (card.points === 10){
             this.events.ten = true;
             this.events.heartsBroken = true;
+            this.whomp = true;
         }
         else if (card.points === 1){
             this.events.heartsBroken = true;
@@ -435,6 +438,7 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.newTrick = ()=>{
+        this.whomp = false;
         this.lead = this.high;
         this.turnOver = false;
         this.turnOrder = [];

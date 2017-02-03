@@ -18,4 +18,5 @@ function controller() {
         console.log('hardmode');
     };
 
+    this.deadly = false;
 };

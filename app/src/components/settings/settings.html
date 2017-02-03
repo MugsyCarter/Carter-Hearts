@@ -1,5 +1,5 @@
 <section class ="page" id="settings-page">
-    <h1 class="gameMessage">Useless Settings</h2>
+    <h1 class="gameMessage">Settings</h2>
 
     <h3>Dave Jokes</h3>
     <form>
@@ -10,8 +10,9 @@
 
     <h3>Farts</h3>
     <form>
-        <input type="radio" name="farts" value="audible" checked> <h4> Audible (recomended)</h4> <br>
-        <input type="radio" name="farts" value="deadly"> <h4> Deadly </h4><br>
+        <input type="radio" name="farts" ng-value="false" ng-model="$ctrl.deadly" checked> <h4> Audible (recomended)</h4> <br>
+        <input type="radio" name="farts" ng-value="true" ng-model="$ctrl.deadly"> <h4> Deadly </h4><br>
+        <h4 ng-if="$ctrl.deadly===true">What's wrong with you???</h4>
     </form>
     <br>
 

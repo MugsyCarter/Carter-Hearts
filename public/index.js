@@ -33795,6 +33795,7 @@
 	    this.holdHand = false;
 	    this.gameOver = false;
 	    this.cardPlayed = false;
+	    this.smoking = false;
 	    this.runFlag = 0;
 	    this.turnOrder = [];
 	    this.playedCards = [];
@@ -34030,6 +34031,7 @@
 	                        _this.playTwo = false;
 	                        _this.playCard(card, 0);
 	                        _this.firstLead = false;
+	                        _this.leadCard = card;
 	                    }
 	                    //player lead options
 	                    else if (_this.lead === 0) {
@@ -34037,10 +34039,12 @@
 	                            if (card.suit !== 'HEARTS') {
 	                                //non-pointers are OK
 	                                _this.playCard(card, 0);
+	                                _this.leadCard = card;
 	                            } else {
 	                                if (_this.events.heartsBroken === true) {
 	                                    //if hearts have been broken, its OK
 	                                    _this.playCard(card, 0);
+	                                    _this.leadCard = card;
 	                                } else {
 	                                    var playerNonHearts = _this.hand.filter(function (card) {
 	                                        return card.suit !== 'HEARTS';
@@ -34048,6 +34052,7 @@
 	                                    if (playerNonHearts.length < 1) {
 	                                        //if player has no non-hearts, the play is OK
 	                                        _this.playCard(card, 0);
+	                                        _this.leadCard = card;
 	                                    } else {
 	                                        //invalid play
 	                                        _this.heartLeadError = true;
@@ -34095,6 +34100,10 @@
 	    this.playCard = function (card, player) {
 	        //this function play a card and removesit from the player's hand
 	        _this.playedCards[player] = card;
+	        if (_this.turnOrder.length < 1) {
+	            _this.leadCard = card;
+	            console.log('lead is ', _this.leadCard);
+	        }
 	        _this.turnOrder.push(player);
 	        if (player === 0) {
 	            _this.cardPlayed = true;
@@ -34107,6 +34116,11 @@
 	                return eachCard.code !== card.code;
 	            });
 	        }
+	        //check for smoking
+	        console.log(_this.leadCard);
+	        if (_this.leadCard.suit === 'SPADES' && _this.leadCard.number < 12 && _this.events.queen === false) {
+	            _this.smoking = true;
+	        }
 	        //count the card
 	        _this.counted[card.suit]++;
 	        //add trick points
@@ -34114,6 +34128,7 @@
 	        //check for special events
 	        if (card.code === 'QS') {
 	            _this.events.queen = true;
+	            _this.smoking = false;
 	        } else if (card.points === 10) {
 	            _this.events.ten = true;
 	            _this.events.heartsBroken = true;
@@ -34153,6 +34168,7 @@
 	            //check for run scoring
 	            //show newHand button and trick message
 	            _this.turnOver = true;
+	            _this.smoking = false;
 	            //count cards to check if hand is over
 	            _this.totalCards = _this.counted.HEARTS + _this.counted.SPADES + _this.counted.DIAMONDS + _this.counted.CLUBS;
 	            if (_this.totalCards === 52) {
@@ -34262,7 +34278,7 @@
 /* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "\n <section class =\"page\" id=\"play-page\">\n    <div>\n        <h2 ng-if=\"$ctrl.beginning===true\">Play Carter Hearts!</h2>\n        <h1 id=\"phoneMessage\" ng-if=\"$ctrl.beginning===true\">Turn your phone sideways.</h1>    \n        <h2 ng-if=\"$ctrl.handStart===true\">Deal Next Hand</h2>\n        <h1 ng-if=\"$ctrl.gameOver===true\">Game Over</h1>\n        <h1 class = \"gameMessage\" ng-if=\"$ctrl.gameOver===true\">{{$ctrl.winMessage}}</h1>\n        <div class=\"banner\">\n            <button class=\"button\" id=\"deal-button\" ng-click=\"$ctrl.dealCards()\" ng-if=\"$ctrl.showDeal===true\"><h1 id=\"bigButtonMessage\">Deal</h1></button>\n            <button class = \"button\" id=\"pass-button\" ng-if=\"$ctrl.passReady===true\" ng-click=\"$ctrl.passCards()\"><h1 id=\"buttonMessage\">Pass</h1></button>\n            <h1 class='gameMessage' id=\"passing-message\" ng-if=\"$ctrl.passReady===true\">Select three cards to pass.<br>Your target is {{$ctrl.passPlayer}}.</h1>\n            <h1 class ='gameMessage' id=\"hold-hand-message\" ng-if=\"$ctrl.holdHand===true\">It's a Hold Hand!<br>No passing.</h1>\n            <h1 class ='gameMessage' id=\"twoMessage\" ng-if=\"$ctrl.playTwo===true\">Play the two of clubs.</h1>\n             <h1 class='gameMessage' id=\"your-play-message\" ng-if=\"$ctrl.playerTurn===true\">Your play.</h1>\n             <h1 class ='gameMessage' id=\"trickMessage\" ng-if=\"$ctrl.turnOver===true\">{{$ctrl.players[$ctrl.high]}} took the trick</h1>\n            <h1 class ='gameMessage' id=\"runMessage\" ng-if=\"$ctrl.runMessage===true\">{{$ctrl.players[$ctrl.run]}} successfully shot the moon!</h1>\n            <h1 class ='errorMessage' id=\"small-pass-message\" ng-if=\"$ctrl.badPass===true\">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.<br>You have {{$ctrl.passArray.length}} cards selected.</h1>\n            <h1 class ='errorMessage' id=\"notVoidedMessage\" ng-if=\"$ctrl.suitError===true\">The lead was {{$ctrl.leadSuit}}.  <br>You cannot play {{$ctrl.playerSuit}} while you still <br>have {{$ctrl.leadSuit}} in your hand.  <br>Nice try!</h1>\n             <h1 class ='errorMessage' id=\"firstHandMessage\" ng-if=\"$ctrl.firstHandError===true\">You cannot play any point card <br>(a Heart or the Queen of Spades) on the first hand.<br>Amateur!</h1>\n              <h1 class ='errorMessage' id=\"twoErrorMessage\" ng-if=\"$ctrl.twoError===true\">If you have the deuce, <br>you've gotta play the deuce.</h1>\n               <h1 class ='errorMessage' id=\"heartsBrokenMessage\" ng-if=\"$ctrl.heartLeadError===true\">You cannot lead a heart until they've been broken<br> (or unless you have nothing else).</h1>\n            <button class=\"button\" id=\"playButton\" ng-if=\"$ctrl.playReady===true\" ng-click=\"$ctrl.startPlay()\"><h1 id=\"playMessage\" >Begin Play!</h1></button>\n           \n               <button class=\"button\" id=\"playButton\" ng-if=\"$ctrl.playAgain===true\" ng-click=\"$ctrl.newGame()\"><h1 id=\"playMessage\" >Play Again</h1></button>\n        </div>\n\n        <div id=\"scoreboard\" ng-if=\"$ctrl.beginning === false\">\n            <table>\n                <th>\n                    <td>You</td>\n                    <td>Dale</td>\n                    <td>Denny</td>\n                    <td>Aileen</td>\n                </th>\n\n                <tr>\n                    <td id=\"semitotal\">Hand Points</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[0]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[1]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[2]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[3]}}</td>\n                </tr>\n\n                <tr>\n                    <td>Total Points</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[0]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[1]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[2]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[3]}}</td>\n                </tr>\n              \n            </table>\n        </div>\n\n        <div class=\"playArea\">\n            <image id=\"player0Card\" ng-if=\"$ctrl.playedCards[0]\" src=\"{{$ctrl.playedCards[0].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 0}\">\n            <image id=\"player1Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/dalecarter.png\" ng-class=\"$ctrl.passFlag[1] ? 'passPlayerImage' : 'playerImage'\">\n            <image id=\"player1Card\" ng-if=\"$ctrl.playedCards[1]\" src=\"{{$ctrl.playedCards[1].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 1}\">\n             <image ng-class=\"$ctrl.passFlag[2] ? 'passPlayerImage' : 'playerImage'\" id=\"player2Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/dennycarter.png\">\n            <image id=\"player2Card\" ng-if=\"$ctrl.playedCards[2]\" src=\"{{$ctrl.playedCards[2].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 2}\">\n            <image ng-class=\"$ctrl.passFlag[3] ? 'passPlayerImage' : 'playerImage'\"id=\"player3Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/aileencole.png\">\n            <image id=\"player3Card\" ng-if=\"$ctrl.playedCards[3]\" src=\"{{$ctrl.playedCards[3].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 3}\">  \n            <button class=\"button\" id=\"newTrickButton\" ng-if=\"$ctrl.turnOver===true\" ng-click=\"$ctrl.newTrick()\"><h1 id=\"buttonMessage\">Next Trick</h1></button>\n        </div>\n\n        <!--<div class=\"compHand\">\n            <ul class=\"comp1Hand\">\n                <li class=\"comp1Card\" ng-repeat=\"compCard in $ctrl.hands[1]\" >\n                    <img src=\"{{compCard.image}}\" >\n                </li>\n            </ul>\n        </div>\n        <div class=\"compHand2\">\n        </div>\n        <div class=\"compHand3\">\n        </div>-->\n\n      \n        <div class=\"playerHand\">\n            <ul class=\"hand\">\n                <li class=\"playerCard\" ng-repeat=\"card in $ctrl.hand\" >\n                    <button ng-click=\"$ctrl.clicked(card)\" ng-class=\"{'selectedCard' : card.toggled, 'cardButton' : !card.toggled}\"><img src=\"{{card.image}}\" ></button>\n                </li>\n            </ul>\n        </div>\n\n    </div>\n</section>\n";
+	module.exports = "\n <section class =\"page\" id=\"play-page\">\n    <div>\n        <h2 ng-if=\"$ctrl.beginning===true\">Play Carter Hearts!</h2>\n        <h1 id=\"phoneMessage\" ng-if=\"$ctrl.beginning===true\">Turn your phone sideways.</h1>    \n        <h2 ng-if=\"$ctrl.handStart===true\">Deal Next Hand</h2>\n        <h1 ng-if=\"$ctrl.gameOver===true\">Game Over</h1>\n        <h1 class = \"gameMessage\" ng-if=\"$ctrl.gameOver===true\">{{$ctrl.winMessage}}</h1>\n        <div class=\"banner\">\n            <button class=\"button\" id=\"deal-button\" ng-click=\"$ctrl.dealCards()\" ng-if=\"$ctrl.showDeal===true\"><h1 id=\"bigButtonMessage\">Deal</h1></button>\n            <button class = \"button\" id=\"pass-button\" ng-if=\"$ctrl.passReady===true\" ng-click=\"$ctrl.passCards()\"><h1 id=\"buttonMessage\">Pass</h1></button>\n            <h1 class='gameMessage' id=\"passing-message\" ng-if=\"$ctrl.passReady===true\">Select three cards to pass.<br>Your target is {{$ctrl.passPlayer}}.</h1>\n            <h1 class ='gameMessage' id=\"hold-hand-message\" ng-if=\"$ctrl.holdHand===true\">It's a Hold Hand!<br>No passing.</h1>\n            <h1 class ='gameMessage' id=\"twoMessage\" ng-if=\"$ctrl.playTwo===true\">Play the two of clubs.</h1>\n             <h1 class='gameMessage' id=\"your-play-message\" ng-if=\"$ctrl.playerTurn===true\">Your play.</h1>\n            <h1 class='gameMessage' id=\"smoking-message\" ng-if=\"$ctrl.smoking===true\">Smoke 'em if you got 'em.</h1>\n            <h1 class ='gameMessage' id=\"trickMessage\" ng-if=\"$ctrl.turnOver===true\">{{$ctrl.players[$ctrl.high]}} took the trick</h1>\n            <h1 class ='gameMessage' id=\"runMessage\" ng-if=\"$ctrl.runMessage===true\">{{$ctrl.players[$ctrl.run]}} successfully shot the moon!</h1>\n            <h1 class ='errorMessage' id=\"small-pass-message\" ng-if=\"$ctrl.badPass===true\">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.<br>You have {{$ctrl.passArray.length}} cards selected.</h1>\n            <h1 class ='errorMessage' id=\"notVoidedMessage\" ng-if=\"$ctrl.suitError===true\">The lead was {{$ctrl.leadSuit}}.  <br>You cannot play {{$ctrl.playerSuit}} while you still <br>have {{$ctrl.leadSuit}} in your hand.  <br>Nice try!</h1>\n             <h1 class ='errorMessage' id=\"firstHandMessage\" ng-if=\"$ctrl.firstHandError===true\">You cannot play any point card <br>(a Heart or the Queen of Spades) on the first hand.<br>Amateur!</h1>\n              <h1 class ='errorMessage' id=\"twoErrorMessage\" ng-if=\"$ctrl.twoError===true\">If you have the deuce, <br>you've gotta play the deuce.</h1>\n               <h1 class ='errorMessage' id=\"heartsBrokenMessage\" ng-if=\"$ctrl.heartLeadError===true\">You cannot lead a heart until they've been broken<br> (or unless you have nothing else).</h1>\n            <button class=\"button\" id=\"playButton\" ng-if=\"$ctrl.playReady===true\" ng-click=\"$ctrl.startPlay()\"><h1 id=\"playMessage\" >Begin Play!</h1></button>\n           \n               <button class=\"button\" id=\"playButton\" ng-if=\"$ctrl.playAgain===true\" ng-click=\"$ctrl.newGame()\"><h1 id=\"playMessage\" >Play Again</h1></button>\n        </div>\n\n        <div id=\"scoreboard\" ng-if=\"$ctrl.beginning === false\">\n            <table>\n                <th>\n                    <td>You</td>\n                    <td>Dale</td>\n                    <td>Denny</td>\n                    <td>Aileen</td>\n                </th>\n\n                <tr>\n                    <td id=\"semitotal\">Hand Points</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[0]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[1]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[2]}}</td>\n                    <td id=\"semitotal\"> {{$ctrl.playerSemis[3]}}</td>\n                </tr>\n\n                <tr>\n                    <td>Total Points</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[0]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[1]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[2]}}</td>\n                    <td id=\"score\"> {{$ctrl.playerScores[3]}}</td>\n                </tr>\n              \n            </table>\n        </div>\n\n        <div class=\"playArea\">\n            <image id=\"player0Card\" ng-if=\"$ctrl.playedCards[0]\" src=\"{{$ctrl.playedCards[0].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 0}\">\n            <image id=\"player1Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/dalecarter.png\" ng-class=\"$ctrl.passFlag[1] ? 'passPlayerImage' : 'playerImage'\">\n            <image id=\"player1Card\" ng-if=\"$ctrl.playedCards[1]\" src=\"{{$ctrl.playedCards[1].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 1}\">\n             <image ng-class=\"$ctrl.passFlag[2] ? 'passPlayerImage' : 'playerImage'\" id=\"player2Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/dennycarter.png\">\n            <image id=\"player2Card\" ng-if=\"$ctrl.playedCards[2]\" src=\"{{$ctrl.playedCards[2].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 2}\">\n            <image ng-class=\"$ctrl.passFlag[3] ? 'passPlayerImage' : 'playerImage'\"id=\"player3Image\" ng-if=\"$ctrl.beginning===false\" src=\"./images/aileencole.png\">\n            <image id=\"player3Card\" ng-if=\"$ctrl.playedCards[3]\" src=\"{{$ctrl.playedCards[3].image}}\" ng-class=\"{'leadCardImage': $ctrl.lead === 3}\">  \n            <button class=\"button\" id=\"newTrickButton\" ng-if=\"$ctrl.turnOver===true\" ng-click=\"$ctrl.newTrick()\"><h1 id=\"buttonMessage\">Next Trick</h1></button>\n        </div>\n\n        <!--<div class=\"compHand\">\n            <ul class=\"comp1Hand\">\n                <li class=\"comp1Card\" ng-repeat=\"compCard in $ctrl.hands[1]\" >\n                    <img src=\"{{compCard.image}}\" >\n                </li>\n            </ul>\n        </div>\n        <div class=\"compHand2\">\n        </div>\n        <div class=\"compHand3\">\n        </div>-->\n\n      \n        <div class=\"playerHand\">\n            <ul class=\"hand\">\n                <li class=\"playerCard\" ng-repeat=\"card in $ctrl.hand\" >\n                    <button ng-click=\"$ctrl.clicked(card)\" ng-class=\"{'selectedCard' : card.toggled, 'cardButton' : !card.toggled}\"><img src=\"{{card.image}}\" ></button>\n                </li>\n            </ul>\n        </div>\n\n    </div>\n</section>\n";
 
 /***/ },
 /* 20 */
@@ -34328,13 +34344,15 @@
 	        localStorage.setItem('easy', false);
 	        console.log('hardmode');
 	    };
+	
+	    this.deadly = false;
 	};
 
 /***/ },
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class =\"page\" id=\"settings-page\">\n    <h1 class=\"gameMessage\">Useless Settings</h2>\n\n    <h3>Dave Jokes</h3>\n    <form>\n        <input type=\"radio\" name=\"daveJokes\" value=\"on\" checked> <h4>off</h4><br>\n        <input type=\"radio\" name=\"daveJokes\" value=\"off\"> <h4> on (impolite company only) </h4><br>\n    </form>\n    <br>\n\n    <h3>Farts</h3>\n    <form>\n        <input type=\"radio\" name=\"farts\" value=\"audible\" checked> <h4> Audible (recomended)</h4> <br>\n        <input type=\"radio\" name=\"farts\" value=\"deadly\"> <h4> Deadly </h4><br>\n    </form>\n    <br>\n\n    <h3>Difficulty</h3>\n    <form>\n        <input ng-click=\"$ctrl.easyMode()\" type=\"radio\" name=\"difficultyLevel\" value=\"easy\" checked> <h4> Non-Carter (Easy)</h4> <br>\n        <input ng-click=\"$ctrl.hardMode()\" type=\"radio\" name=\"difficultyLevel\" value=\"hard\"> <h4> Carter (Hard)</h4><br>\n    </form>\n    <br>\n\n\n    <footer>\n      <p class=\"footerText\"><span class=\"branding\">&copy; Mugsy Carter, 2016</span></p>\n    </footer>\n</section>";
+	module.exports = "<section class =\"page\" id=\"settings-page\">\n    <h1 class=\"gameMessage\">Settings</h2>\n\n    <h3>Dave Jokes</h3>\n    <form>\n        <input type=\"radio\" name=\"daveJokes\" value=\"on\" checked> <h4>off</h4><br>\n        <input type=\"radio\" name=\"daveJokes\" value=\"off\"> <h4> on (impolite company only) </h4><br>\n    </form>\n    <br>\n\n    <h3>Farts</h3>\n    <form>\n        <input type=\"radio\" name=\"farts\" ng-value=\"false\" ng-model=\"$ctrl.deadly\" checked> <h4> Audible (recomended)</h4> <br>\n        <input type=\"radio\" name=\"farts\" ng-value=\"true\" ng-model=\"$ctrl.deadly\"> <h4> Deadly </h4><br>\n        <h4 ng-if=\"$ctrl.deadly===true\">What's wrong with you???</h4>\n    </form>\n    <br>\n\n    <h3>Difficulty</h3>\n    <form>\n        <input ng-click=\"$ctrl.easyMode()\" type=\"radio\" name=\"difficultyLevel\" value=\"easy\" checked> <h4> Non-Carter (Easy)</h4> <br>\n        <input ng-click=\"$ctrl.hardMode()\" type=\"radio\" name=\"difficultyLevel\" value=\"hard\"> <h4> Carter (Hard)</h4><br>\n    </form>\n    <br>\n\n\n    <footer>\n      <p class=\"footerText\"><span class=\"branding\">&copy; Mugsy Carter, 2016</span></p>\n    </footer>\n</section>";
 
 /***/ },
 /* 24 */

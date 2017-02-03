@@ -30,6 +30,7 @@ function controller(shuffle, ai, timeout) {
     this.holdHand = false;
     this.gameOver = false;
     this.cardPlayed = false;
+    this.smoking = false;
     this.runFlag = 0;
     this.turnOrder = [];
     this.playedCards = [];
@@ -272,6 +273,7 @@ function controller(shuffle, ai, timeout) {
                     this.playTwo = false;
                     this.playCard(card, 0);
                     this.firstLead = false;
+                    this.leadCard = card;
                 }
                 //player lead options
                 else if (this.lead === 0){
@@ -279,11 +281,13 @@ function controller(shuffle, ai, timeout) {
                     if(card.suit !== 'HEARTS'){
                         //non-pointers are OK
                         this.playCard(card, 0);
+                        this.leadCard = card;
                     }
                     else{
                         if (this.events.heartsBroken === true){
                             //if hearts have been broken, its OK
                             this.playCard(card, 0);
+                            this.leadCard = card;
                         }
                         else{
                             var playerNonHearts = this.hand.filter(function(card){
@@ -292,6 +296,7 @@ function controller(shuffle, ai, timeout) {
                             if(playerNonHearts.length <1){
                                 //if player has no non-hearts, the play is OK
                                 this.playCard(card, 0); 
+                                this.leadCard = card;
                             }
                             else{
                                 //invalid play
@@ -335,6 +340,10 @@ function controller(shuffle, ai, timeout) {
     this.playCard = (card, player)=>{
         //this function play a card and removesit from the player's hand
         this.playedCards[player] = card;
+        if (this.turnOrder.length < 1){
+            this.leadCard = card;
+            console.log('lead is ', this.leadCard);
+        }
         this.turnOrder.push(player);
         if (player === 0){
             this.cardPlayed = true;
@@ -348,6 +357,11 @@ function controller(shuffle, ai, timeout) {
                 return eachCard.code !== card.code;
             });
         }
+        //check for smoking
+        console.log(this.leadCard);
+        if (this.leadCard.suit === 'SPADES' && this.leadCard.number < 12 && this.events.queen === false){
+            this.smoking = true;
+        }
         //count the card
         this.counted[card.suit] ++;
         //add trick points
@@ -355,6 +369,7 @@ function controller(shuffle, ai, timeout) {
         //check for special events
         if (card.code === 'QS'){
             this.events.queen = true;
+            this.smoking = false;
         }
         else if (card.points === 10){
             this.events.ten = true;
@@ -394,6 +409,7 @@ function controller(shuffle, ai, timeout) {
             //check for run scoring
             //show newHand button and trick message
             this.turnOver = true;
+            this.smoking = false;
             //count cards to check if hand is over
             this.totalCards = this.counted.HEARTS + this.counted.SPADES + this.counted.DIAMONDS + this.counted.CLUBS;
             if (this.totalCards === 52){

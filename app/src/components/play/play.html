@@ -13,7 +13,8 @@
             <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!<br>No passing.</h1>
             <h1 class ='gameMessage' id="twoMessage" ng-if="$ctrl.playTwo===true">Play the two of clubs.</h1>
              <h1 class='gameMessage' id="your-play-message" ng-if="$ctrl.playerTurn===true">Your play.</h1>
-             <h1 class ='gameMessage' id="trickMessage" ng-if="$ctrl.turnOver===true">{{$ctrl.players[$ctrl.high]}} took the trick</h1>
+            <h1 class='gameMessage' id="smoking-message" ng-if="$ctrl.smoking===true">Smoke 'em if you got 'em.</h1>
+            <h1 class ='gameMessage' id="trickMessage" ng-if="$ctrl.turnOver===true">{{$ctrl.players[$ctrl.high]}} took the trick</h1>
             <h1 class ='gameMessage' id="runMessage" ng-if="$ctrl.runMessage===true">{{$ctrl.players[$ctrl.run]}} successfully shot the moon!</h1>
             <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.<br>You have {{$ctrl.passArray.length}} cards selected.</h1>
             <h1 class ='errorMessage' id="notVoidedMessage" ng-if="$ctrl.suitError===true">The lead was {{$ctrl.leadSuit}}.  <br>You cannot play {{$ctrl.playerSuit}} while you still <br>have {{$ctrl.leadSuit}} in your hand.  <br>Nice try!</h1>

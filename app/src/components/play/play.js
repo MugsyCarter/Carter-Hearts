@@ -341,6 +341,7 @@ function controller(shuffle, ai, timeout) {
             this.hand = this.hand.filter((eachCard)=>{
                 return eachCard.code !== card.code;
             });
+            this.playerTurn = false;
         }
         else{
             this.hands[player] = this.hands[player].filter((eachCard)=>{
@@ -411,7 +412,6 @@ function controller(shuffle, ai, timeout) {
             }
             else {
                 //its the AIs turn.  Let the AI play.
-                this.PlayerTurn = false;
                 var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard, this.trickPoints, this.runFlag);
                 this.playCard(aiPlay, currentPlayer);
             }

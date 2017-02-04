@@ -34337,16 +34337,9 @@
 	
 	
 	function controller() {
-	    this.easyMode = function () {
-	        localStorage.setItem('easy', true);
-	        localStorage.setItem('hard', false);
-	        console.log('easymode');
-	    };
-	
-	    this.hardMode = function () {
-	        localStorage.setItem('hard', true);
-	        localStorage.setItem('easy', false);
-	        console.log('hardmode');
+	    this.mode = function (difficulty) {
+	        localStorage.setItem('mode', difficulty);
+	        console.log('changed mode to ', difficulty);
 	    };
 	
 	    this.deadly = false;
@@ -34356,7 +34349,7 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class =\"page\" id=\"settings-page\">\n    <h1 class=\"gameMessage\">Settings</h2>\n\n    <h3>Dave Jokes</h3>\n    <form>\n        <input type=\"radio\" name=\"daveJokes\" value=\"on\" checked> <h4>off</h4><br>\n        <input type=\"radio\" name=\"daveJokes\" value=\"off\"> <h4> on (impolite company only) </h4><br>\n    </form>\n    <br>\n\n    <h3>Farts</h3>\n    <form>\n        <input type=\"radio\" name=\"farts\" ng-value=\"false\" ng-model=\"$ctrl.deadly\" checked> <h4> Audible (recomended)</h4> <br>\n        <input type=\"radio\" name=\"farts\" ng-value=\"true\" ng-model=\"$ctrl.deadly\"> <h4> Deadly </h4><br>\n        <h4 ng-if=\"$ctrl.deadly===true\">What's wrong with you???</h4>\n    </form>\n    <br>\n\n    <h3>Difficulty</h3>\n    <form>\n        <input ng-click=\"$ctrl.easyMode()\" type=\"radio\" name=\"difficultyLevel\" value=\"easy\" checked> <h4> Non-Carter (Easy)</h4> <br>\n        <input ng-click=\"$ctrl.hardMode()\" type=\"radio\" name=\"difficultyLevel\" value=\"hard\"> <h4> Carter (Hard)</h4><br>\n    </form>\n    <br>\n\n\n    <footer>\n      <p class=\"footerText\"><span class=\"branding\">&copy; Mugsy Carter, 2016</span></p>\n    </footer>\n</section>";
+	module.exports = "<section class =\"page\" id=\"settings-page\">\n    <h1 class=\"gameMessage\">Settings</h2>\n\n    <h3>Dave Jokes</h3>\n    <form>\n        <input type=\"radio\" name=\"daveJokes\" value=\"on\" checked> <h4>off</h4><br>\n        <input type=\"radio\" name=\"daveJokes\" value=\"off\"> <h4> on (impolite company only) </h4><br>\n    </form>\n    <br>\n\n    <h3>Farts</h3>\n    <form>\n        <input type=\"radio\" name=\"farts\" ng-value=\"false\" ng-model=\"$ctrl.deadly\" checked> <h4> Audible (recomended)</h4> <br>\n        <input type=\"radio\" name=\"farts\" ng-value=\"true\" ng-model=\"$ctrl.deadly\"> <h4> Deadly </h4><br>\n        <h4 ng-if=\"$ctrl.deadly===true\">What's wrong with you???</h4>\n    </form>\n    <br>\n\n    <h3>Difficulty</h3>\n    <form>\n        <input ng-click=\"$ctrl.mode('easy')\" type=\"radio\" name=\"difficultyLevel\" value=\"easy\" checked> <h4> Non-Carter (Easy)</h4> <br>\n        <input ng-click=\"$ctrl.mode('hard')\" type=\"radio\" name=\"difficultyLevel\" value=\"hard\"> <h4> Carter (Hard)</h4><br>\n    </form>\n    <br>\n\n\n    <footer>\n      <p class=\"footerText\"><span class=\"branding\">&copy; Mugsy Carter, 2016</span></p>\n    </footer>\n</section>";
 
 /***/ },
 /* 24 */

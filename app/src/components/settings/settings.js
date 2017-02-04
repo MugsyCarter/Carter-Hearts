@@ -6,17 +6,10 @@ export default {
 };
 
 function controller() {
-    this.easyMode = ()=>{
-        localStorage.setItem('easy', true);
-        localStorage.setItem('hard', false);
-        console.log('easymode');
+    this.mode = (difficulty)=>{
+        localStorage.setItem('mode', difficulty);
+        console.log('changed mode to ', difficulty);
     };
-    
-    this.hardMode = ()=>{
-        localStorage.setItem('hard', true);
-        localStorage.setItem('easy', false);
-        console.log('hardmode');
-    };
-
+ 
     this.deadly = false;
 };

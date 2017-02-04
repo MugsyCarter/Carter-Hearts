@@ -10,6 +10,7 @@
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.showDeal===true"><h1 id="bigButtonMessage">Deal</h1></button>
             <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>
             <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.<br>Your target is {{$ctrl.passPlayer}}.</h1>
+            <h1 class='gameMessage' id="low-man-message" ng-if="$ctrl.passReady===true">{{$ctrl.lowMan}}</h1>
             <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!<br>No passing.</h1>
             <h1 class ='gameMessage' id="twoMessage" ng-if="$ctrl.playTwo===true">Play the two of clubs.</h1>
              <h1 class='gameMessage' id="your-play-message" ng-if="$ctrl.playerTurn===true">Your play.</h1>

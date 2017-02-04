@@ -33,6 +33,8 @@ function controller(shuffle, ai, timeout) {
     this.smoking = false;
     this.whomp = false;
     this.runFlag = 0;
+    this.lowScore = 99;
+    this.lowMan = '';
     this.turnOrder = [];
     this.playedCards = [];
     this.highCard = {};
@@ -57,6 +59,8 @@ function controller(shuffle, ai, timeout) {
         this.passTarget = 0;
         this.playerScores = [0,0,0,0];
         this.playerSemis =[0,0,0,0];
+        this.lowScore = 99;
+        this.lowMan = '';
         this.dealCards();
     };
 
@@ -496,12 +500,19 @@ function controller(shuffle, ai, timeout) {
         this.turnOver = false;
         this.showDeal = true;
         this.handStart = true;
-        this.playerScores.forEach((playerScore)=>{
-            if (playerScore >99){
+        this.lowScore = 99; 
+        for (var i = 0; i < 4; i++){
+            if (this.playerScores[i] < this.lowScore && i !==0){
+                this.lowMan = 'Whomp on '+this.players[i]+'!';
+                this.lowScore = this.playerScores[i];
+            }
+
+            if (this.playerScores[i] >99){
                 this.endGame();
                 return;
             }
-        });
+        }
+        console.log('lowMan is ', this.lowMan);
     };
 
     this.endGame = ()=>{

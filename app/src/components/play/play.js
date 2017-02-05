@@ -61,6 +61,7 @@ function controller(shuffle, ai, timeout) {
 
     this.changePlayers = ()=>{
         this.playerSelect = true;
+        this.showDeal = false;
     };
 
     this.selectPlayer = (player)=>{
@@ -98,6 +99,7 @@ function controller(shuffle, ai, timeout) {
         else{
             this.opponentSelect = false;
             this.playerSelect = false;
+            this.showDeal = true;
         }       
     };
 
@@ -131,6 +133,7 @@ function controller(shuffle, ai, timeout) {
         };
         this.turnOver = false;
         this.runMessage = false;
+        this.whomp=false;
         this.gameOver = false;
         this.sortedHand=[];
         this.run = 5;

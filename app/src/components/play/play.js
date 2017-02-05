@@ -65,6 +65,7 @@ function controller(shuffle, ai, timeout) {
 
     this.selectPlayer = (player)=>{
         if (this.playerSelect ===true){
+            player.name = 'You';
             this.players[0] = player;
         }
     };
@@ -476,6 +477,7 @@ function controller(shuffle, ai, timeout) {
             if (currentPlayer === 4){
                 currentPlayer = 0;
                 this.playerTurn = true;
+                console.log('HEY, ', this.turnOrder[(this.turnOrder.length)-1]);
                 return;
                 //let the Player Play
             }
@@ -488,6 +490,7 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.newTrick = ()=>{
+        console.log('turnOrder is ',this.turnOrder);
         this.whomp = false;
         this.lead = this.high;
         this.turnOver = false;

@@ -143,6 +143,22 @@ img {
   float: left;
   list-style: none; }
 
+.galleryButton {
+  background-color: white;
+  width: 12vw; }
+
+.galleryButton:hover {
+  cursor: pointer;
+  background-color: #D40000; }
+
+.playerButton {
+  background-color: black;
+  color: white; }
+
+.opponentButton {
+  background-color: black;
+  color: #D40000; }
+
 .hand {
   list-style-type: none;
   display: block;

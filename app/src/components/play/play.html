@@ -85,7 +85,8 @@
 
         <div class="playArea">
 
-            <image id="player0Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[0].src}} ng-class="$ctrl.lead[0]? 'leadPlayerImage' : 'playerImage'">
+            <image id="player0Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[0].src}} 
+             ng-class="{'currentPlayerImage' : $ctrl.turnOrder[($ctrl.turnOrder.length)-1]===3, 'playerImage' : $ctrl.turnOrder[($ctrl.turnOrder.length)-1]!==3}">
             <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}" ng-class="{'leadCardImage': $ctrl.lead === 0}">
             <image id="player1Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[1].src}} ng-class="$ctrl.passFlag[1] ? 'passPlayerImage' : 'playerImage'">
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}" ng-class="{'leadCardImage': $ctrl.lead === 1}">

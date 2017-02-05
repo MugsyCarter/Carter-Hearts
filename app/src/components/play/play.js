@@ -52,7 +52,7 @@ function controller(shuffle, ai, timeout) {
         heartsBroken: false,
     };
 
-    this.players = [{name: 'You', src: './images/tj.png'}, {name: 'Dale', src: './images/dalecarter.png'}, {name:'Denny', src: './images/dennycarter.png'}, {name: 'Aileen', src: './images/aileencole.png'}];
+    this.players = [{name: 'You', src: './images/aileencole.png'}, {name: 'Teege', src: './images/tj.png'}, {name: 'Dale', src: './images/dalecarter.png'}, {name:'Denny', src: './images/dennycarter.png'}, ];
     this.playerScores = [0,0,0,0];
     this.playerSemis =[0,0,0,0];
 

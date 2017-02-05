@@ -9,6 +9,7 @@ controller.$inject = ['shuffleService', 'aiService', '$timeout', '$rootScope'];
 
 function controller(shuffle, ai, timeout) {
     this.playerSelect = false;
+    this.opponentSelect = false;
     this.beginning = true;
     this.showDeal = true;
     this.handStart = false;
@@ -60,12 +61,45 @@ function controller(shuffle, ai, timeout) {
 
     this.changePlayers = ()=>{
         this.playerSelect = true;
-        this.showDeal = false;
     };
 
     this.selectPlayer = (player)=>{
-        this.players[0] = player;
+        if (this.playerSelect ===true){
+            this.players[0] = player;
+        }
     };
+
+    this.playerSelected = ()=>{
+        // this.playerSelect = false;
+        this.opponentSelect = true;
+    };
+
+    this.selectOpponent = (player)=>{
+        var index = this.players.indexOf(player);
+        if (index === -1){
+            this.players.push(player);
+            if(this.players.length>4){
+                this.players.splice(1,1);
+            }
+            console.log(this.players);
+        }
+        else{
+            this.players.splice(index,1);
+            console.log(this.players);
+        }
+    };
+
+    this.opponentsSelected = ()=>{
+        if (this.players.length !==4){
+            this.playersLengthError = true;
+            timeout(()=>{this.playersLengthError=false;}, 3000);
+        }
+        else{
+            this.opponentSelect = false;
+            this.playerSelect = false;
+        }       
+    };
+
 
     this.newGame = ()=>{
         this.passTarget = 0;

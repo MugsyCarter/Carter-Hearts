@@ -131,14 +131,6 @@ img {
   background-color: #105910;
   height: 97vh; }
 
-#scoreboard {
-  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
-  height: 30vh;
-  width: 30vw;
-  position: fixed;
-  right: 0vw;
-  top: 10vh; }
-
 .playerGalleryItem {
   float: left;
   list-style: none; }
@@ -158,6 +150,14 @@ img {
 .opponentButton {
   background-color: black;
   color: #D40000; }
+
+#scoreboard {
+  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+  height: 30vh;
+  width: 30vw;
+  position: fixed;
+  right: 0vw;
+  top: 10vh; }
 
 .hand {
   list-style-type: none;
@@ -270,8 +270,15 @@ a:hover {
 
 .playerImage {
   height: 15vh;
-  padding: 0vh;
+  padding: 2vh;
   border-radius: 2vh; }
+
+.currentPlayerImage {
+  height: 15vh;
+  padding: 1vh;
+  background-color: black;
+  border-radius: 2vh;
+  border: 1vh solid #D40000; }
 
 .passPlayerImage {
   height: 15vh;
@@ -291,6 +298,9 @@ a:hover {
   position: fixed;
   top: 50vh;
   left: 45vw; }
+
+#player1Image {
+  padding: 3vh; }
 
 #player1Card {
   position: fixed;

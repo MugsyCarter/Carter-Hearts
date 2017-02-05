@@ -154,6 +154,34 @@ border-radius: 1vh;
   top: 10vh;
 }
 
+
+//gallery stuff here
+.playerGalleryItem{
+  float: left;
+  list-style: none;
+}
+
+.galleryButton{
+  background-color: white;
+    width: 12vw;
+}
+
+.galleryButton:hover{
+  cursor: pointer;
+  background-color:$red;
+}
+
+.playerButton{
+   background-color: black;
+   color: $red;
+}
+
+.opponentButton{
+  background-color: black;
+  color: white;
+}
+
+
 .hand{
  list-style-type: none;
   display: block;

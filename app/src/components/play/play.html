@@ -7,18 +7,29 @@
         <h1 ng-if="$ctrl.gameOver===true">Game Over</h1>
         <h1 class = "gameMessage" ng-if="$ctrl.gameOver===true">{{$ctrl.winMessage}}</h1>
         <div class="banner">
+             <h1 class='gameMessage' id="player-select-message" ng-if="$ctrl.playerSelect===true">Select your avatar.</h1>
+             <button class="button" id="player-select-button" ng-click="$ctrl.playerSelected()" ng-if="$ctrl.playerSelect===true"><h1 id="buttonMessage">Done</h1></button>
+            <h1 class ='errorMessage' id="no-player-message" ng-if="$ctrl.playerChoice==={}">Choose a player from the images below.</h1>
+
+            <h1 class='gameMessage' id="opponent-select-message" ng-if="$ctrl.opponentSelect===true">Select three opponenets.</h1>
+             <button class="button" id="opponent-select-button" ng-click="$ctrl.opponentSelected()" ng-if="$ctrl.players.length===3"><h1 id="buttonMessage">Done</h1></button>
+            <h1 class ='errorMessage' id="no-player-message" ng-if="$ctrl.players.length!==4">Choose three opponents from the images below.</h1>
+
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.showDeal===true"><h1 id="bigButtonMessage">Deal</h1></button>
+
+            <button class="button" id="change-players-button" ng-click="$ctrl.changePlayers()" ng-if="$ctrl.showDeal===true"><h1 id="bigButtonMessage">Change Players</h1></button>
+
             <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>
-            <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.<br>Your target is {{$ctrl.passPlayer}}.</h1>
+            <h1 class='gameMessage' id="passing-message" ng-if="$ctrl.passReady===true">Select three cards to pass.<br>Your target is {{$ctrl.passPlayer.name}}.</h1>
             <h1 class='gameMessage' id="low-man-message" ng-if="$ctrl.passReady===true">{{$ctrl.lowMan}}</h1>
             <h1 class ='gameMessage' id="hold-hand-message" ng-if="$ctrl.holdHand===true">It's a Hold Hand!<br>No passing.</h1>
             <h1 class ='gameMessage' id="twoMessage" ng-if="$ctrl.playTwo===true">Play the two of clubs.</h1>
              <h1 class='gameMessage' id="your-play-message" ng-if="$ctrl.playerTurn===true">Your play.</h1>
             <h1 class='gameMessage' id="smoking-message" ng-if="$ctrl.smoking===true">Smoke 'em if you got 'em.</h1>
              <h1 class='gameMessage' id="whomp-message" ng-if="$ctrl.whomp===true">Bam!</h1>
-            <h1 class ='gameMessage' id="trickMessage" ng-if="$ctrl.turnOver===true">{{$ctrl.players[$ctrl.high]}} took the trick</h1>
-            <h1 class ='gameMessage' id="runMessage" ng-if="$ctrl.runMessage===true">{{$ctrl.players[$ctrl.run]}} successfully shot the moon!</h1>
-            <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer}}.<br>You have {{$ctrl.passArray.length}} cards selected.</h1>
+            <h1 class ='gameMessage' id="trickMessage" ng-if="$ctrl.turnOver===true">{{$ctrl.players[$ctrl.high].name}} took the trick</h1>
+            <h1 class ='gameMessage' id="runMessage" ng-if="$ctrl.runMessage===true">{{$ctrl.players[$ctrl.run].name}} successfully shot the moon!</h1>
+            <h1 class ='errorMessage' id="small-pass-message" ng-if="$ctrl.badPass===true">You must select exactly 3 cards to pass to {{$ctrl.passPlayer.name}}.<br>You have {{$ctrl.passArray.length}} cards selected.</h1>
             <h1 class ='errorMessage' id="notVoidedMessage" ng-if="$ctrl.suitError===true">The lead was {{$ctrl.leadSuit}}.  <br>You cannot play {{$ctrl.playerSuit}} while you still <br>have {{$ctrl.leadSuit}} in your hand.  <br>Nice try!</h1>
              <h1 class ='errorMessage' id="firstHandMessage" ng-if="$ctrl.firstHandError===true">You cannot play any point card <br>(a Heart or the Queen of Spades) on the first hand.<br>Amateur!</h1>
               <h1 class ='errorMessage' id="twoErrorMessage" ng-if="$ctrl.twoError===true">If you have the deuce, <br>you've gotta play the deuce.</h1>
@@ -28,6 +39,14 @@
                <button class="button" id="playButton" ng-if="$ctrl.playAgain===true" ng-click="$ctrl.newGame()"><h1 id="playMessage" >Play Again</h1></button>
         </div>
 
+<!--player gallery-->
+        <div id="playerGallery" ng-if="$ctrl.playerSelect === true">
+              <li class="playerGalleryItem" ng-repeat="player in $ctrl.playerGallery">
+                    <button class="galleryButton" ng-click="$ctrl.selectPlayer(player)"><img src="{{player.src}}" ><p>{{player.name}}</p></button>
+            </li>
+        </div>
+        
+<!--scoreboard-->
         <div id="scoreboard" ng-if="$ctrl.beginning === false">
             <table>
                 <th>

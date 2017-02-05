@@ -139,6 +139,10 @@ img {
   right: 0vw;
   top: 10vh; }
 
+.playerGalleryItem {
+  float: left;
+  list-style: none; }
+
 .hand {
   list-style-type: none;
   display: block;

@@ -8,6 +8,7 @@ export default {
 controller.$inject = ['shuffleService', 'aiService', '$timeout', '$rootScope'];
 
 function controller(shuffle, ai, timeout) {
+    this.playerSelect = false;
     this.beginning = true;
     this.showDeal = true;
     this.handStart = false;
@@ -51,9 +52,20 @@ function controller(shuffle, ai, timeout) {
         heartsBroken: false,
     };
 
-    this.players = ['You', 'Dale', 'Denny', 'Aileen'];
+    this.players = [{name: 'You', src: './images/tj.png'}, {name: 'Dale', src: './images/dalecarter.png'}, {name:'Denny', src: './images/dennycarter.png'}, {name: 'Aileen', src: './images/aileencole.png'}];
     this.playerScores = [0,0,0,0];
     this.playerSemis =[0,0,0,0];
+
+    this.playerGallery =[{name:'Denny', src: './images/dennycarter.png'}, {name: 'Dunc', src: './images/dunc.png'}, {name: 'Dale', src: './images/dalecarter.png'}, {name: 'Marianne', src: './images/marianne.png'}, {name: 'Dan', src: './images/dan.png'}, {name: 'Mugs', src: './images/mugs.png'}, {name: 'Sultan', src: './images/sultan.png'}, {name: 'Aileen', src: './images/aileencole.png'}, {name: 'Teege', src: './images/tj.png'}];
+
+    this.changePlayers = ()=>{
+        this.playerSelect = true;
+        this.showDeal = false;
+    };
+
+    this.selectPlayer = (player)=>{
+        this.players[0] = player;
+    };
 
     this.newGame = ()=>{
         this.passTarget = 0;
@@ -503,7 +515,7 @@ function controller(shuffle, ai, timeout) {
         this.lowScore = 99; 
         for (var i = 0; i < 4; i++){
             if (this.playerScores[i] < this.lowScore && i !==0){
-                this.lowMan = 'Whomp on '+this.players[i]+'!';
+                this.lowMan = 'Whomp on '+this.players[i].name+'!';
                 this.lowScore = this.playerScores[i];
             }
 
@@ -526,7 +538,7 @@ function controller(shuffle, ai, timeout) {
             this.winMessage = 'You won Carter Hearts!  <br>Congratulations!';
         }
         else{
-            this.winMessage = this.players[winner] + ' has won the game.  <br>You can\'t win them all.';
+            this.winMessage = this.players[winner].name + ' has won the game.  <br>You can\'t win them all.';
         }
         this.gameOver = true;
         this.playAgain = true;

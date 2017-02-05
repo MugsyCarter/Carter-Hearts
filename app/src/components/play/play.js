@@ -66,13 +66,13 @@ function controller(shuffle, ai, timeout) {
 
     this.selectPlayer = (player)=>{
         if (this.playerSelect ===true){
-            player.name = 'You';
             this.players[0] = player;
         }
     };
 
     this.playerSelected = ()=>{
         // this.playerSelect = false;
+        this.players[0].name = 'You';
         this.opponentSelect = true;
     };
 
@@ -575,7 +575,7 @@ function controller(shuffle, ai, timeout) {
             }
         } 
         if (winner===0){
-            this.winMessage = 'You won Carter Hearts!  <br>Congratulations!';
+            this.winMessage = 'You won Carter Hearts!';
         }
         else{
             this.winMessage = this.players[winner].name + ' has won the game.  <br>You can\'t win them all.';

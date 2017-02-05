@@ -178,7 +178,7 @@ border-radius: 1vh;
 #scoreboard{
   background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
   height: 30vh;
-  width: 30vw;
+  width: 33vw;
   position: fixed;
   right: 0vw;
   top: 10vh;
@@ -324,7 +324,7 @@ a:hover{
 
 .playerImage{
   height: 15vh;
-  padding: 2vh;
+  padding: 1vh;
   border-radius: 2vh;
 }
 
@@ -338,7 +338,7 @@ a:hover{
 
 .passPlayerImage{
   height: 15vh;
-    padding: 3vh;
+    padding: 1vh;
     background-color:$red;
     border-radius: 2vh;
     border: 1vh solid black;

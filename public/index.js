@@ -33831,13 +33831,13 @@
 	
 	    this.selectPlayer = function (player) {
 	        if (_this.playerSelect === true) {
-	            player.name = 'You';
 	            _this.players[0] = player;
 	        }
 	    };
 	
 	    this.playerSelected = function () {
 	        // this.playerSelect = false;
+	        _this.players[0].name = 'You';
 	        _this.opponentSelect = true;
 	    };
 	
@@ -34329,7 +34329,7 @@
 	            }
 	        }
 	        if (winner === 0) {
-	            _this.winMessage = 'You won Carter Hearts!  <br>Congratulations!';
+	            _this.winMessage = 'You won Carter Hearts!';
 	        } else {
 	            _this.winMessage = _this.players[winner].name + ' has won the game.  <br>You can\'t win them all.';
 	        }

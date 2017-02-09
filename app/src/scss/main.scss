@@ -159,17 +159,20 @@ border-radius: 1vh;
 
 .galleryButton:hover{
   cursor: pointer;
-  background-color:$red;
+  background-color:black;
+  color: white;
 }
 
 .playerButton{
    background-color: black;
-   color: white;
+   color: $red;
+      width: 12vw;
 }
 
 .opponentButton{
   background-color: black;
   color: $red;
+  width: 12vw;
 }
 
 .easyLabel{

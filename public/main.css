@@ -141,15 +141,18 @@ img {
 
 .galleryButton:hover {
   cursor: pointer;
-  background-color: #D40000; }
-
-.playerButton {
   background-color: black;
   color: white; }
 
+.playerButton {
+  background-color: black;
+  color: #D40000;
+  width: 12vw; }
+
 .opponentButton {
   background-color: black;
-  color: #D40000; }
+  color: #D40000;
+  width: 12vw; }
 
 .easyLabel {
   color: #105910;

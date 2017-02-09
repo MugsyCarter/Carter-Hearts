@@ -7,13 +7,13 @@
         <h1 ng-if="$ctrl.gameOver===true">Game Over</h1>
         <h1 class = "gameMessage" ng-if="$ctrl.gameOver===true">{{$ctrl.winMessage}}</h1>
         <div class="banner">
-             <h1 class='gameMessage' id="player-select-message" ng-if="$ctrl.playerSelect===true && $ctrl.opponentSelect===false">Select your avatar.</h1>
-             <button class="button" id="player-select-button" ng-click="$ctrl.playerSelected()" ng-if="$ctrl.playerSelect===true && $ctrl.opponentSelect===false"><h1 id="buttonMessage">Done</h1></button>
+             <h1 class='gameMessage' id="player-select-message" ng-if="$ctrl.playerSelect===true && $ctrl.opponentSelect===false">Select your player.
+             <button class="button" id="player-select-button" ng-click="$ctrl.playerSelected()" ng-if="$ctrl.playerSelect===true && $ctrl.opponentSelect===false"><h1 id="buttonMessage">Done</h1></button></h1>
             <h1 class ='errorMessage' id="no-player-message" ng-if="$ctrl.playerChoice==={}">Choose a player from the images below.</h1>
 
-            <h1 class='gameMessage' id="opponent-select-message" ng-if="$ctrl.opponentSelect===true">Select three opponents.</h1>
+            <h1 class='gameMessage' id="opponent-select-message" ng-if="$ctrl.opponentSelect===true">Select three opponents.
              <button class="button" id="opponent-select-button" ng-click="$ctrl.opponentsSelected()" ng-if="$ctrl.opponentSelect===true"><h1 id="buttonMessage">Done</h1></button>
-            <h1 class ='errorMessage' id="no-player-message" ng-if="$ctrl.playersLengthError">Choose three opponents from the images below.</h1>
+            <h1 class ='errorMessage' id="no-player-message" ng-if="$ctrl.playersLengthError">Choose three opponents from the images below.</h1></h1>
 
             <button class="button" id="deal-button" ng-click="$ctrl.dealCards()" ng-if="$ctrl.showDeal===true"><h1 id="bigButtonMessage">Deal</h1></button>
 
@@ -42,7 +42,7 @@
 <!--player gallery-->
         <div id="playerGallery" ng-if="$ctrl.playerSelect === true && $ctrl.opponentSelect===false">
               <li class="playerGalleryItem" ng-repeat="player in $ctrl.playerGallery">
-                    <button class="galleryButton" ng-click="$ctrl.selectPlayer(player)" ng-class="{'playerButton' : $ctrl.players[0]===player, 'opponentButton' : $ctrl.players.indexOf(player)!==-1}"><img src="{{player.src}}" ><p class="playerLabel">{{player.name}}</p></button>
+                    <button  ng-click="$ctrl.selectPlayer(player)" ng-class="{'playerButton' : $ctrl.players[0]===player, 'galleryButton' : $ctrl.players[0]!==player}"><img src="{{player.src}}" ><p class="playerLabel">{{player.name}}</p></button>
             </li>
         </div>
 

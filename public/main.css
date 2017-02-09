@@ -151,6 +151,17 @@ img {
   background-color: black;
   color: #D40000; }
 
+.easyLabel {
+  color: #105910;
+  font-size: 3vh; }
+
+.hardLabel {
+  color: #D40000;
+  font-size: 3vh; }
+
+.playerLabel {
+  font-size: 3vh; }
+
 #scoreboard {
   background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
   height: 30vh;

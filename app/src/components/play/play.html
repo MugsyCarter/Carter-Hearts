@@ -49,7 +49,7 @@
 <!--2nd player gallery-->
         <div id="playerGallery" ng-if="$ctrl.opponentSelect === true">
               <li class="playerGalleryItem" ng-repeat="player in $ctrl.playerGallery">
-                    <button ng-if="$ctrl.players[0]!==player" class="galleryButton" ng-click="$ctrl.selectOpponent(player)" ng-class="{'playerButton' : $ctrl.players[0]===player, 'opponentButton' : $ctrl.players.indexOf(player)!==-1}"><img src="{{player.src}}" ><p>{{player.name}}</p></button>
+                    <button ng-if="$ctrl.players[0]!==player" class="galleryButton" ng-click="$ctrl.selectOpponent(player)" ng-class="{'playerButton' : $ctrl.players[0]===player, 'opponentButton' : $ctrl.players.indexOf(player)!==-1}"><p ng-class=>{"{'easyLabel' : player.difficulty==="easy", 'hardLabel' : players.difficulty==="hard"}"{player.difficulty}}</p class="playerLabel"><img src="{{player.src}}" ><p>{{player.name}}</p></button>
             </li>
         </div>
 

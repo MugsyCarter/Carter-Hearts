@@ -486,7 +486,7 @@ function controller(shuffle, ai, timeout) {
             }
             else {
                 //its the AIs turn.  Let the AI play.
-                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard, this.trickPoints, this.runFlag);
+                var aiPlay = ai.play(this.playedCards, this.lead, this.hands[currentPlayer], this.counted, this.events, this.highCard, this.trickPoints, this.runFlag, this.players[currentPlayer].difficulty);
                 this.playCard(aiPlay, currentPlayer);
             }
         }

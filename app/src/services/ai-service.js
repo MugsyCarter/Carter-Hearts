@@ -211,9 +211,10 @@ export default function aiService() {
             }
         },
 
-        play(playedCards, lead, hand, counted, events, highCard, trickPoints, runFlag){
+        play(playedCards, lead, hand, counted, events, highCard, trickPoints, runFlag, difficulty){
             console.log('Computer now playing.  This is their hand :'+hand+' and this is their playedCards'+ playedCards + ' and this is the lead'+ lead);
             console.log('run flag is ', runFlag);
+            console.log('difficulty is ', difficulty);
             if (playedCards[lead].code === '2C'){
                 console.log('aiPlay first hand');
                 //if its the first hand, no pointers are allowed
@@ -345,47 +346,53 @@ export default function aiService() {
                         return sortedHand[sortedHand.length-1];
                     }
                     console.log('right above priorities');
-                    //priority 1: dump queen
-                    if (theQueen.length>0){
-                        return theQueen[0];
+                    if (difficulty === hard){
+                        //priority 1: dump queen
+                        if (theQueen.length>0){
+                            return theQueen[0];
+                        }
+                        //priority 1.5: ten protection
+                        else if (hearts.length>0 && hearts.length<3 && hearts[0].number > 9){
+                            return hearts[0];
+                        }
+                        //priority 2: dump to make void
+                        else if (hearts.length === 1){
+                            return hearts[0];
+                        }
+                        else if (diamonds.length === 1){
+                            return diamonds[0];
+                        }
+                        else if (clubs.length === 1){
+                            return clubs[0];
+                        }
+                        else if (spades.length === 1){
+                            return spades[0];
+                        }
+                        //priority 3 dump high spade
+                        else if (spades.length > 0 && spades.length < 4){
+                            return spades[0];
+                        }
+                        //priority 4 dump high heart
+                        else if (hearts.length > 0 && hearts.length < 4){
+                            return hearts[0];
+                        }
+                        //priority 5: dump near voids
+                        else if (diamonds.length > 0 && diamonds.length<3 && diamonds[0].number > 9){
+                            return diamonds[0];
+                        }
+                        else if (clubs.length > 0 && clubs.length<3 && clubs[0].number > 9){
+                            return clubs[0];
+                        }
+                        else if (hearts.length > 0 && hearts.length<3 && diamonds[0].number > 9){
+                            return hearts[0];
+                        }
+                        //priority 6: dump high
+                        else{
+                            return sortedHand[0];
+                        }
                     }
-                    //priority 1.5: ten protection
-                    else if (hearts.length>0 && hearts.length<3 && hearts[0].number > 9){
-                        return hearts[0];
-                    }
-                    //priority 2: dump to make void
-                    else if (hearts.length === 1){
-                        return hearts[0];
-                    }
-                    else if (diamonds.length === 1){
-                        return diamonds[0];
-                    }
-                    else if (clubs.length === 1){
-                        return clubs[0];
-                    }
-                    else if (spades.length === 1){
-                        return spades[0];
-                    }
-                    //priority 3 dump high spade
-                    else if (spades.length > 0 && spades.length < 4){
-                        return spades[0];
-                    }
-                    //priority 4 dump high heart
-                    else if (hearts.length > 0 && hearts.length < 4){
-                        return hearts[0];
-                    }
-                    //priority 5: dump near voids
-                    else if (diamonds.length > 0 && diamonds.length<3 && diamonds[0].number > 9){
-                        return diamonds[0];
-                    }
-                    else if (clubs.length > 0 && clubs.length<3 && clubs[0].number > 9){
-                        return clubs[0];
-                    }
-                    else if (hearts.length > 0 && hearts.length<3 && diamonds[0].number > 9){
-                        return hearts[0];
-                    }
-                    //priority 6: dump high
-                    else{
+                    //easy play
+                    else {
                         return sortedHand[0];
                     }
                 }

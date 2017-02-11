@@ -467,9 +467,16 @@ a:hover{
 }
 
 .tab { 
-  margin-left: 40px; 
-  font-size: 5vh;
+  margin-left: 2vh; 
+  font-size: 4vh;
 }
+
+#aboutImage{
+  float: right;
+  height: 80vh;
+  padding:  1vh;
+}
+
 //home page
 #home-page{
   height: 92vh;

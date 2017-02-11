@@ -55,7 +55,7 @@ function controller(shuffle, ai, timeout) {
 
     this.playerGallery =[{name:'Denny', src: './images/dennycarter.png', difficulty: 'hard'}, {name: 'Dunc', src: './images/dunc.png', difficulty: 'hard'}, {name: 'Dale', src: './images/dalecarter.png', difficulty: 'hard'}, {name: 'Darrel', src: './images/darrel.png', difficulty: 'hard'}, {name: 'Dwight', src: './images/dwight2.png', difficulty: 'hard'}, {name: 'Debbie', src: './images/debbie.png', difficulty: 'hard'}, {name: 'Marianne', src: './images/marianne.png', difficulty: 'easy'}, {name: 'Dan', src: './images/dan.png', difficulty: 'easy'}, {name: 'Mugs', src: './images/mugs.png', difficulty: 'easy'}, {name: 'Sultan', src: './images/sultan.png', difficulty: 'easy'}, {name: 'Aileen', src: './images/aileencole.png', difficulty: 'easy'}, {name: 'Teege', src: './images/tj.png', difficulty: 'easy'}];
 
-    this.players = [this.playerGallery[0], this.playerGallery[1], this.playerGallery[2], this.playerGallery[3]];
+    this.players = [this.playerGallery[10], this.playerGallery[0], this.playerGallery[1], this.playerGallery[2]];
     this.playerScores = [0,0,0,0];
     this.playerSemis =[0,0,0,0];
 
@@ -72,7 +72,6 @@ function controller(shuffle, ai, timeout) {
 
     this.playerSelected = ()=>{
         // this.playerSelect = false;
-        this.players[0].name = 'You';
         this.opponentSelect = true;
     };
 
@@ -114,6 +113,7 @@ function controller(shuffle, ai, timeout) {
     };
 
     this.dealCards = ()=>{
+        this.players[0].name = 'You';
         this.cardPlayed = false;
         this.playedCards = [];
         this.turnOrder = [];

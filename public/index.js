@@ -33818,9 +33818,9 @@
 	        heartsBroken: false
 	    };
 	
-	    this.playerGallery = [{ name: 'Denny', src: './images/dennycarter.png', difficulty: 'hard' }, { name: 'Dunc', src: './images/dunc.png', difficulty: 'hard' }, { name: 'Dale', src: './images/dalecarter.png', difficulty: 'hard' }, { name: 'Darrel', src: './images/darrel.png', difficulty: 'hard' }, { name: 'Dwight', src: './images/dwight2.png', difficulty: 'hard' }, { name: 'Debbie', src: './images/debbie.png', difficulty: 'hard' }, { name: 'Marianne', src: './images/marianne.png', difficulty: 'easy' }, { name: 'Dan', src: './images/dan.png', difficulty: 'easy' }, { name: 'Mugs', src: './images/mugs.png', difficulty: 'easy' }, { name: 'Sultan', src: './images/sultan.png', difficulty: 'easy' }, { name: 'Aileen', src: './images/aileencole.png', difficulty: 'easy' }, { name: 'Teege', src: './images/tj.png', difficulty: 'easy' }];
+	    this.playerGallery = [{ name: 'Denny', src: './images/dennycarter.png', difficulty: 'hard' }, { name: 'Dunc', src: './images/dunc.png', difficulty: 'hard' }, { name: 'Dale', src: './images/dalecarter.png', difficulty: 'hard' }, { name: 'Darrel', src: './images/darrel.png', difficulty: 'hard' }, { name: 'Dwight', src: './images/dwight2.png', difficulty: 'hard' }, { name: 'Debbie', src: './images/debbie.png', difficulty: 'hard' }, { name: 'Marianne', src: './images/marianne.png', difficulty: 'easy' }, { name: 'Dan', src: './images/dan.png', difficulty: 'easy' }, { name: 'Mugs', src: './images/mugs.png', difficulty: 'easy' }, { name: 'Sultan', src: './images/sultan.png', difficulty: 'easy' }, { name: 'Suzy', src: './images/suzy.png', difficulty: 'easy' }, { name: 'Aileen', src: './images/aileencole.png', difficulty: 'easy' }, { name: 'Teege', src: './images/tj.png', difficulty: 'easy' }];
 	
-	    this.players = [this.playerGallery[10], this.playerGallery[0], this.playerGallery[1], this.playerGallery[2]];
+	    this.players = [this.playerGallery[11], this.playerGallery[0], this.playerGallery[1], this.playerGallery[2]];
 	    this.playerScores = [0, 0, 0, 0];
 	    this.playerSemis = [0, 0, 0, 0];
 	

@@ -248,7 +248,7 @@ function controller(shuffle, ai, timeout) {
                 return card !== this.passArray[0] && card !== this.passArray [1] && card !== this.passArray[2];
             });
         //run the algorithim from the aiService to get the pass from the computer player.  It returns an object with the new full player hand and the new computer hand which has had its pass removed. 
-            var passObject = ai.pass(this.hands[this.passTarget], this.hand);
+            var passObject = ai.pass(this.hands[this.passTarget], this.hand, this.players[this.passTarget].difficulty);
             console.log(passObject);
             this.hands[this.passTarget] = passObject.compHand;
         //add the pass to the computer's hand

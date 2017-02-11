@@ -1,6 +1,6 @@
 export default function aiService() {
     return {
-        pass(hand, playerHand){
+        pass(hand, playerHand, difficulty){
             var aiPass = {
                 compPass: [],
                 compHand: hand,
@@ -85,7 +85,8 @@ export default function aiService() {
                 }
                 aiPass.compHand = hearts.concat(spades).concat(clubs).concat(diamonds);
             }
-            //If too small, fill it with high cards
+
+            //If too small, fill 
             else if(aiPass.compPass.length < 3){
                 var full = hearts.concat(spades).concat(clubs).concat(diamonds);
                 console.log('full AI is ', full); 
@@ -93,16 +94,22 @@ export default function aiService() {
                     return a.number - b.number;
                 });
                 console.log('sorted is ', sorted);
-                while(aiPass.compPass.length<3){
-                    var y = sorted.pop();
-                    aiPass.compPass.push(y);
-                } 
+                //if hard add highest cards
+                if(difficulty==='hard'){
+                    while(aiPass.compPass.length<3){
+                        var z = sorted.pop();
+                        aiPass.compPass.push(z);
+                    } 
+                }
+                    //if easy, fill with medium cards
+                else {
+                    console.log('EASYPASS');
+                    while(aiPass.compPass.length<3){
+                        var y = sorted.splice(4,1);
+                        aiPass.compPass.push(y[0]);
+                    } 
+                }
             }
-            console.log('at end of ai');
-            console.log('player hand is ', aiPass.playerHand);
-            console.log('comp Pass is ', aiPass.compPass);
-
-
             aiPass.playerHand = aiPass.playerHand.concat(aiPass.compPass);
             aiPass.compHand = aiPass.compHand.filter((card)=>{
                 return card !== aiPass.compPass[0] && card !== aiPass.compPass[1] && card !== aiPass.compPass[2];
@@ -346,7 +353,7 @@ export default function aiService() {
                         return sortedHand[sortedHand.length-1];
                     }
                     console.log('right above priorities');
-                    if (difficulty === hard){
+                    if (difficulty === 'hard'){
                         //priority 1: dump queen
                         if (theQueen.length>0){
                             return theQueen[0];

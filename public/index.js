@@ -34004,7 +34004,7 @@
 	                return card !== _this.passArray[0] && card !== _this.passArray[1] && card !== _this.passArray[2];
 	            });
 	            //run the algorithim from the aiService to get the pass from the computer player.  It returns an object with the new full player hand and the new computer hand which has had its pass removed. 
-	            var passObject = ai.pass(_this.hands[_this.passTarget], _this.hand);
+	            var passObject = ai.pass(_this.hands[_this.passTarget], _this.hand, _this.players[_this.passTarget].difficulty);
 	            console.log(passObject);
 	            _this.hands[_this.passTarget] = passObject.compHand;
 	            //add the pass to the computer's hand
@@ -34490,7 +34490,7 @@
 	exports.default = aiService;
 	function aiService() {
 	    return {
-	        pass: function pass(hand, playerHand) {
+	        pass: function pass(hand, playerHand, difficulty) {
 	            var aiPass = {
 	                compPass: [],
 	                compHand: hand,
@@ -34574,7 +34574,8 @@
 	                    }
 	                    aiPass.compHand = hearts.concat(spades).concat(clubs).concat(diamonds);
 	                }
-	                //If too small, fill it with high cards
+	
+	                //If too small, fill 
 	                else if (aiPass.compPass.length < 3) {
 	                        var full = hearts.concat(spades).concat(clubs).concat(diamonds);
 	                        console.log('full AI is ', full);
@@ -34582,15 +34583,22 @@
 	                            return a.number - b.number;
 	                        });
 	                        console.log('sorted is ', sorted);
-	                        while (aiPass.compPass.length < 3) {
-	                            var y = sorted.pop();
-	                            aiPass.compPass.push(y);
+	                        //if hard add highest cards
+	                        if (difficulty === 'hard') {
+	                            while (aiPass.compPass.length < 3) {
+	                                var z = sorted.pop();
+	                                aiPass.compPass.push(z);
+	                            }
 	                        }
+	                        //if easy, fill with medium cards
+	                        else {
+	                                console.log('EASYPASS');
+	                                while (aiPass.compPass.length < 3) {
+	                                    var y = sorted.splice(4, 1);
+	                                    aiPass.compPass.push(y[0]);
+	                                }
+	                            }
 	                    }
-	            console.log('at end of ai');
-	            console.log('player hand is ', aiPass.playerHand);
-	            console.log('comp Pass is ', aiPass.compPass);
-	
 	            aiPass.playerHand = aiPass.playerHand.concat(aiPass.compPass);
 	            aiPass.compHand = aiPass.compHand.filter(function (card) {
 	                return card !== aiPass.compPass[0] && card !== aiPass.compPass[1] && card !== aiPass.compPass[2];
@@ -34827,7 +34835,7 @@
 	                            return sortedHand[sortedHand.length - 1];
 	                        }
 	                        console.log('right above priorities');
-	                        if (difficulty === hard) {
+	                        if (difficulty === 'hard') {
 	                            //priority 1: dump queen
 	                            if (theQueen.length > 0) {
 	                                return theQueen[0];

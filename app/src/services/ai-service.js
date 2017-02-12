@@ -287,29 +287,64 @@ export default function aiService() {
                 });
 
                 console.log('matching cards are ', sortedInSuit);
-
+             
                     //if so, the ai must play one
                 if (sortedInSuit.length>0){
                     console.log('not voided');
-                    if (runFlag === 1){
+                    if (runFlag === 1 && difficulty==='hard'){
                         console.log('run play!');
                         return sortedInSuit[0];
                     }
-                        //if no pointers and last player, go big
-                    console.log('trick points are ', trickPoints);
-                    if(trickPoints<1 && playedCards.length > 2 &&sortedInSuit[0].points===0){
-                        //no points so go big
-                        return sortedInSuit[0];
-                    }
-                    //if spades and queen is still out there
-                    else if (playedCards[lead].suit==='SPADES' && events.queen===false){
-                        console.log('spades play.  Queen Out');
-                        for (var i = 0; i < (sortedInSuit.length-1); i++){
-                            if (sortedInSuit[i].number < 12){
-                                return sortedInSuit[i];
+                    //if spades
+                    else if (playedCards[lead].suit==='SPADES'){
+                        var theQueen = sortedInSuit.filter((card)=>{
+                            return card.number === 12;
+                        });
+                        //if player has the queen 
+                        if (theQueen.length===1){
+                            //if high card is higher, hit em
+                            if(highCard.number > 12){
+                                return theQueen[0];
+                            }
+                            //if not, go high
+                            else{
+                                if (sortedInSuit[0].code !== 'QS' || sortedInSuit.length===1){
+                                    return sortedInSuit[0];
+                                }
+                                else{
+                                    return sortedInSuit[1];
+                                }
                             }
                         }
-                        console.log('nothing less that the queen');
+                        //else the player doesn't have the queen'    
+                        else{
+                            //check the played cards for the queen
+                            var playedQueen = playedCards.filter((card)=>{
+                                return card.code === 'QS';
+                            });
+                            //if the queen hasn't been played, or has just been played
+                            if(events.queen===false || playedQueen.length===1){
+                                console.log('spade play, queen out');
+                                for (var i = 0; i < (sortedInSuit.length-1); i++){
+                                    console.log('card number is ', sortedInSuit[i].number);
+                                    if (sortedInSuit[i].number < 12){
+                                        return sortedInSuit[i];
+                                    }
+                                }
+                                console.log('nothing less that the queen');
+                                return sortedInSuit[0];
+                            }
+                            //no queen danger
+                            else{
+                                console.log('no queen danger');
+                                return sortedInSuit[0];
+                            }
+                        }
+                    }
+                        //if no pointers and last player, go big
+                    else if(trickPoints<1 && playedCards.length > 2 &&sortedInSuit[0].points===0){
+                        console.log('trick points are '+ trickPoints + 'should be zero');
+                        //no points so go big
                         return sortedInSuit[0];
                     }
                     else{    

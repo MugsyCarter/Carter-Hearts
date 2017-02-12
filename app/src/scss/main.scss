@@ -104,20 +104,31 @@ td{
 }
 
 img{
-  height: 24vh;
+  height: 18vh;
   display: inline-block;
-border-radius: 1vh;
+  border-radius: 1vh;
 }
 
-.footerText{
-  padding: 0vh;
-  margin: 0vh 0vh 2vh 0vh;
+//play page 
+//intro
+#playMessage{
+  font-size: 10vh;
+  color:$red
 }
 
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
+.button{
+  text-align:center;
+  margin:auto;
+}
+
+#deal-button{
+  width: 100vw;
+  border: 1vh solid black;
+  margin: 2vh 0vh;
+}
+//game play view
+#scoreboard{
+  display: none;
 }
 
 .gameMessage{
@@ -130,6 +141,108 @@ border-radius: 1vh;
     font-size: 4vh;
     color: $red;
 }
+
+
+
+.playerImage{
+  height: 8vh;
+  padding: 0.5vh;
+  border-radius: 1vh;
+}
+
+
+#player0Card{
+  position: fixed;
+  top: 50vh;
+  left: 45vw;
+}
+
+#player0Image{
+    position: fixed;
+    top: 72vh;
+    left: 42vw;
+}
+
+#player1Card{
+  position: fixed;
+  top: 50vh;
+  left: 35vw;
+}
+
+#player1Image{
+  position: fixed;
+  top: 55vh;
+  left: 15vw;
+}
+
+#player2Card{
+  position: fixed;
+  top: 25vh;
+  left: 45vw;
+}
+
+#player2Image{
+  position: fixed;
+  top: 20vh;
+  left: 42vw;
+}
+
+#player3Card{
+  position: fixed;
+  top: 50vh;
+  left: 55vw;
+}
+
+#player3Image{
+  position: fixed;
+  top: 55vh;
+  left: 75vw;
+}
+
+.currentPlayerImage{
+    padding: 1vh;
+    background-color:black;
+    border-radius: 2vh;
+    border: 1vh solid $red;
+}
+
+.passPlayerImage{
+    padding: 1vh;
+    margin: 1vh;
+    background-color:$red;
+    border-radius: 2vh;
+    border: 0vh solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footerText{
+  padding: 0vh;
+  margin: 0vh 0vh 2vh 0vh;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+
+
+
 
 .main-nav {
   display: block;
@@ -191,15 +304,6 @@ border-radius: 1vh;
 
 
 // general play page stuff here
-
-#scoreboard{
-  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
-  height: 30vh;
-  width: 33vw;
-  position: fixed;
-  right: 0vw;
-  top: 10vh;
-}
 
 .hand{
  list-style-type: none;
@@ -339,87 +443,6 @@ a:hover{
   height: 900vh;
 }
 
-.playerImage{
-  height: 15vh;
-  padding: 1vh;
-  border-radius: 2vh;
-}
-
-.currentPlayerImage{
-    height: 15vh;
-    padding: 1vh;
-    background-color:black;
-    border-radius: 2vh;
-    border: 1vh solid $red;
-}
-
-.passPlayerImage{
-  height: 15vh;
-    padding: 1vh;
-    background-color:$red;
-    border-radius: 2vh;
-    border: 1vh solid black;
-}
-
-.leadCardImage{
-    padding: 0.5vh;
-    background-color:black;
-    border-radius: 2vh;
-    border: 0.5vh solid $red;
-    top: +1vh;
-}
-
-
-
-#player0Card{
-  position: fixed;
-  top: 50vh;
-  left: 45vw;
-}
-
-#player1Image{
-   padding: 3vh;
-}
-
-#player1Card{
-  position: fixed;
-  top: 50vh;
-  left: 35vw;
-}
-
-#player1Image{
-   padding: 3vh;
-  position: fixed;
-  top: 55vh;
-  left: 15vw;
-}
-
-#player2Card{
-  position: fixed;
-  top: 25vh;
-  left: 45vw;
-}
-
-#player2Image{
-  padding: 3vh;
-  position: fixed;
-  top: 8vh;
-  left: 45vw;
-}
-
-#player3Card{
-  position: fixed;
-  top: 50vh;
-  left: 55vw;
-}
-
-#player3Image{
-  padding: 3vh;
-  position: fixed;
-  top: 55vh;
-  left: 75vw;
-}
-
 #score{
   padding-left: 3vw;
 }
@@ -519,29 +542,38 @@ a:hover{
 
 /* Media Query Stuff */
 
-@media only screen and (min-width: 481px) {
+// @media only screen and (min-width: 481px) {
   /* Larger cell screen, changes image only */
 
-  .icon-menu {
-    display: none;
-  }
+//   .icon-menu {
+//     display: none;
+//   }
 
-  .main-nav ul li {
-    display: inline-block;
-    padding: 0.5% 5%;
-  }
+//   .main-nav ul li {
+//     display: inline-block;
+//     padding: 0.5% 5%;
+//   }
 
-  .firstLink{
-    padding-left: 0%;
-  }
-}
+//   .firstLink{
+//     padding-left: 0%;
+//   }
+// }
 
-@media only screen and (min-width: 640px) {
-  /* First break point - switch to tablet design: 2+ columns */
-}
+// @media only screen and (min-width: 640px) {
+//   /* First break point - switch to tablet design: 2+ columns */
+// }
+
+
+
+
+
 
 @media only screen and (min-width: 1024px) {
   /* Minor styling: larger image and fonts to match new screen size */
+
+  img{
+    height: 24vh;
+  }
 
   .main-nav ul li {
     padding: 1% 5%;
@@ -551,9 +583,7 @@ a:hover{
     font-size: 3.3vh;
   }
 
-#phoneMessage{
-  display: none;
-}
+
 
 //home page fullscreen
 #home-page{
@@ -582,6 +612,107 @@ a:hover{
   }
 }
 
+//play page fullscreen
+#scoreboard{
+  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+  height: 30vh;
+  width: 33vw;
+  position: fixed;
+  right: 0vw;
+  top: 10vh;
+}
+
+.gameMessage{
+  font-size: 5vh;
+  color: white;
+  padding-left: 1vw;
+}
+
+.errorMessage{    
+    font-size: 4vh;
+    color: $red;
+}
+
+.playerImage{
+  height: 15vh;
+  padding: 1vh;
+  border-radius: 2vh;
+}
+
+.currentPlayerImage{
+    height: 15vh;
+    padding: 1vh;
+    background-color:black;
+    border-radius: 2vh;
+    border: 1vh solid $red;
+}
+
+.passPlayerImage{
+  height: 15vh;
+    padding: 1vh;
+    background-color:$red;
+    border-radius: 2vh;
+    border: 1vh solid black;
+}
+
+.leadCardImage{
+    padding: 0.5vh;
+    background-color:black;
+    border-radius: 2vh;
+    border: 0.5vh solid $red;
+    top: +1vh;
+}
+
+
+
+#player0Card{
+  position: fixed;
+  top: 50vh;
+  left: 45vw;
+}
+
+#player0Image{
+   padding: 3vh;
+}
+
+#player1Card{
+  position: fixed;
+  top: 50vh;
+  left: 35vw;
+}
+
+#player1Image{
+   padding: 3vh;
+  position: fixed;
+  top: 55vh;
+  left: 15vw;
+}
+
+#player2Card{
+  position: fixed;
+  top: 25vh;
+  left: 45vw;
+}
+
+#player2Image{
+  padding: 3vh;
+  position: fixed;
+  top: 8vh;
+  left: 45vw;
+}
+
+#player3Card{
+  position: fixed;
+  top: 50vh;
+  left: 55vw;
+}
+
+#player3Image{
+  padding: 3vh;
+  position: fixed;
+  top: 55vh;
+  left: 75vw;
+}
 
 
 }

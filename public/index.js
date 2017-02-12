@@ -34808,7 +34808,7 @@
 	                                        //if the queen hasn't been played, or has just been played
 	                                        if (events.queen === false || playedQueen.length === 1) {
 	                                            console.log('spade play, queen out');
-	                                            for (var i = 0; i < sortedInSuit.length - 1; i++) {
+	                                            for (var i = 0; i < sortedInSuit.length; i++) {
 	                                                console.log('card number is ', sortedInSuit[i].number);
 	                                                if (sortedInSuit[i].number < 12) {
 	                                                    return sortedInSuit[i];
@@ -34836,6 +34836,10 @@
 	                                            return sortedInSuit[i];
 	                                        }
 	                                    }
+	                                    //if none are lower and its there are pointers, still play low
+	                                    if (trickPoints < 1 && playedCards.length < 3) {
+	                                        return sortedInSuit[sortedInSuit.length];
+	                                    }
 	                                    //if none are lower, play highest
 	                                    return sortedInSuit[0];
 	                                }
@@ -34849,17 +34853,20 @@
 	                        var theQueen = [];
 	                        var theTen = [];
 	                        var sortedHand = [];
+	                        sortedHand = hand.sort(function (a, b) {
+	                            return b.number - a.number;
+	                        });
 	                        //play whatever
-	                        hearts = hand.filter(function (card) {
+	                        hearts = sortedHand.filter(function (card) {
 	                            return card.suit === 'HEARTS';
 	                        });
-	                        spades = hand.filter(function (card) {
+	                        spades = sortedHand.filter(function (card) {
 	                            return card.suit === 'SPADES';
 	                        });
-	                        diamonds = hand.filter(function (card) {
+	                        diamonds = sortedHand.filter(function (card) {
 	                            return card.suit === 'DIAMONDS';
 	                        });
-	                        clubs = hand.filter(function (card) {
+	                        clubs = sortedHand.filter(function (card) {
 	                            return card.suit === 'CLUBS';
 	                        });
 	                        if (spades.length > 0) {
@@ -34872,10 +34879,7 @@
 	                                return card.number === 10;
 	                            });
 	                        }
-	                        sortedHand = hand.sort(function (a, b) {
-	                            return b.number - a.number;
-	                        });
-	                        if (runFlag === 1) {
+	                        if (runFlag === 1 && difficulty === 'hard') {
 	                            console.log('run play!');
 	                            return sortedHand[sortedHand.length - 1];
 	                        }
@@ -34883,40 +34887,55 @@
 	                        if (difficulty === 'hard') {
 	                            //priority 1: dump queen
 	                            if (theQueen.length > 0) {
+	                                console.log(1);
 	                                return theQueen[0];
 	                            }
 	                            //priority 1.5: ten protection
 	                            else if (hearts.length > 0 && hearts.length < 3 && hearts[0].number > 9) {
+	                                    console.log(2);
 	                                    return hearts[0];
 	                                }
 	                                //priority 2: dump to make void
 	                                else if (hearts.length === 1) {
+	                                        console.log(3);
 	                                        return hearts[0];
 	                                    } else if (diamonds.length === 1) {
+	                                        console.log(4);
 	                                        return diamonds[0];
 	                                    } else if (clubs.length === 1) {
+	                                        console.log(5);
 	                                        return clubs[0];
 	                                    } else if (spades.length === 1) {
+	                                        console.log(6);
 	                                        return spades[0];
 	                                    }
 	                                    //priority 3 dump high spade
-	                                    else if (spades.length > 0 && spades.length < 4) {
+	                                    else if (spades.length > 0 && spades.length < 3) {
+	                                            console.log(7);
 	                                            return spades[0];
 	                                        }
 	                                        //priority 4 dump high heart
-	                                        else if (hearts.length > 0 && hearts.length < 4) {
+	                                        else if (hearts.length > 0 && hearts.length < 3) {
+	                                                console.log(8);
 	                                                return hearts[0];
 	                                            }
 	                                            //priority 5: dump near voids
-	                                            else if (diamonds.length > 0 && diamonds.length < 3 && diamonds[0].number > 9) {
-	                                                    return diamonds[0];
-	                                                } else if (clubs.length > 0 && clubs.length < 3 && clubs[0].number > 9) {
-	                                                    return clubs[0];
-	                                                } else if (hearts.length > 0 && hearts.length < 3 && diamonds[0].number > 9) {
+	                                            else if (spades.length > 0 && spades.length < 6 && spades[0].number > 11) {
+	                                                    console.log(9);
+	                                                    return spades[0];
+	                                                } else if (hearts.length > 0 && hearts.length < 4 && hearts[0].number > 9) {
+	                                                    console.log(10);
 	                                                    return hearts[0];
+	                                                } else if (diamonds.length > 0 && diamonds.length < 4 && diamonds[0].number > 9) {
+	                                                    console.log(11);
+	                                                    return diamonds[0];
+	                                                } else if (clubs.length > 0 && clubs.length < 4 && clubs[0].number > 9) {
+	                                                    console.log(12);
+	                                                    return clubs[0];
 	                                                }
 	                                                //priority 6: dump high
 	                                                else {
+	                                                        console.log('dump high');
 	                                                        return sortedHand[0];
 	                                                    }
 	                        }
@@ -34925,7 +34944,6 @@
 	                                return sortedHand[0];
 	                            }
 	                    }
-	                    return;
 	                }
 	        }
 	    };

@@ -354,6 +354,10 @@ export default function aiService() {
                                 return sortedInSuit[i];
                             }
                         }
+                        //if none are lower and its there are pointers, still play low
+                        if (trickPoints<1 && playedCards.length < 3){
+                            return sortedInSuit[sortedInSuit.length];
+                        }
                         //if none are lower, play highest
                         return(sortedInSuit[0]);
                     }

@@ -295,20 +295,21 @@ export default function aiService() {
                         console.log('run play!');
                         return sortedInSuit[0];
                     }
-                        //if no pointers, go big
+                        //if no pointers and last player, go big
                     console.log('trick points are ', trickPoints);
-                    if(trickPoints<1 && playedCards.length > 2 &&sortedInSuit[0].points===0 && playedCards[lead].suit!=='SPADES'){
+                    if(trickPoints<1 && playedCards.length > 2 &&sortedInSuit[0].points===0){
                         //no points so go big
                         return sortedInSuit[0];
                     }
                     //if spades and queen is still out there
                     else if (playedCards[lead].suit==='SPADES' && events.queen===false){
                         console.log('spades play.  Queen Out');
-                        for (var i = 0; i < sortedInSuit.length-1; i++){
+                        for (var i = 0; i < (sortedInSuit.length-1); i++){
                             if (sortedInSuit[i].number < 12){
                                 return sortedInSuit[i];
                             }
                         }
+                        console.log('nothing less that the queen');
                         return sortedInSuit[0];
                     }
                     else{    

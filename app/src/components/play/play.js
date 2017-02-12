@@ -578,7 +578,7 @@ function controller(shuffle, ai, timeout) {
             this.winMessage = 'You won Carter Hearts!';
         }
         else{
-            this.winMessage = this.players[winner].name + ' has won the game.  <br>You can\'t win them all.';
+            this.winMessage = this.players[winner].name + ' has won the game.  You can\'t win them all.';
         }
         this.gameOver = true;
         this.playAgain = true;

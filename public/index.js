@@ -34331,7 +34331,7 @@
 	        if (winner === 0) {
 	            _this.winMessage = 'You won Carter Hearts!';
 	        } else {
-	            _this.winMessage = _this.players[winner].name + ' has won the game.  <br>You can\'t win them all.';
+	            _this.winMessage = _this.players[winner].name + ' has won the game.  You can\'t win them all.';
 	        }
 	        _this.gameOver = true;
 	        _this.playAgain = true;
@@ -34781,19 +34781,29 @@
 	                        }
 	                        //if no pointers, go big
 	                        console.log('trick points are ', trickPoints);
-	                        if (trickPoints < 1 && playedCards.length > 2 && sortedInSuit[0].points === 0) {
+	                        if (trickPoints < 1 && playedCards.length > 2 && sortedInSuit[0].points === 0 && playedCards[lead].suit !== 'SPADES') {
 	                            //no points so go big
 	                            return sortedInSuit[0];
-	                        } else {
-	                            //play highest in suit below high card
-	                            for (var i = 0; i < sortedInSuit.length; i++) {
-	                                if (sortedInSuit[i].number < highCard.number) {
-	                                    return sortedInSuit[i];
-	                                }
-	                            }
-	                            //if none are lower, play highest
-	                            return sortedInSuit[0];
 	                        }
+	                        //if spades and queen is still out there
+	                        else if (playedCards[lead].suit === 'SPADES' && events.queen === false) {
+	                                console.log('spades play.  Queen Out');
+	                                for (var i = 0; i < sortedInSuit.length - 1; i++) {
+	                                    if (sortedInSuit[i].number < 12) {
+	                                        return sortedInSuit[i];
+	                                    }
+	                                }
+	                                return sortedInSuit[0];
+	                            } else {
+	                                //otherwise play highest in suit below high card
+	                                for (var i = 0; i < sortedInSuit.length; i++) {
+	                                    if (sortedInSuit[i].number < highCard.number) {
+	                                        return sortedInSuit[i];
+	                                    }
+	                                }
+	                                //if none are lower, play highest
+	                                return sortedInSuit[0];
+	                            }
 	                    } else {
 	                        console.log('VOIDED!');
 	                        console.log('hand is ', hand);

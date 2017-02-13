@@ -2,10 +2,10 @@
  <section class ="page" id="play-page">
     <div>
         <image id="player0Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[0].src}} 
-             ng-class="{'currentPlayerImage' : $ctrl.high===0, 'playerImage' : $ctrl.high!==0}">
+             ng-class="{'currentPlayerImage' : $ctrl.high===0, 'playerImage' : $ctrl.high!==0,'hiddenPlayArea': $ctrl.handStart===true}">
         <h2 ng-if="$ctrl.beginning===true" id="playMessage">Play Carter Hearts!</h2>
         <!--<h1 id="phoneMessage" ng-if="$ctrl.beginning===true">Turn your phone sideways.</h1>    -->
-        <h2 ng-if="$ctrl.handStart===true">Deal Next Hand</h2>
+        <h2 id="nextHandMessage" ng-if="$ctrl.handStart===true">Deal Next Hand</h2>
         <h1 ng-if="$ctrl.gameOver===true">Game Over</h1>
         <h1 class = "gameMessage" ng-if="$ctrl.gameOver===true">{{$ctrl.winMessage}}</h1>
         <div class="banner">
@@ -56,7 +56,7 @@
         </div>
 
 <!--scoreboard-->
-        <div id="scoreboard" ng-if="$ctrl.beginning === false">
+        <div ng-if="$ctrl.beginning === false" ng-class="{'scoreboard': $ctrl.handStart===true, 'hiddenScoreboard': $ctrl.handStart===false}">
             <table>
                 <th>
                     <td>{{$ctrl.players[0].name}}</td>
@@ -84,9 +84,7 @@
             </table>
         </div>
 
-        <div class="playArea">
-
-         
+        <div class="playArea" ng-class="{'hiddenPlayArea': $ctrl.handStart===true}">
             <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}" ng-class="{'leadCardImage': $ctrl.lead === 0}">
             <image id="player1Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[1].src}} ng-class="{'currentPlayerImage' : $ctrl.high===1, 'playerImage' : $ctrl.high!==1, 'passPlayerImage' : $ctrl.passFlag[1]}">
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}" ng-class="{'leadCardImage': $ctrl.lead === 1}">

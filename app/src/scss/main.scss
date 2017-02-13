@@ -128,8 +128,20 @@ img{
   margin: 2vh 0vh;
 }
 //game play view
-#scoreboard{
+.hiddenScoreboard{
   display: none;
+}
+
+.hiddenPlayArea{
+  display: none;
+}
+
+.scoreboard{
+  display: flex;
+  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+  height: 30vh;
+  width: 100vw;
+  position: static;
 }
 
 .gameMessage{
@@ -618,7 +630,8 @@ a:hover{
 }
 
 //play page fullscreen
-#scoreboard{
+
+.hiddenScoreboard{
   display: flex;
   background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
   height: 30vh;
@@ -626,6 +639,22 @@ a:hover{
   position: fixed;
   right: 0vw;
   top: 10vh;
+}
+
+.scoreboard{
+  display: flex;
+  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+  height: 30vh;
+  width: 33vw;
+  position: fixed;
+  right: 0vw;
+  top: 10vh;
+}
+
+
+
+.hiddenPlayArea{
+  display: flex;
 }
 
 .gameMessage{

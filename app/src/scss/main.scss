@@ -384,11 +384,11 @@ img{
 
 .selectedCard{
     padding: 1vh;
-    bottom: +30px;
+    position:absolute;
+    bottom: 26vh;
     background-color:$red;
     border-radius: 2vh;
     border-color: black;
-    z-index: -1;
 }
 
 

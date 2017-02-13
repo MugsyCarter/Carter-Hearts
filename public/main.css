@@ -115,8 +115,18 @@ img {
   border: 1vh solid black;
   margin: 2vh 0vh; }
 
-#scoreboard {
+.hiddenScoreboard {
   display: none; }
+
+.hiddenPlayArea {
+  display: none; }
+
+.scoreboard {
+  display: flex;
+  background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+  height: 30vh;
+  width: 100vw;
+  position: static; }
 
 .gameMessage {
   font-size: 3vh;
@@ -295,11 +305,11 @@ img {
 
 .selectedCard {
   padding: 1vh;
-  bottom: +30px;
+  position: absolute;
+  bottom: 26vh;
   background-color: #D40000;
   border-radius: 2vh;
-  border-color: black;
-  z-index: -1; }
+  border-color: black; }
 
 .link {
   display: none;
@@ -449,7 +459,7 @@ a:hover {
     width: auto;
     border: 1vh solid black;
     margin: 2vh 0vh; }
-  #scoreboard {
+  .hiddenScoreboard {
     display: flex;
     background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
     height: 30vh;
@@ -457,6 +467,16 @@ a:hover {
     position: fixed;
     right: 0vw;
     top: 10vh; }
+  .scoreboard {
+    display: flex;
+    background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
+    height: 30vh;
+    width: 33vw;
+    position: fixed;
+    right: 0vw;
+    top: 10vh; }
+  .hiddenPlayArea {
+    display: flex; }
   .gameMessage {
     font-size: 5vh;
     color: white;
@@ -493,32 +513,32 @@ a:hover {
   #player1Card {
     position: fixed;
     top: 50vh;
-    left: 35vw; }
+    left: 34vw; }
   #player1Image {
     position: fixed;
     top: 55vh;
-    left: 15vw; }
+    left: 10vw; }
   #player2Card {
     position: fixed;
     top: 25vh;
     left: 45vw; }
   #player2Image {
     position: fixed;
-    top: 8vh;
+    top: 7vh;
     left: 45vw; }
   #player3Card {
     position: fixed;
     top: 50vh;
-    left: 55vw; }
+    left: 56vw; }
   #player3Image {
     position: fixed;
     top: 55vh;
-    left: 75vw; }
+    left: 77vw; }
   .selectedCard {
     z-index: 0; }
   #newTrickButton {
     bottom: 25vh;
-    left: 21.5vw; } }
+    left: 19.5vw; } }
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */

@@ -1,6 +1,8 @@
 
  <section class ="page" id="play-page">
     <div>
+        <image id="player0Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[0].src}} 
+             ng-class="{'currentPlayerImage' : $ctrl.high===0, 'playerImage' : $ctrl.high!==0}">
         <h2 ng-if="$ctrl.beginning===true" id="playMessage">Play Carter Hearts!</h2>
         <!--<h1 id="phoneMessage" ng-if="$ctrl.beginning===true">Turn your phone sideways.</h1>    -->
         <h2 ng-if="$ctrl.handStart===true">Deal Next Hand</h2>
@@ -84,8 +86,7 @@
 
         <div class="playArea">
 
-            <image id="player0Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[0].src}} 
-             ng-class="{'currentPlayerImage' : $ctrl.high===0, 'playerImage' : $ctrl.high!==0}">
+         
             <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}" ng-class="{'leadCardImage': $ctrl.lead === 0}">
             <image id="player1Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[1].src}} ng-class="{'currentPlayerImage' : $ctrl.high===1, 'playerImage' : $ctrl.high!==1, 'passPlayerImage' : $ctrl.passFlag[1]}">
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}" ng-class="{'leadCardImage': $ctrl.lead === 1}">

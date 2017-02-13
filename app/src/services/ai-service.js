@@ -318,8 +318,13 @@ export default function aiService() {
                         }
                         //else the player doesn't have the queen'    
                         else{
+                            //check the played cards for the queen
+                            console.log('playedCards are', playedCards);
+                            var playedQueen = playedCards.filter((card)=>{
+                                return card.code === 'QS';
+                            });
                             //if the queen hasn't been played, or has just been played
-                            if(events.queen===false){
+                            if(events.queen===false || playedQueen.length===1){
                                 console.log('spade play, queen out');
                                 for (var i = 0; i < (sortedInSuit.length); i++){
                                     console.log('card number is ', sortedInSuit[i].number);
@@ -344,7 +349,6 @@ export default function aiService() {
                         return sortedInSuit[0];
                     }
                     else{    
-                        console.log('playing a card');
                     //otherwise play highest in suit below high card
                         for(var i=0; i < sortedInSuit.length; i++){
                             if (sortedInSuit[i].number < highCard.number){

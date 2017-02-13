@@ -344,6 +344,7 @@ export default function aiService() {
                         return sortedInSuit[0];
                     }
                     else{    
+                        console.log('playing a card');
                     //otherwise play highest in suit below high card
                         for(var i=0; i < sortedInSuit.length; i++){
                             if (sortedInSuit[i].number < highCard.number){
@@ -352,7 +353,7 @@ export default function aiService() {
                         }
                         //if none are lower and its there are pointers, still play low
                         if (trickPoints<1 && playedCards.length < 3){
-                            return sortedInSuit[sortedInSuit.length];
+                            return sortedInSuit[sortedInSuit.length-1];
                         }
                         //if none are lower, play highest
                         return(sortedInSuit[0]);

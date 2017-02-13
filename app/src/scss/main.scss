@@ -611,8 +611,15 @@ a:hover{
   }
 }
 
+#deal-button{
+  width: auto;
+  border: 1vh solid black;
+  margin: 2vh 0vh;
+}
+
 //play page fullscreen
 #scoreboard{
+  display: flex;
   background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
   height: 30vh;
   width: 33vw;
@@ -639,12 +646,13 @@ a:hover{
 }
 
 .currentPlayerImage{
+    height: 15vh;
     background-color:black;
     border: 1vh solid $red;
 }
 
 .passPlayerImage{
-    padding: 1vh;
+    padding: 0.5vh;
     background-color:$red;
     border-radius: 2vh;
     border: 1vh solid black;
@@ -678,7 +686,6 @@ a:hover{
 }
 
 #player1Image{
-   padding: 3vh;
   position: fixed;
   top: 55vh;
   left: 15vw;
@@ -691,7 +698,6 @@ a:hover{
 }
 
 #player2Image{
-  padding: 3vh;
   position: fixed;
   top: 8vh;
   left: 45vw;
@@ -704,7 +710,6 @@ a:hover{
 }
 
 #player3Image{
-  padding: 3vh;
   position: fixed;
   top: 55vh;
   left: 75vw;

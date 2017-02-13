@@ -97,9 +97,10 @@ td {
   font-family: 'Reenie Beanie', cursive; }
 
 img {
-  height: 18vh;
+  height: 15vh;
   display: inline-block;
-  border-radius: 1vh; }
+  border-radius: 1vh;
+  z-index: 1; }
 
 #playMessage {
   font-size: 10vh;
@@ -118,71 +119,69 @@ img {
   display: none; }
 
 .gameMessage {
-  font-size: 5vh;
+  font-size: 3vh;
   color: white;
   padding-left: 1vw; }
 
 .errorMessage {
-  font-size: 4vh;
+  font-size: 3vh;
   color: #D40000; }
 
 .playerImage {
   height: 8vh;
+  margin: 1vh;
   padding: 0.5vh;
-  border-radius: 1vh; }
+  border-radius: 2vh;
+  border: 1vh solid #105910; }
 
 #player0Card {
   position: fixed;
-  top: 50vh;
-  left: 45vw; }
+  top: 56vh;
+  left: 40vw; }
 
 #player0Image {
   position: fixed;
   top: 72vh;
-  left: 42vw; }
+  left: 40vw; }
 
 #player1Card {
   position: fixed;
-  top: 50vh;
-  left: 35vw; }
+  top: 40vh;
+  left: 30vw; }
 
 #player1Image {
   position: fixed;
-  top: 55vh;
-  left: 15vw; }
+  top: 42vh;
+  left: 0vw; }
 
 #player2Card {
   position: fixed;
-  top: 25vh;
-  left: 45vw; }
+  top: 24vh;
+  left: 40vw; }
 
 #player2Image {
   position: fixed;
-  top: 20vh;
-  left: 42vw; }
+  top: 12vh;
+  left: 40vw; }
 
 #player3Card {
   position: fixed;
-  top: 50vh;
-  left: 55vw; }
+  top: 40vh;
+  left: 52vw; }
 
 #player3Image {
   position: fixed;
-  top: 55vh;
-  left: 75vw; }
+  top: 42vh;
+  left: 82vw; }
 
 .currentPlayerImage {
-  padding: 1vh;
+  height: 8vh;
   background-color: black;
-  border-radius: 2vh;
   border: 1vh solid #D40000; }
 
 .passPlayerImage {
-  padding: 1vh;
-  margin: 1vh;
   background-color: #D40000;
-  border-radius: 2vh;
-  border: 0vh solid black; }
+  border: 1vh solid black; }
 
 .footerText {
   padding: 0vh;
@@ -262,7 +261,8 @@ img {
 .playerCard {
   list-style-type: none;
   display: inline-block;
-  width: 6vw; }
+  width: 6vw;
+  z-index: 1; }
   .playerCard:hover {
     cursor: pointer; }
 
@@ -298,7 +298,8 @@ img {
   bottom: +30px;
   background-color: #D40000;
   border-radius: 2vh;
-  border-color: black; }
+  border-color: black;
+  z-index: -1; }
 
 .link {
   display: none;
@@ -342,8 +343,8 @@ a:hover {
 
 #newTrickButton {
   position: absolute;
-  bottom: 25vh;
-  left: 21.5vw; }
+  left: 5vw;
+  bottom: 18vh; }
 
 .playArea {
   height: 900vh; }
@@ -444,7 +445,12 @@ a:hover {
     background-color: white; }
     #playGameButton:hover {
       background-color: black; }
+  #deal-button {
+    width: auto;
+    border: 1vh solid black;
+    margin: 2vh 0vh; }
   #scoreboard {
+    display: flex;
     background-image: url("http://www.clipartkid.com/images/276/lined-paper-aycQXZ-clipart.png");
     height: 30vh;
     width: 33vw;
@@ -464,13 +470,10 @@ a:hover {
     border-radius: 2vh; }
   .currentPlayerImage {
     height: 15vh;
-    padding: 1vh;
     background-color: black;
-    border-radius: 2vh;
     border: 1vh solid #D40000; }
   .passPlayerImage {
-    height: 15vh;
-    padding: 1vh;
+    padding: 0.5vh;
     background-color: #D40000;
     border-radius: 2vh;
     border: 1vh solid black; }
@@ -485,13 +488,13 @@ a:hover {
     top: 50vh;
     left: 45vw; }
   #player0Image {
+    position: static;
     padding: 3vh; }
   #player1Card {
     position: fixed;
     top: 50vh;
     left: 35vw; }
   #player1Image {
-    padding: 3vh;
     position: fixed;
     top: 55vh;
     left: 15vw; }
@@ -500,7 +503,6 @@ a:hover {
     top: 25vh;
     left: 45vw; }
   #player2Image {
-    padding: 3vh;
     position: fixed;
     top: 8vh;
     left: 45vw; }
@@ -509,10 +511,14 @@ a:hover {
     top: 50vh;
     left: 55vw; }
   #player3Image {
-    padding: 3vh;
     position: fixed;
     top: 55vh;
-    left: 75vw; } }
+    left: 75vw; }
+  .selectedCard {
+    z-index: 0; }
+  #newTrickButton {
+    bottom: 25vh;
+    left: 21.5vw; } }
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */

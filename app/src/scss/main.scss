@@ -319,6 +319,7 @@ img{
   display: block;
   position: absolute;
   bottom: 0vh;
+  width: 100vw;
 }
 
 .compHand1{
@@ -653,9 +654,9 @@ a:hover{
 
 
 
-.hiddenPlayArea{
-  display: flex;
-}
+// .hiddenPlayArea{
+//   display: none;
+// }
 
 .gameMessage{
   font-size: 5vh;
@@ -746,6 +747,7 @@ a:hover{
 
 .selectedCard{
     z-index: 0;
+    bottom: 2vh;
 }
 
 #newTrickButton{

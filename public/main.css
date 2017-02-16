@@ -156,7 +156,7 @@ img {
 
 #player1Card {
   position: fixed;
-  top: 35vh;
+  top: 34vh;
   left: 30vw; }
 
 #player1Image {
@@ -166,17 +166,17 @@ img {
 
 #player2Card {
   position: fixed;
-  top: 19vh;
+  top: 18vh;
   left: 40vw; }
 
 #player2Image {
   position: fixed;
-  top: 7vh;
+  top: 8vh;
   left: 40vw; }
 
 #player3Card {
   position: fixed;
-  top: 35vh;
+  top: 34vh;
   left: 52vw; }
 
 #player3Image {

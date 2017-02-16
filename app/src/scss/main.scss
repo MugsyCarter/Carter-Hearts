@@ -160,9 +160,8 @@ img{
   margin: 1vh;
   padding: 0.5vh;
   border-radius: 2vh;
-  border: 1vh solid $green;
+  border: none;
 }
-
 
 #player0Card{
   position: fixed;
@@ -523,9 +522,6 @@ a:hover{
   font-size: 10vh;
 }
 
-#homeSubtitle{
-}
-
 #goatImage{
   margin-left: 30vw;
   height: 35vh;
@@ -768,10 +764,6 @@ a:hover{
 
   .icon-menu {
     font-size: 3.6vh;
-  }
-
-  .firstLink{
-    padding-left: 0%;
   }
 
 }

@@ -146,42 +146,42 @@ img {
 
 #player0Card {
   position: fixed;
-  top: 56vh;
+  top: 50vh;
   left: 40vw; }
 
 #player0Image {
   position: fixed;
-  top: 70vh;
+  top: 65vh;
   left: 40vw; }
 
 #player1Card {
   position: fixed;
-  top: 40vh;
+  top: 35vh;
   left: 30vw; }
 
 #player1Image {
   position: fixed;
-  top: 42vh;
+  top: 37vh;
   left: 0vw; }
 
 #player2Card {
   position: fixed;
-  top: 24vh;
+  top: 19vh;
   left: 40vw; }
 
 #player2Image {
   position: fixed;
-  top: 12vh;
+  top: 7vh;
   left: 40vw; }
 
 #player3Card {
   position: fixed;
-  top: 40vh;
+  top: 35vh;
   left: 52vw; }
 
 #player3Image {
   position: fixed;
-  top: 42vh;
+  top: 37vh;
   left: 82vw; }
 
 .currentPlayerImage {

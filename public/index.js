@@ -33714,7 +33714,7 @@
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = " <section>\n    <header>\n        <nav class=\"main-nav\">\n            <ul>\n            <div class=\"icon-menu\"></div>\n            <li class=\"firstLink\"><a href=\"/\" id=\"home-link\"  ng-class='{\"activeLink\":$ctrl.link[\"home\"]===true}' ng-click=\"$ctrl.clicked('home')\"><span class=\"branding\">Carter-Hearts</span></a></li>\n            <li class=\"link\"><a ui-sref=\"play\" id=\"play-link\" ng-class='{\"activeLink\":$ctrl.link[\"play\"]===true}' ng-click=\"$ctrl.clicked('play')\">Play Now</a></li>\n            <li class=\"link\"><a ui-sref=\"rules\" id=\"rules-link\"  ng-class='{\"activeLink\":$ctrl.link[\"rules\"]===true}' ng-click=\"$ctrl.clicked('rules')\">Rules</a></li>\n            <li class=\"link\"><a ui-sref=\"settings\" id=\"settings-link\"  ng-class='{\"activeLink\":$ctrl.link[\"settings\"]===true}' ng-click=\"$ctrl.clicked('settings')\">Settings</a></li>\n            <li class=\"link\"><a ui-sref=\"about\" id=\"about-link\"  ng-class='{\"activeLink\":$ctrl.link[\"about\"]===true}' ng-click=\"$ctrl.clicked('about')\">About</a></li>\n            </ul>\n        </nav>\n    </header>\n  \n    <div class=\"main-content\">\n        <ui-view></ui-view>\n    </div>\n  </section>";
+	module.exports = " <section>\n    <header>\n        <nav class=\"main-nav\">\n            <ul>\n            <div class=\"icon-menu\"></div>\n            <li class=\"link\"><a ui-sref=\"home\" id=\"home-link\"  ng-class='{\"activeLink\":$ctrl.link[\"home\"]===true}' ng-click=\"$ctrl.clicked('home')\">Home</a></li>\n            <li class=\"link\"><a ui-sref=\"play\" id=\"play-link\" ng-class='{\"activeLink\":$ctrl.link[\"play\"]===true}' ng-click=\"$ctrl.clicked('play')\">Play Now</a></li>\n            <li class=\"link\"><a ui-sref=\"rules\" id=\"rules-link\"  ng-class='{\"activeLink\":$ctrl.link[\"rules\"]===true}' ng-click=\"$ctrl.clicked('rules')\">Rules</a></li>\n            <li class=\"link\"><a ui-sref=\"settings\" id=\"settings-link\"  ng-class='{\"activeLink\":$ctrl.link[\"settings\"]===true}' ng-click=\"$ctrl.clicked('settings')\">Settings</a></li>\n            <li class=\"link\"><a ui-sref=\"about\" id=\"about-link\"  ng-class='{\"activeLink\":$ctrl.link[\"about\"]===true}' ng-click=\"$ctrl.clicked('about')\">About</a></li>\n            </ul>\n        </nav>\n    </header>\n  \n    <div class=\"main-content\">\n        <ui-view></ui-view>\n    </div>\n  </section>";
 
 /***/ },
 /* 16 */
@@ -34323,20 +34323,23 @@
 	
 	    this.endGame = function () {
 	        var winner = 0;
-	        for (var i = 1; i < 4; i++) {
-	            if (_this.playerScores[i] < _this.playerScores[winner]) {
-	                winner = i;
+	        timeout(function () {
+	            for (var i = 1; i < 4; i++) {
+	                if (_this.playerScores[i] < _this.playerScores[winner]) {
+	                    winner = i;
+	                }
 	            }
-	        }
-	        if (winner === 0) {
-	            _this.winMessage = 'You won Carter Hearts!';
-	        } else {
-	            _this.winMessage = _this.players[winner].name + ' has won the game.  You can\'t win them all.';
-	        }
-	        _this.gameOver = true;
-	        _this.playAgain = true;
-	        _this.handStart = false;
-	        _this.showDeal = false;
+	            if (winner === 0) {
+	                _this.winMessage = 'You won Carter Hearts!';
+	            } else {
+	                _this.winMessage = _this.players[winner].name + ' has won the game.  You can\'t win them all.';
+	            }
+	            _this.gameOver = true;
+	            _this.playAgain = true;
+	            _this.handStart = false;
+	            _this.showDeal = false;
+	            _this.playedCards = [];
+	        }, 2000);
 	    };
 	};
 

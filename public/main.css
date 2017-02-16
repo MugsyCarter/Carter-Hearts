@@ -441,6 +441,8 @@ a:hover {
     padding: 1% 5%; }
   .icon-menu {
     font-size: 3.3vh; }
+  .link {
+    display: inline; }
   #home-page {
     height: 90vh; }
   #homeTitle {
@@ -486,7 +488,8 @@ a:hover {
   .playerImage {
     height: 15vh;
     padding: 1vh;
-    border-radius: 2vh; }
+    border-radius: 2vh;
+    border: none; }
   .currentPlayerImage {
     height: 15vh;
     background-color: black;

@@ -595,7 +595,9 @@ a:hover{
     font-size: 3.3vh;
   }
 
-
+.link {
+  display: inline;
+}
 
 //home page fullscreen
 #home-page{
@@ -673,6 +675,7 @@ a:hover{
   height: 15vh;
   padding: 1vh;
   border-radius: 2vh;
+  border: none;
 }
 
 .currentPlayerImage{

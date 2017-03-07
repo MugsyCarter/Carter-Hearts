@@ -39,6 +39,10 @@
             <button class = "button" id="pass-button" ng-if="$ctrl.passReady===true" ng-click="$ctrl.passCards()"><h1 id="buttonMessage">Pass</h1></button>
             <button class="button" id="playButton" ng-if="$ctrl.playReady===true" ng-click="$ctrl.startPlay()"><h1 id="playMessage" >Begin Play!</h1></button>
             <button class="button" id="playButton" ng-if="$ctrl.playAgain===true" ng-click="$ctrl.newGame()"><h1 id="playMessage" >Play Again</h1></button>
+            <div class="phaseImages" ng-if="$ctrl.gameOver===true">
+                <img class="winImage" ng-if="$ctrl.winner===0" src="{{$ctrl.players[0].src}}" id="winImage">
+                <img class="winImage" ng-if="$ctrl.winner!==0" src="{{$ctrl.players[$ctrl.winner].src}}"  id="loseImage">
+            </div> 
         </div>
 
 <!--player gallery-->
@@ -106,7 +110,7 @@
         </div>
         <div class="compHand3">
         </div>-->
-
+       
       
         <div class="playerHand">
             <ul class="hand">
@@ -117,10 +121,7 @@
         </div>
 
 
-       <div class="phaseImages">
-           <img ng-if="$ctrl.winner===0" src="" id="winImage">
-           <img ng-if="$ctrl.winner===0 && $ctrl.winner!==5" src="" id="loseImage">
-       </div> 
+  
 
 
     </div>

@@ -222,18 +222,6 @@ img{
     border: 1vh solid black;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .footerText{
   padding: 0vh;
   margin: 0vh 0vh 2vh 0vh;
@@ -244,13 +232,6 @@ img{
   display: table;
   clear: both;
 }
-
-
-
-
-
-
-
 
 .main-nav {
   display: block;
@@ -265,7 +246,6 @@ img{
   background-color: $green;
   height: 97vh;
 }
-
 
 //gallery stuff here
 .playerGalleryItem{
@@ -463,6 +443,16 @@ a:hover{
   color: $red;
 }
 
+.winImage{
+    height: 24vh;
+    position: fixed;
+    left: 32vw;
+    border: 2vw black solid;
+    padding: 1vw;
+    background-color: $red;
+    border-radius: 10vh;
+}
+
 // rules page
 #rules-page{
   height: 85vh;
@@ -541,6 +531,8 @@ a:hover{
   color: white;
   font-size: 10vh;
 }
+
+
 
 //settings page styles
 #settings-page{
@@ -646,7 +638,10 @@ a:hover{
   top: 10vh;
 }
 
-
+.winImage{
+    height: 48vh;
+    left: 38vw;
+}
 
 // .hiddenPlayArea{
 //   display: none;

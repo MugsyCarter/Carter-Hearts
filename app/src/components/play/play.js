@@ -571,22 +571,22 @@ function controller(shuffle, ai, timeout) {
     this.endGame = ()=>{
         this.winner = 0;
         // timeout(()=>{
-            for (var i = 1; i < 4; i++){
-                if (this.playerScores[i] < this.playerScores[this.winner]){
-                    this.winner = i;
-                }
-            } 
-            if (this.winner===0){
-                this.winMessage = 'You won Carter Hearts!';
+        for (var i = 1; i < 4; i++){
+            if (this.playerScores[i] < this.playerScores[this.winner]){
+                this.winner = i;
             }
-            else{
-                this.winMessage = this.players[this.winner].name + ' has won the game.  You can\'t win them all.';
-            }
-            this.gameOver = true;
-            this.playAgain = true;
-            this.handStart = false;
-            this.showDeal = false;
-            this.playedCards = [];
+        } 
+        if (this.winner===0){
+            this.winMessage = 'You won Carter Hearts!';
+        }
+        else{
+            this.winMessage = this.players[this.winner].name + ' has won the game.  You can\'t win them all.';
+        }
+        this.gameOver = true;
+        this.playAgain = true;
+        this.handStart = false;
+        this.showDeal = false;
+        this.playedCards = [];
         // }, 200);
     };
 

@@ -367,6 +367,15 @@ a:hover {
   padding-left: 3vw;
   color: #D40000; }
 
+.winImage {
+  height: 24vh;
+  position: fixed;
+  left: 32vw;
+  border: 2vw black solid;
+  padding: 1vw;
+  background-color: #D40000;
+  border-radius: 10vh; }
+
 #rules-page {
   height: 85vh;
   background-color: black; }
@@ -478,6 +487,9 @@ a:hover {
     position: fixed;
     right: 0vw;
     top: 10vh; }
+  .winImage {
+    height: 48vh;
+    left: 38vw; }
   .gameMessage {
     font-size: 5vh;
     color: white;

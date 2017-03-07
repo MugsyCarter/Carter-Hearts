@@ -118,7 +118,7 @@ img{
   right: 1vw;
   padding: 0vh;
   margin: 0vh;
-  background-color: $red;
+  background-color: $green;
 }
 
 .main-nav ul{
@@ -526,18 +526,22 @@ a:hover{
 
 //about page 
 #about-page{
-  height: 85vh;
+  height: 95vh;
 }
 
 .tab { 
   margin-left: 2vh; 
-  font-size: 4vh;
+  font-size: 3vh;
 }
 
 #aboutImage{
   float: right;
-  height: 80vh;
+  height: 36vh;
   padding:  1vh;
+}
+
+#aboutTitle{
+  font-size: 5vh;
 }
 
 //home page
@@ -580,28 +584,6 @@ a:hover{
 }
 
 /* Media Query Stuff */
-
-// @media only screen and (min-width: 481px) {
-  /* Larger cell screen, changes image only */
-
-//   .icon-menu {
-//     display: none;
-//   }
-
-//   .main-nav ul li {
-//     display: inline-block;
-//     padding: 0.5% 5%;
-//   }
-
-//   .firstLink{
-//     padding-left: 0%;
-//   }
-// }
-
-// @media only screen and (min-width: 640px) {
-//   /* First break point - switch to tablet design: 2+ columns */
-// }
-
 
 @media only screen and (min-width: 1024px) {
   /* Minor styling: larger image and fonts to match new screen size */
@@ -828,6 +810,27 @@ a:hover{
   font-size: 5vh;
   color: $red;
 }
+
+//about page fulscreen
+#about-page{
+  height: 85vh;
+}
+
+.tab { 
+  margin-left: 2vh; 
+  font-size: 4vh;
+}
+
+#aboutImage{
+  float: right;
+  height: 80vh;
+  padding:  1vh;
+}
+
+#aboutTitle{
+  font-size: 10vh;
+}
+
 
 
 

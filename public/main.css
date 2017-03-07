@@ -109,7 +109,7 @@ img {
   right: 1vw;
   padding: 0vh;
   margin: 0vh;
-  background-color: #D40000; }
+  background-color: #105910; }
 
 .main-nav ul {
   display: none;
@@ -425,16 +425,19 @@ a:hover {
   color: #105910; }
 
 #about-page {
-  height: 85vh; }
+  height: 95vh; }
 
 .tab {
   margin-left: 2vh;
-  font-size: 4vh; }
+  font-size: 3vh; }
 
 #aboutImage {
   float: right;
-  height: 80vh;
+  height: 36vh;
   padding: 1vh; }
+
+#aboutTitle {
+  font-size: 5vh; }
 
 #home-page {
   height: 92vh;
@@ -464,7 +467,6 @@ a:hover {
   background-color: black; }
 
 /* Media Query Stuff */
-/* Larger cell screen, changes image only */
 @media only screen and (min-width: 1024px) {
   /* Minor styling: larger image and fonts to match new screen size */
   #menuIcon {
@@ -603,7 +605,18 @@ a:hover {
     height: 85vh; }
   .rulesMessage {
     font-size: 5vh;
-    color: #D40000; } }
+    color: #D40000; }
+  #about-page {
+    height: 85vh; }
+  .tab {
+    margin-left: 2vh;
+    font-size: 4vh; }
+  #aboutImage {
+    float: right;
+    height: 80vh;
+    padding: 1vh; }
+  #aboutTitle {
+    font-size: 10vh; } }
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */

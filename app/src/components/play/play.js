@@ -570,7 +570,7 @@ function controller(shuffle, ai, timeout) {
 
     this.endGame = ()=>{
         this.winner = 0;
-        timeout(()=>{
+        // timeout(()=>{
             for (var i = 1; i < 4; i++){
                 if (this.playerScores[i] < this.playerScores[this.winner]){
                     this.winner = i;
@@ -587,7 +587,7 @@ function controller(shuffle, ai, timeout) {
             this.handStart = false;
             this.showDeal = false;
             this.playedCards = [];
-        }, 2000);
+        // }, 200);
     };
 
 };

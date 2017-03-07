@@ -118,6 +118,7 @@ img{
   right: 1vw;
   padding: 0vh;
   margin: 0vh;
+  background-color: $red;
 }
 
 .main-nav ul{
@@ -127,6 +128,11 @@ img{
   opacity:0.85;
   list-style: none;
   width: 100%;
+  z-index: 100;
+  position: fixed;
+	top: 0;
+	left: 0;
+	border-bottom:1vh solid $red;
 }
 
 .link {
@@ -139,6 +145,9 @@ nav:hover ul{
   display: block;
 }
 
+nav:hover #menuIcon{
+  background-color: white;
+}
 
 
 
@@ -632,6 +641,16 @@ a:hover{
   .main-nav ul li {
     padding: 1% 5%;
   }
+
+  .main-nav ul{
+    display: inline-block;
+    position: static;
+    padding: 1vh;
+    height: 5vh; 
+    width: 100vw;
+    border: none;
+  }
+
 
   .icon-menu {
     font-size: 3.3vh;

@@ -6,11 +6,7 @@ export default {
 };
 
 
-
-
-
 function controller() {
-
 
 //this code prevents scrolldown on an iphone
     var xStart, yStart = 0;
@@ -27,8 +23,6 @@ function controller() {
             e.preventDefault();
         }
     });
-
-
 
     this.link = {
         home: true,

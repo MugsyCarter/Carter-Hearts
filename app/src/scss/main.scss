@@ -579,9 +579,23 @@ a:hover{
 
 //settings page styles
 #settings-page{
-  height: 85vh;
+  height: 95vh;
   background-color: black;
 }
+
+#settingsTitle{
+  color: white;
+  font-size: 6vh;
+}
+#settingsImage{
+  height: 32vh;
+  margin: 1vw 12vw;
+}
+
+// #settingsDiv{
+//   float: right;
+// }
+
 
 /* Media Query Stuff */
 
@@ -831,7 +845,22 @@ a:hover{
   font-size: 10vh;
 }
 
+//settings page fullscreen
+#settings-page{
+  height: 85vh;
+  background-color: black;
+}
 
+#settingsTitle{
+  font-size: 10vh;
+}
+#settingsImage{
+  height: 54vh;
+  margin: 12vw 12vw;
+  position: absolute;
+  right: 0vw;
+  top: 0vh;
+}
 
 
 }

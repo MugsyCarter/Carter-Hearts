@@ -250,7 +250,7 @@ img{
 //gallery stuff here
 
 #playerGallery{
-  overflow-y: scroll;
+  // overflow-y: scroll;
   background-color: $red;
 }
 
@@ -291,19 +291,23 @@ img{
 
 .easyLabel{
   color: $green;
-  font-size: 3vh;
+  font-size: 2vh;
   margin: 0.1vh;
 }
 
 .hardLabel{
   color: $red;
-  font-size: 3vh;
+  font-size: 2vh;
   margin: 0.1vh;
 }
 
 .playerLabel{
-  font-size: 3vh;
+  font-size: 2vh;
   margin: 0.1vh;
+}
+
+#galleryImage{
+  height: 12vh;
 }
 
 

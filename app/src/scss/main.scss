@@ -110,6 +110,77 @@ img{
   z-index: 1;
 }
 
+//app.html stuff
+#menuIcon{
+  position: absolute;
+  height: 5vh;
+  top: 1vw;
+  right: 1vw;
+  padding: 0vh;
+  margin: 0vh;
+}
+
+.main-nav ul{
+  display: none;;
+  margin:0 auto;
+  background-color:black;
+  opacity:0.85;
+  list-style: none;
+  width: 100%;
+}
+
+.link {
+  padding: 1% 5%;
+  text-align: center;
+  font-size: 3vh;
+}
+
+nav:hover ul{
+  display: block;
+}
+
+
+
+
+
+
+.activeLink{
+  color: $green;
+}
+
+.branding {
+  color:#FFF;
+  font-size:3vh;
+  font-weight: bold;
+  text-shadow: 3px 4px 4px black;
+}
+
+// .icon-menu {
+//   text-align: center;
+//   font-size: 6vh;
+// }
+
+a:hover{
+//   font-style: italic;
+  cursor: pointer;
+  color: $red;
+}
+
+
+
+
+// #menu{
+//   background: #fff;
+// 	width: 100%;
+// 	height: 76px;
+// 	position: fixed;
+// 	top: 0;
+// 	left: 0;
+// 	border-bottom: 4px solid #4C9CF1;
+// 	z-index: 100;
+// }
+
+
 //play page 
 //intro
 #playMessage{
@@ -231,15 +302,6 @@ img{
   content: "";
   display: table;
   clear: both;
-}
-
-.main-nav {
-  display: block;
-  margin:0 auto;
-  background-color:black;
-  opacity:0.85;
-  list-style: none;
-  width: 100%;
 }
 
 #play-page{
@@ -392,34 +454,6 @@ img{
 }
 
 
-.link {
-  display: none;
-  padding: 1% 5%;
-  text-align: center;
-  font-size: 3vh;
-}
-
-.activeLink{
-  color: $green;
-}
-
-.branding {
-  color:#FFF;
-  font-size:3vh;
-  font-weight: bold;
-  text-shadow: 3px 4px 4px black;
-}
-
-.icon-menu {
-  text-align: center;
-  font-size: 6vh;
-}
-
-a:hover{
-//   font-style: italic;
-  cursor: pointer;
-  color: $red;
-}
 
 #playMessage{
   color:$red;
@@ -586,6 +620,10 @@ a:hover{
 
 @media only screen and (min-width: 1024px) {
   /* Minor styling: larger image and fonts to match new screen size */
+
+  #menuIcon{
+    display: none;
+  }
 
   img{
     height: 24vh;

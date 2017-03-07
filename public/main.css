@@ -102,6 +102,43 @@ img {
   border-radius: 1vh;
   z-index: 1; }
 
+#menuIcon {
+  position: absolute;
+  height: 5vh;
+  top: 1vw;
+  right: 1vw;
+  padding: 0vh;
+  margin: 0vh; }
+
+.main-nav ul {
+  display: none;
+  margin: 0 auto;
+  background-color: black;
+  opacity: 0.85;
+  list-style: none;
+  width: 100%; }
+
+.link {
+  padding: 1% 5%;
+  text-align: center;
+  font-size: 3vh; }
+
+nav:hover ul {
+  display: block; }
+
+.activeLink {
+  color: #105910; }
+
+.branding {
+  color: #FFF;
+  font-size: 3vh;
+  font-weight: bold;
+  text-shadow: 3px 4px 4px black; }
+
+a:hover {
+  cursor: pointer;
+  color: #D40000; }
+
 #playMessage {
   font-size: 10vh;
   color: #D40000; }
@@ -201,14 +238,6 @@ img {
   content: "";
   display: table;
   clear: both; }
-
-.main-nav {
-  display: block;
-  margin: 0 auto;
-  background-color: black;
-  opacity: 0.85;
-  list-style: none;
-  width: 100%; }
 
 #play-page {
   background-color: #105910;
@@ -320,29 +349,6 @@ img {
   border-radius: 2vh;
   border-color: black; }
 
-.link {
-  display: none;
-  padding: 1% 5%;
-  text-align: center;
-  font-size: 3vh; }
-
-.activeLink {
-  color: #105910; }
-
-.branding {
-  color: #FFF;
-  font-size: 3vh;
-  font-weight: bold;
-  text-shadow: 3px 4px 4px black; }
-
-.icon-menu {
-  text-align: center;
-  font-size: 6vh; }
-
-a:hover {
-  cursor: pointer;
-  color: #D40000; }
-
 #playMessage {
   color: #D40000;
   font-size: 5vh; }
@@ -452,6 +458,8 @@ a:hover {
 /* Larger cell screen, changes image only */
 @media only screen and (min-width: 1024px) {
   /* Minor styling: larger image and fonts to match new screen size */
+  #menuIcon {
+    display: none; }
   img {
     height: 24vh; }
   .main-nav ul li {

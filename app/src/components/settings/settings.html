@@ -12,18 +12,9 @@
     <form>
         <input type="radio" name="farts" ng-value="false" ng-model="$ctrl.deadly" checked> <h4> Audible (recomended)</h4> <br>
         <input type="radio" name="farts" ng-value="true" ng-model="$ctrl.deadly"> <h4> Deadly </h4><br>
-        <h4 ng-if="$ctrl.deadly===true">What's wrong with you???</h4>
+        <h4 ng-if="$ctrl.deadly===true">    What's wrong with you???</h4>
     </form>
     <br>
-
-    <h3>Difficulty</h3>
-    <form>
-        <input ng-click="$ctrl.mode('easy')" type="radio" name="difficultyLevel" value="easy" checked> <h4> Non-Carter (Easy)</h4> <br>
-        <input ng-click="$ctrl.mode('hard')" type="radio" name="difficultyLevel" value="hard"> <h4> Carter (Hard)</h4><br>
-    </form>
-    <br>
-
-
     <footer>
       <p class="footerText"><span class="branding">&copy; Mugsy Carter, 2016</span></p>
     </footer>

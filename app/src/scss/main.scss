@@ -765,6 +765,31 @@ a:hover{
   left: 19.5vw;
 }
 
+.easyLabel{
+  color: $green;
+  font-size: 3vh;
+  margin: 0.4vh;
+}
+
+.hardLabel{
+  color: $red;
+  font-size: 3vh;
+  margin: 0.4vh;
+}
+
+.playerLabel{
+  font-size: 3vh;
+  margin: 0.4vh;
+}
+
+#galleryImage{
+  height: 24vh;
+}
+
+
+
+
+
 }
 
 @media only screen and (min-width: 1600px) {

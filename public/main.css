@@ -215,7 +215,6 @@ img {
   height: 97vh; }
 
 #playerGallery {
-  overflow-y: scroll;
   background-color: #D40000; }
 
 .playerGalleryItem {
@@ -242,17 +241,20 @@ img {
 
 .easyLabel {
   color: #105910;
-  font-size: 3vh;
+  font-size: 2vh;
   margin: 0.1vh; }
 
 .hardLabel {
   color: #D40000;
-  font-size: 3vh;
+  font-size: 2vh;
   margin: 0.1vh; }
 
 .playerLabel {
-  font-size: 3vh;
+  font-size: 2vh;
   margin: 0.1vh; }
+
+#galleryImage {
+  height: 12vh; }
 
 .hand {
   list-style-type: none;
@@ -559,7 +561,20 @@ a:hover {
     bottom: 2vh; }
   #newTrickButton {
     bottom: 25vh;
-    left: 19.5vw; } }
+    left: 19.5vw; }
+  .easyLabel {
+    color: #105910;
+    font-size: 3vh;
+    margin: 0.4vh; }
+  .hardLabel {
+    color: #D40000;
+    font-size: 3vh;
+    margin: 0.4vh; }
+  .playerLabel {
+    font-size: 3vh;
+    margin: 0.4vh; }
+  #galleryImage {
+    height: 24vh; } }
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */

@@ -1,7 +1,7 @@
 
  <section class ="page" id="play-page">
     <div>
-        <image id="player0Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[0].src}} 
+        <image id="player0Image" ng-if="$ctrl.beginning===false && $ctrl.gameOver===false" src={{$ctrl.players[0].src}} 
              ng-class="{'currentPlayerImage' : $ctrl.high===0, 'playerImage' : $ctrl.high!==0,'hiddenPlayArea': $ctrl.handStart===true}">
         <h2 ng-if="$ctrl.beginning===true" id="playMessage">Play Carter Hearts!</h2>
         <!--<h1 id="phoneMessage" ng-if="$ctrl.beginning===true">Turn your phone sideways.</h1>    -->
@@ -86,11 +86,11 @@
 
         <div class="playArea" ng-class="{'hiddenPlayArea': $ctrl.handStart===true}">
             <image id="player0Card" ng-if="$ctrl.playedCards[0]" src="{{$ctrl.playedCards[0].image}}" ng-class="{'leadCardImage': $ctrl.lead === 0}">
-            <image id="player1Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[1].src}} ng-class="{'currentPlayerImage' : $ctrl.high===1, 'playerImage' : $ctrl.high!==1, 'passPlayerImage' : $ctrl.passFlag[1]}">
+            <image id="player1Image" ng-if="$ctrl.beginning===false && $ctrl.gameOver===false" src={{$ctrl.players[1].src}} ng-class="{'currentPlayerImage' : $ctrl.high===1, 'playerImage' : $ctrl.high!==1, 'passPlayerImage' : $ctrl.passFlag[1]}">
             <image id="player1Card" ng-if="$ctrl.playedCards[1]" src="{{$ctrl.playedCards[1].image}}" ng-class="{'leadCardImage': $ctrl.lead === 1}">
-             <image ng-class="{'currentPlayerImage' : $ctrl.high===2, 'playerImage' : $ctrl.high!==2, 'passPlayerImage' : $ctrl.passFlag[2]}"id="player2Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[2].src}} >
+             <image ng-class="{'currentPlayerImage' : $ctrl.high===2, 'playerImage' : $ctrl.high!==2, 'passPlayerImage' : $ctrl.passFlag[2]}"id="player2Image" ng-if="$ctrl.beginning===false && $ctrl.gameOver===false" src={{$ctrl.players[2].src}} >
             <image id="player2Card" ng-if="$ctrl.playedCards[2]" src="{{$ctrl.playedCards[2].image}}" ng-class="{'leadCardImage': $ctrl.lead === 2}">
-            <image ng-class="{'currentPlayerImage' : $ctrl.high===3, 'playerImage' : $ctrl.high!==3, 'passPlayerImage' : $ctrl.passFlag[3]}" id="player3Image" ng-if="$ctrl.beginning===false" src={{$ctrl.players[3].src}} >
+            <image ng-class="{'currentPlayerImage' : $ctrl.high===3, 'playerImage' : $ctrl.high!==3, 'passPlayerImage' : $ctrl.passFlag[3]}" id="player3Image" ng-if="$ctrl.beginning===false && $ctrl.gameOver===false" src={{$ctrl.players[3].src}} >
             <image id="player3Card" ng-if="$ctrl.playedCards[3]" src="{{$ctrl.playedCards[3].image}}" ng-class="{'leadCardImage': $ctrl.lead === 3}">  
             <button class="button" id="newTrickButton" ng-if="$ctrl.turnOver===true" ng-click="$ctrl.newTrick()"><h1 id="buttonMessage">Next Trick</h1></button>
         </div>
@@ -115,6 +115,13 @@
                 </li>
             </ul>
         </div>
+
+
+       <div class="phaseImages">
+           <img ng-if="$ctrl.winner===0" src="" id="winImage">
+           <img ng-if="$ctrl.winner===0 && $ctrl.winner!==5" src="" id="loseImage">
+       </div> 
+
 
     </div>
 </section>

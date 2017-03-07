@@ -557,6 +557,7 @@ function controller(shuffle, ai, timeout) {
             if (this.playerScores[i] < this.lowScore && i !==0){
                 this.lowMan = 'Whomp on '+this.players[i].name+'!';
                 this.lowScore = this.playerScores[i];
+                this.high = 5;
             }
 
             if (this.playerScores[i] >99){

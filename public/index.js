@@ -34328,6 +34328,7 @@
 	            if (_this.playerScores[i] < _this.lowScore && i !== 0) {
 	                _this.lowMan = 'Whomp on ' + _this.players[i].name + '!';
 	                _this.lowScore = _this.playerScores[i];
+	                _this.high = 5;
 	            }
 	
 	            if (_this.playerScores[i] > 99) {

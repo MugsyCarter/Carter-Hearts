@@ -108,7 +108,8 @@ img {
   top: 1vw;
   right: 1vw;
   padding: 0vh;
-  margin: 0vh; }
+  margin: 0vh;
+  background-color: #D40000; }
 
 .main-nav ul {
   display: none;
@@ -116,7 +117,12 @@ img {
   background-color: black;
   opacity: 0.85;
   list-style: none;
-  width: 100%; }
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-bottom: 1vh solid #D40000; }
 
 .link {
   padding: 1% 5%;
@@ -125,6 +131,9 @@ img {
 
 nav:hover ul {
   display: block; }
+
+nav:hover #menuIcon {
+  background-color: white; }
 
 .activeLink {
   color: #105910; }
@@ -391,7 +400,7 @@ a:hover {
   border-radius: 10vh; }
 
 #rules-page {
-  height: 85vh;
+  height: 95vh;
   background-color: black; }
 
 .rulesRow {
@@ -409,7 +418,7 @@ a:hover {
   height: 10vh; }
 
 .rulesMessage {
-  font-size: 5vh;
+  font-size: 3vh;
   color: #D40000; }
 
 .rulesLink {
@@ -464,6 +473,13 @@ a:hover {
     height: 24vh; }
   .main-nav ul li {
     padding: 1% 5%; }
+  .main-nav ul {
+    display: inline-block;
+    position: static;
+    padding: 1vh;
+    height: 5vh;
+    width: 100vw;
+    border: none; }
   .icon-menu {
     font-size: 3.3vh; }
   .link {
@@ -582,7 +598,12 @@ a:hover {
     font-size: 3vh;
     margin: 0.4vh; }
   #galleryImage {
-    height: 24vh; } }
+    height: 24vh; }
+  #rules-page {
+    height: 85vh; }
+  .rulesMessage {
+    font-size: 5vh;
+    color: #D40000; } }
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */

@@ -149,10 +149,6 @@ nav:hover #menuIcon{
   background-color: white;
 }
 
-
-
-
-
 .activeLink{
   color: $green;
 }
@@ -164,31 +160,11 @@ nav:hover #menuIcon{
   text-shadow: 3px 4px 4px black;
 }
 
-// .icon-menu {
-//   text-align: center;
-//   font-size: 6vh;
-// }
-
 a:hover{
 //   font-style: italic;
   cursor: pointer;
   color: $red;
 }
-
-
-
-
-// #menu{
-//   background: #fff;
-// 	width: 100%;
-// 	height: 76px;
-// 	position: fixed;
-// 	top: 0;
-// 	left: 0;
-// 	border-bottom: 4px solid #4C9CF1;
-// 	z-index: 100;
-// }
-
 
 //play page 
 //intro
@@ -518,7 +494,7 @@ a:hover{
 
 // rules page
 #rules-page{
-  height: 85vh;
+  height: 95vh;
   background-color: black;
 }
 
@@ -540,7 +516,7 @@ a:hover{
 }
 
 .rulesMessage{
-  font-size: 5vh;
+  font-size: 3vh;
   color: $red;
 }
 
@@ -842,8 +818,16 @@ a:hover{
 #galleryImage{
   height: 24vh;
 }
+//rules page fullscreen
 
+#rules-page{
+  height: 85vh;
+}
 
+.rulesMessage{
+  font-size: 5vh;
+  color: $red;
+}
 
 
 

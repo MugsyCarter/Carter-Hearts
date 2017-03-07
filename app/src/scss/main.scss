@@ -248,14 +248,29 @@ img{
 }
 
 //gallery stuff here
-.playerGalleryItem{
-  float: left;
-  list-style: none;
+
+#playerGallery{
+  overflow-y: scroll;
+  background-color: $red;
 }
+
+.playerGalleryItem{
+  list-style: none;
+  display: inline-block;
+  position: relative;
+  background-color: white;
+}
+
+// .galleryDiv{
+//   background-color: white;
+//   width: 12vw;
+//   position: relative;
+//   float: right;
+//   clear: both;
+// }
 
 .galleryButton{
   background-color: white;
-    width: 12vw;
 }
 
 .galleryButton:hover{
@@ -267,27 +282,28 @@ img{
 .playerButton{
    background-color: black;
    color: $red;
-      width: 12vw;
 }
 
 .opponentButton{
   background-color: black;
   color: $red;
-  width: 12vw;
 }
 
 .easyLabel{
   color: $green;
   font-size: 3vh;
+  margin: 0.1vh;
 }
 
 .hardLabel{
   color: $red;
   font-size: 3vh;
+  margin: 0.1vh;
 }
 
 .playerLabel{
   font-size: 3vh;
+  margin: 0.1vh;
 }
 
 

@@ -214,13 +214,18 @@ img {
   background-color: #105910;
   height: 97vh; }
 
+#playerGallery {
+  overflow-y: scroll;
+  background-color: #D40000; }
+
 .playerGalleryItem {
-  float: left;
-  list-style: none; }
+  list-style: none;
+  display: inline-block;
+  position: relative;
+  background-color: white; }
 
 .galleryButton {
-  background-color: white;
-  width: 12vw; }
+  background-color: white; }
 
 .galleryButton:hover {
   cursor: pointer;
@@ -229,24 +234,25 @@ img {
 
 .playerButton {
   background-color: black;
-  color: #D40000;
-  width: 12vw; }
+  color: #D40000; }
 
 .opponentButton {
   background-color: black;
-  color: #D40000;
-  width: 12vw; }
+  color: #D40000; }
 
 .easyLabel {
   color: #105910;
-  font-size: 3vh; }
+  font-size: 3vh;
+  margin: 0.1vh; }
 
 .hardLabel {
   color: #D40000;
-  font-size: 3vh; }
+  font-size: 3vh;
+  margin: 0.1vh; }
 
 .playerLabel {
-  font-size: 3vh; }
+  font-size: 3vh;
+  margin: 0.1vh; }
 
 .hand {
   list-style-type: none;

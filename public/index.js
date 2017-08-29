@@ -34798,7 +34798,13 @@
 	                        console.log('not voided');
 	                        if (runFlag === 1 && difficulty === 'hard') {
 	                            console.log('run play!');
-	                            return sortedInSuit[0];
+	                            if (sortedInSuit[0].number > highCard.number) {
+	                                console.log('killed the run!');
+	                                return sortedInSuit[0];
+	                            } else {
+	                                console.log('play low');
+	                                return sortedInSuit[sortedInSuit.length - 1];
+	                            }
 	                        }
 	                        //if spades
 	                        else if (playedCards[lead].suit === 'SPADES') {
